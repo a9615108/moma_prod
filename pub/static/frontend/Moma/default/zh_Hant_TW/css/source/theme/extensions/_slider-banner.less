@@ -1,0 +1,275 @@
+// /**
+//  * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true ) {
+
+  //
+  //  Main Slider
+  //  _____________________________________________
+
+  section{
+    &.slider{
+      .flexslider{
+        margin-bottom: 0;
+        .slides > li{
+          //width: 100% !important;
+        }
+      }
+      .flex-direction-nav{
+        .flexslider:hover & {
+          .flex-prev, .flex-next{
+            opacity: 1;
+          }
+        }
+        .flex-prev{
+          left: 26px;
+        }
+        .flex-next{
+          right: 26px;
+        }
+        a {
+          width: 40px;
+          height: 76px;
+          .lib-css(opacity, 1);
+          margin-top: -38px;
+          text-indent: -10000px;
+          overflow: hidden;
+          text-align: left;
+          &:before{
+            display: none;
+          }
+          &:after{
+            width: 40px;
+            height: 76px;
+            .lib-css(background, url('@{baseDir}images/slider/icon-left-arr.png') no-repeat center center/40px 76px);
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+          }
+          &.flex-next{
+            &:after{
+              .rotate (180deg);
+            }
+          }
+        }
+      }
+
+      .flex-control-paging {
+        li {
+          a{
+            width: 5.6px;
+            height: 6px;
+            background-color: @color-white;
+            border: solid 1px @color-black;
+            .lib-css(opacity, .3);
+            &.flex-active{
+              .lib-css(opacity, 1);
+            }
+          }
+        }
+      }
+
+      .flex-control-nav{
+        bottom: 0;
+        li{
+          margin: 0 18.7px;
+        }
+      }
+
+    }
+  }
+
+  .flexslider{
+    .slides{
+      > li{
+        a{
+          float: left;
+          width: 100%;
+        }
+        img{
+          width: 100%;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  .video__wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    //padding-top: 25px;
+    height: 0;
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+
+
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+  body section.slider{
+    .flex-control-nav{
+      margin-bottom: -10px;
+      li{
+        margin: 0 9px;
+        a{
+          width: 4px;
+          height: 4px;
+          border-width: 0.5px;
+        }
+      }
+    }
+    .flex-direction-nav{
+      .flex-prev{
+        left: 15px;
+      }
+      .flex-next{
+        right: 15px;
+      }
+      a {
+        width: 20px;
+        height: 38px;
+        margin-top: -19px;
+        &:after{
+          width: 20px;
+          height: 38px;
+          .lib-css(background-size, 20px 38px);
+        }
+      }
+    }
+  }
+
+}
+
+//
+//  Notebook
+//  _____________________________________________
+
+& when (@media-target = 'desktop'),
+(@media-target = 'all') {
+  @media only screen and (max-width: (@screen__l + 1)) and (min-width: (@screen__m + 1) ) {
+
+    .main-slider section.slider{
+      .flexslider {
+        .flex-direction-nav {
+          .flex-next {
+            margin-top: -52px;
+            right: 40px;
+          }
+          .flex-prev {
+            margin-top: -52px;
+            left: 40px;
+          }
+        }
+        &:hover{
+          .flex-direction-nav {
+            .flex-next {
+              margin-top: -52px;
+              right: 40px;
+            }
+            .flex-prev {
+              margin-top: -52px;
+              left: 40px;
+            }
+          }
+        }
+      }
+    }
+
+    .section-home-3 section.slider{
+      .flexslider {
+        .flex-direction-nav {
+          .flex-next {
+            margin-top: -38px;
+            right: 15px;
+          }
+          .flex-prev {
+            margin-top: -38px;
+            left: 15px;
+          }
+        }
+        &:hover{
+          .flex-direction-nav {
+            .flex-next {
+              margin-top: -38px;
+              right: 15px;
+            }
+            .flex-prev {
+              margin-top: -38px;
+              left: 15px;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+  //
+  //  Main Slider
+  //  _____________________________________________
+
+  .main-slider section.slider{
+    .flexslider {
+      .flex-direction-nav {
+        .flex-next {
+          margin-top: -38px;
+          right: 40px;
+        }
+        .flex-prev {
+          margin-top: -38px;
+          left: 40px;
+        }
+      }
+      &:hover{
+       .flex-direction-nav {
+          .flex-next {
+            margin-top: -38px;
+            right: 40px;
+          }
+          .flex-prev {
+            margin-top: -38px;
+            left: 40px;
+          }
+        }
+      }
+    }
+  }
+
+
+}

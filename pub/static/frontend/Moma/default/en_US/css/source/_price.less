@@ -1,0 +1,82 @@
+// /**
+//  * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    //  Prices
+    .price-style-1() {
+        .price {
+            &-tier_price .price-excluding-tax,
+            &-tier_price .price-including-tax {
+                display: inline;
+                font-family: @font-family__secondary;
+            }
+        }
+    }
+
+    .price-style-2() {
+        font-family: @font-family__secondary;
+        .price {
+            &-including-tax,
+            &-excluding-tax {
+                display: inline !important;
+                font-family: @font-family__secondary;
+            }
+
+            &-including-tax:before {
+                content: ' / ';
+            }
+
+            &-including-tax:after {
+                content: '('attr(data-label)')';
+            }
+        }
+    }
+
+    .price-style-3() {
+        .price-including-tax,
+        .price-excluding-tax {
+            display: block;
+            .lib-font-size(18);
+            line-height: 1;
+
+            .price {
+                font-weight: @font-weight__bold;
+                font-family: @font-family__secondary;
+            }
+
+            .cart-tax-total {
+                font-family: @font-family__secondary;
+                &:extend(.abs-tax-total all);
+                &-expanded {
+                    &:extend(.abs-tax-total-expanded all);
+                }
+            }
+        }
+
+        .price-including-tax + .price-excluding-tax,
+        .weee[data-label] {
+            display: block;
+            .lib-font-size(18);
+
+            &:before {
+                content: attr(data-label) ': ';
+                .lib-font-size(11);
+            }
+
+            .price {
+                .lib-font-size(11);
+                font-family: @font-family__secondary;
+            }
+        }
+    }
+
+    .price-style-1();
+    .price-style-3();
+}

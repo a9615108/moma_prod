@@ -1,0 +1,250 @@
+.ms-faq ul{
+    margin: 0;
+    padding:0;
+}
+.ms-faq img{max-width: 100%;}
+.ms-faq .faq-title{
+    margin: 25px 0;
+}
+.ms-faq .faq-title h1{
+    color: #06365f;
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: none;
+}
+.ms-faq .faq-left li{float: left;width: 100%;}
+.ms-faq .faq-left .faq-navigator{
+    float:left;
+    width:100%;
+    padding: 9px 5px 10px 15px;
+    font-size: 13px;
+    background: #FCFCFC;
+    color: #3f729b;
+    border:  1px solid #c3cfd9;
+    border-top: 0;
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 150ms ease-out;
+  -webkit-transition: all 150ms ease-out;
+  -moz-transition: all 150ms ease-out;
+  -ms-transition: all 150ms ease-out;
+  -o-transition: all 150ms ease-out;
+}
+.ms-faq .faq-left .faq-navigator.first{border-top: 1px solid #c3cfd9;}
+.ms-faq .faq-left .faq-navigator:hover,.ms-faq .faq-left .active.faq-navigator{
+    background: #F1F2F4;
+}
+.ms-faq .faq-left .faq-navigator:hover{
+    text-indent: 5px;
+}
+span.glyphicon.small.glyphicon-chevron-right {
+    top:0;
+}
+.ms-faq .faq-listing{padding-left:20px;}
+.ms-faq .faq-main{
+    min-height: 300px;
+    position: relative;
+    border: 1px solid #c3cfd9;
+    padding: 10px 10px 40px;
+}
+.ms-faq .faq-question{
+    color: #1570a6;
+    font-size: 16px;
+    line-height: 27px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    float: left;
+    cursor: pointer;
+}
+.ms-faq .faq-question.active span:before{
+    content:"\e252";
+}
+.ms-faq .faq-content{
+    padding-left: 30px;
+    padding-bottom: 20px;
+    font-size: 14px;
+}
+.ms-faq .faq-main .faq-fade{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(../images/faq/loading.gif) no-repeat center 125px #fff;
+    opacity: 0.8;
+    filter:alpha(opacity=80);
+    z-index: 100;
+    margin-left: -10px;
+    margin-top: -10px;
+}
+.ms-faq .faq-tags .faq-tag{
+    float: left;
+    color: #3e6d8e;
+    font-size: 12px;
+    white-space: nowrap;
+    background: #e4edf4;
+    border: 1px solid #e4edf4;
+    display: inline-block;
+    margin: 2px 2px 2px 0;
+    border-radius: 0;
+    -webkit-transition: color 0.15s ease, background 0.15s ease, border 0.15s ease;
+    -moz-transition: color 0.15s ease, background 0.15s ease, border 0.15s ease;
+    -ms-transition: color 0.15s ease, background 0.15s ease, border 0.15s ease;
+    -o-transition: color 0.15s ease, background 0.15s ease, border 0.15s ease;
+    line-height: 1;
+    text-decoration: none;
+    text-align: center;
+    padding: .4em .5em;
+    cursor: pointer;
+}
+.ms-faq .faq-tags .faq-tag:hover,.ms-faq .faq-tags .faq-tag.active{
+    color: #3e6d8e;
+    background-color: #A9CBE5;
+    border: 1px solid #dae6ef;
+}
+.ms-faq .magestore-faq-tags{
+    float:left;
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #c3cfd9;
+}
+.ms-faq .faq-pager{
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+    z-index: 99;
+}
+.ms-faq .faq-pager li{float:left;}
+.ms-faq .faq-pager .faq-page{
+    float: left;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 5px 0px;
+    text-align: center;
+    width: 35px;
+    font-size: 14px;
+    background-color: #d1d4d8;
+    border: 0;
+    margin: 0 3px;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    transition: all 150ms ease-out;
+    -webkit-transition: all 150ms ease-out;
+    -moz-transition: all 150ms ease-out;
+    -ms-transition: all 150ms ease-out;
+    -o-transition: all 150ms ease-out;
+}
+.ms-faq .faq-pager .faq-page:hover,.ms-faq .faq-pager .faq-page.active{
+    background: #1483b8;
+}
+.ms-faq .faq-pager .faq-page.active:before{
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 10px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 9px solid #1483b8;
+}
+.ms-faq .faq-sidebar{
+    float:left;
+    width:100%;
+    border: 1px solid #cccccc;
+}
+.ms-faq .faq-sidebar .sidebar-title {
+    background: #f4f4f4;
+    border-bottom: 1px solid #cccccc;;
+    padding:10px;
+}
+.ms-faq .faq-sidebar .sidebar-title h3{
+    margin: 0;
+    color: #636363;
+}
+.ms-faq .ms-popular-title span{
+    color: #3f729b;
+    font-size: 13px;
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #c3cfd9;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.ms-faq .ms-view-all-tags{
+    font-size: 13px;
+    color: #3f729b;
+    float: right;
+    cursor: pointer;
+}
+
+.ms-faq #ms-action-tags{
+    float: right;
+    width: 100%;
+    margin-top: 5px;
+}
+/* CSS on Mobile */
+@media (max-width: 767px) {
+    .ms-faq .faq-container{position: relative;overflow: hidden;}
+    #faq-container{
+      float:left;
+      width:200%;
+      -webkit-transition: all 150ms ease-out;
+      -moz-transition: all 150ms ease-out;
+      -ms-transition: all 150ms ease-out;
+      -o-transition: all 150ms ease-out;
+    }
+    .ms-faq #faq-container.active{
+      transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      -o-transform:translateX(-50%);
+      -moz-transform: translateX(-50%);;
+    } 
+    .ms-faq .faq-main{
+        padding:0 0 40px;
+        height: 0;
+    }
+    .ms-faq .active .faq-main{height: auto;}
+    .ms-faq #title-back{
+      font-size: 13px;
+      background: #F1F2F4;
+      color: #3f729b;
+      border-bottom: 1px solid #c3cfd9;
+      border-top: 0;
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 10px 20px;
+    }
+    .ms-faq #title-back span{
+      top:4px;
+      float:left;
+    }
+    .ms-faq .faq-left{padding-left: 0;}
+    .ms-faq .faq-main .faq-fade,.ms-faq .row-container{margin: 0;}
+    .ms-faq .faq-left .faq-navigator:hover,
+    .ms-faq .faq-left .faq-navigator:active,
+    .ms-faq .faq-left .faq-navigator:focus{text-indent: 0;}
+    .ms-faq .faq-listing{padding-right: 10px;}
+
+
+}
+
+/* Eden Css*/
+.ms-faq li  {
+    list-style: none !important;
+    margin-bottom: 0 !important;
+}
+.ms-faq button {
+    box-shadow: none !important;
+}
+.validation-advice {
+    color: red ;
+}
+.validation-failed {
+    border-color: red !important;
+}
+.faq-sidebar {
+    margin-bottom: 10px !important;
+}

@@ -1,0 +1,273 @@
+// /**
+//  * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@checkout-modal-popup__width: 440px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+  .checkout-index-index {
+    .modal-popup {
+      &._inner-scroll{
+        overflow-y: auto;
+        .showpopupimport{
+          display: block !important;
+        }
+      }
+      .field-tooltip {
+        .field-tooltip-content {
+          &:extend(.abs-checkout-tooltip-content-position-top all);
+        }
+      }
+      .modal-header{
+        background: @color-white;
+        padding: 28px 27px 13px;
+        border: @border-width__base solid @border-color__base;
+        border-bottom: none;
+        .modal-title{
+          font-size: @font-size__l;
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+      }
+      .modal-inner-wrap{
+      }
+      .modal-footer{
+        background: @color-white;
+        padding: 11px 11px 9px;
+        border: @border-width__base solid @border-color__base;
+        border-top: none;
+        .action-hide-popup{
+          background: none;
+          border: none;
+          color: @primary__color
+        }
+        .action-save-address{
+          width: 150px;
+        }
+      }
+      .fieldset {
+        &.address{
+          #lib-layout-columns();
+          > *{
+            width: 100%;
+          }
+          > .field{
+            .control._with-tooltip{
+              input{
+                width: 100%;
+                margin-right: 0;
+              }
+              .field-tooltip{
+                .lib-visually-hidden;
+              }
+            }
+            &:nth-child(1){
+              order: 1;
+              > .control{
+                color: @primary__color__lighter;
+              }
+            }
+            &:nth-child(2){
+              order: 2;
+              .lib-visually-hidden; // Remove for test
+            }
+            &:nth-child(3){
+              //.lib-visually-hidden;
+            }
+            &:nth-child(4){
+              //.lib-visually-hidden;
+            }
+            &:nth-child(5), &.stress{
+              order: 4;
+              .additional{
+                .lib-visually-hidden;
+              }
+            }
+            &:nth-child(6){
+              //.lib-visually-hidden; // Remove for test old
+              //width: 95px;
+              order: 3;
+              margin: 0;
+              padding: 0;
+              .lib-visually-hidden;
+              .control .input-text, .label{
+                .lib-visually-hidden;
+              }
+              .mage-error{
+                margin-top: -10px;
+                margin-bottom: 10px;
+              }
+            }
+            &:nth-child(7){
+              .lib-visually-hidden; // Remove for test
+              //width: 95px;
+              //order: 4;
+              margin: 0;
+              padding: 0;
+              .control .input-text, .label{
+                .lib-visually-hidden;
+              }
+            }
+            &:nth-child(8){
+              .lib-visually-hidden; // Remove for test
+              width: 95px;
+             //order: 6;
+            }
+            &:nth-child(9){
+              .lib-visually-hidden; // Remove for test
+              width: 95px;
+              //order: 5;
+              margin-right: 8px;
+            }
+            &:nth-child(10){
+              //order: 3;
+              color: @primary__color__lighter;
+            }
+            &:nth-child(11){
+              //order: 8;
+              &.choice:before{
+                display: none;
+              }
+            }
+          }
+          >  #twzipcode{
+            order: 2;
+            display: inline-block;
+            float: left;
+            width: 100% ;
+            margin-bottom: 18px;
+            > *{
+              width: 95px;
+              margin-left: 7.5px;
+              display: inline-block;
+              float: left;
+              &:first-child{
+                margin-left: 0;
+              }
+            }
+            & + .field.choice{
+              order: 5 ;
+            }
+            label{
+              padding: 0 0 5px 0;
+              text-align: left;
+              width: 100%;
+              box-sizing: border-box;
+              float: left;
+              &:after{
+                content: '*';
+                color: @error__color;
+                font-size: 1.2rem;
+                margin: 0 5px 0 0;
+                float: left;
+              }
+            }
+            .wrap-select{
+              width: 100%;
+            }
+          }
+        }
+        > .field:not(.choice) {
+          > .control{
+            width: 100%;
+            max-width: 300px;
+          }
+        }
+      }
+    }
+  }
+}
+
+//
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+  body {
+    .modal-popup {
+      &._inner-scroll {
+        .modal-content {
+          padding: 20px 13px 20px 15px;
+          min-height: 100%;
+        }
+      }
+    }
+  }
+  .checkout-index-index{
+    .modal-popup{
+      .fieldset {
+        > .field:not(.choice) {
+          > .control{
+            max-width: none;
+          }
+        }
+       &.address {
+         > .field:nth-child(6){
+            width: calc(~"(100% - 16px)/3");
+         }
+         > .field:nth-child(7){
+           width: calc(~"(100% - 16px)/3");
+         }
+         > .field:nth-child(8){
+           width: calc(~"(100% - 16px)/3");
+         }
+       }
+      }
+    }
+  }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+  .checkout-index-index {
+    .modal-popup {
+      &._inner-scroll{
+        .modal-content{
+          padding: 19px 38px;
+          overflow-y: initial;
+        }
+      }
+      .modal-inner-wrap {
+        .lib-css(margin-left, -(@checkout-modal-popup__width/2));
+        .lib-css(width, @checkout-modal-popup__width);
+      }
+      .form-shipping-address {
+        .lib-css(max-width, @checkout-shipping-address__max-width);
+      }
+
+      &.modal-slide .modal-footer {
+        border: @border-width__base solid @border-color__base;
+        border-top: none;
+        .action-save-address {
+          float: right;
+          margin: 0 0 0 @indent__s;
+        }
+
+        .action-hide-popup {
+          &:extend(.abs-action-button-as-link all);
+        }
+      }
+    }
+  }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+  .checkout-index-index {
+    .modal-popup {
+      .modal-inner-wrap {
+        .lib-css(margin-left, -(@checkout-modal-popup__width/2));
+        .lib-css(width, @checkout-modal-popup__width);
+        left: 50%;
+      }
+    }
+  }
+}

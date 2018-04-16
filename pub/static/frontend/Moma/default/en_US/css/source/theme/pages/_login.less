@@ -1,0 +1,225 @@
+// /**
+//  * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+  //
+  //  Layout
+  //  _____________________________________________
+
+  .customer-account-login, .customer-account-forgotpassword, .customer-account-create, .modal-popup, .contact-index-index{
+    .page-main > .page-title-wrapper .page-title{
+      //float: left;
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+    }
+    .column:not(.sidebar-main) {
+      form {
+        .actions-toolbar, .column:not(.sidebar-additional) form .actions-toolbar{
+          width: 100%;
+          margin-left: 0;
+        }
+      }
+    }
+    .fieldset > .legend{
+      .lib-visually-hidden();
+    }
+    .field.choice{
+      &.persistent{
+        text-align: center;
+      }
+    }
+
+    .pslogin-register.pslogin-block{
+      display: none;
+    }
+
+    .pslogin-spacer{
+      .lib-visually-hidden;
+    }
+    .pslogin-login, .pslogin-block{
+      float: left;
+      display: inline-block;
+      margin-bottom: 35px;
+      .pslogin-buttons{
+        margin: 0 auto;
+        float: none;
+        text-align: left;
+        max-width: 300px;
+        ul{
+          &.pslogin-clearfix{
+            margin-bottom: 0;
+          }
+          li{
+            &.facebook{
+              width: 100%;
+              height: auto;
+              margin: 0;
+              a{
+                .lib-button-primary;
+                border-radius: 3px;
+                padding: 6px 15px;
+                height: 40px;
+                span{
+                  &.pslogin-button-auto{
+                    text-align: center;
+                    background: none;
+                    width: 100%;
+                    height: 25px;
+                    > span{
+                      display: inline-block;
+                      background: none;
+                      float: none;
+                      &.pslogin-button-icon{
+                        width: 25px;
+                        height: 25px;
+                        position: static;
+                        .lib-css(background, url('@{baseDir}images/customer/icon-fb.png') no-repeat center center/25px 25px);
+                      }
+                      &.pslogin-button-text{
+                        color: @color-white;
+                        font-size: @font-size__l;
+                        height: auto;
+                        width: auto;
+                        text-align: left;
+                        margin-left: 10px;
+                        line-height: 25px;
+                        min-width: 0;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .login-container, .customer-account-forgotpassword .column.main, .customer-account-create .column.main{
+    text-align: center;
+  }
+
+  .form-login, .password.forget, .form-create-account, .form.contact{
+    margin: 0 auto;
+    float: none;
+    text-align: left;
+    max-width: 300px;
+    .fieldset {
+      &:after{
+        display: none;
+      }
+      .field {
+        &.note {
+          .lib-visually-hidden();
+        }
+      }
+      > .field.required {
+        > .label:after{
+          margin: 0 5px 0 0;
+          float: left;
+        }
+      }
+      > .field:not(.choice) {
+        > .label{
+          text-align: left;
+          width: 100%;
+          padding: 0;
+          padding-bottom: 5px;
+        }
+        > .control{
+          width: 100%;
+        }
+      }
+      > .field.choice:before, .fieldset > .field.no-label:before{
+        display: none;
+      }
+    }
+    .forgot-password-link{
+      width: 100%;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .actions-toolbar{
+      .primary{
+        width: 100%;
+        .action{
+          margin-left: 0;
+          width: 100%;
+        }
+      }
+      .secondary{
+        text-align: center;
+        width: 100%;
+        margin-top: 20px;
+        .action{
+          margin-left: 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .form-login{
+    #remember-me-box{
+      .lib-visually-hidden;
+    }
+  }
+  .customer-account-logoutsuccess{
+    .page-main {
+      > .page-title-wrapper {
+        padding-top: 20px;
+        .page-title{
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+  //
+  //  Layout
+  //  _____________________________________________
+
+  .customer-account-login, .customer-account-forgotpassword, .customer-account-create{
+    .page-main > .page-title-wrapper .page-title{
+      margin-top: 47px;
+    }
+  }
+
+}

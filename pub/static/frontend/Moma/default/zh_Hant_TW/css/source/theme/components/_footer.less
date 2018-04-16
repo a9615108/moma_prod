@@ -1,0 +1,419 @@
+// /**
+//  * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+
+@footer-links-color: @color-white;
+@footer-title-color: @primary__color__lighter;
+@footer-line-color: #f4f4f6;
+
+
+  //
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+  //
+  //  Footer links
+  //  _____________________________________________
+
+  .footer__links{
+    float: left;
+    display: inline-block;
+    width: auto;
+    &--item{
+      float: left;
+      display: inline-block;
+    }
+    h3{
+      color: @footer-title-color;
+      margin-top: 0;
+      border-bottom: 2px solid @footer-line-color;
+      font-size: @font-size__base;
+      padding-bottom: 18px;
+      margin-bottom: 14px;
+    }
+    a{
+      color: @footer-links-color;
+      line-height: 28px;
+    }
+
+  }
+
+  .footer__links--bottom{
+    color: @primary__color__lighter;
+    clear: left;
+    font-size: @font-size__base + 2;
+    line-height: 28px;
+    float: left;
+    margin-top: 20px;
+    width: 52%;
+    span{
+      color: @footer-links-color;
+      font-size: @font-size__xl - 1 ;
+    }
+
+    p{
+      margin-bottom: 0;
+    }
+  }
+
+  .page-footer .mn_navigation.mn__footer{
+
+    .navigation{
+      li.level0{
+
+      }
+    }
+    a.level0{
+      color: @footer-title-color;
+      margin-top: 0;
+      border-bottom: 2px solid @footer-line-color;
+      font-size: @font-size__l;
+      padding: 0 0 12px;
+      margin-bottom: 16px;
+
+    }
+
+  }
+
+  .footer--right{
+    display: inline-block;
+    float: right;
+    width: 48%;
+    .footer__social--main{
+      float: left;
+      width: 100%;
+      margin-bottom: 13px;
+      padding-right: 8px;
+    }
+    ul{
+      .lib-list-inline();
+      li{
+        float: right;
+        padding-left: 40px;
+      }
+      a{
+        position: relative;
+        span{
+          .lib-visually-hidden();
+        }
+        &.fb-icon{
+          i{
+            .lib-css(background, url('@{baseDir}images/footer/fb-icon.svg') no-repeat center center/14px 27px);
+            width: 28px;
+            height: 28px;
+            display: block;
+          }
+        }
+        &.youtube-icon{
+          i{
+            .lib-css(background, url('@{baseDir}images/footer/youtube-icon.svg') no-repeat center center/29px 20px);
+            width: 29px;
+            height: 28px;
+            display: block;
+          }
+        }
+        &.line-icon{
+          i{
+            .lib-css(background, url('@{baseDir}images/footer/line-icon.svg') no-repeat center center/28px 26px);
+            width: 28px;
+            height: 28px;
+            display: block;
+          }
+        }
+        &.insta-icon{
+          i{
+            .lib-css(background, url('@{baseDir}images/footer/insta-icon.svg') no-repeat center center/27px 27px);
+            width: 28px;
+            height: 28px;
+            display: block;
+          }
+        }
+        &.wechat-icon{
+          i{
+            .lib-css(background, url('@{baseDir}images/footer/wechat-icon.svg') no-repeat center center/28px 23px);
+            width: 28px;
+            height: 28px;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  //
+  //  Footer Social
+  //  _____________________________________________
+
+  .footer__social{
+    ul{
+      display: inline-block;
+      width: 100%;
+    }
+  }
+
+  //
+  //  Back top
+  //
+
+  .page-footer {
+    & + #back_top {
+      width: 49px;
+      height: 49px;
+      .lib-css(background, url('@{baseDir}images/footer/scroll-up.png') rgba(255, 255, 255, 0.6) no-repeat center center/34px 17px);
+      right: 10px;
+      bottom: 90px;
+      z-index: 19;
+    }
+  }
+
+  .footer-collapse{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    center{
+      width: 100%;
+      text-align: center;
+      background: @primary__color;
+      cursor: pointer;
+      > span{
+        display: inline-block;
+        font-size: 18px;
+        height: 30px;
+        line-height: 30px;
+        color: @color-white;
+        > span{
+          margin-right: 7px;
+          display: inline-block;
+        }
+        &:after{
+          width: 19px;
+          height: 19px;
+          .lib-css(background, url('@{baseDir}images/footer/double-arr-icon.png')no-repeat center center/19px 19px);
+          position: relative;
+          top: 5px;
+          display: inline-block;
+          content: '';
+          .transition(600ms ease-in all);
+          .rotate (180deg);
+        }
+      }
+    }
+    &.active{
+      center{
+        > span{
+          &:after{
+            .rotate (0deg);
+          }
+        }
+      }
+    }
+  }
+
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+  body .page-footer {
+    display: block !important;
+    .content{
+      > *:not(.footer--right){
+        display: none;
+      }
+      .footer--right{
+        width: calc(~'100% + 2 * 15px');
+        float: left;
+        margin-left: -15px;
+      }
+      .copyright{
+        text-align: center;
+        line-height: 40px;
+      }
+    }
+    .footer__social--main{
+      display: none;
+    }
+    & + #back_top {
+      width: 30px;
+      height: 30px;
+      .lib-css(background, url('@{baseDir}images/footer/scroll-up.png') rgba(255, 255, 255, 0.6) no-repeat center center/20px 10px);
+      right: 7px;
+      bottom: 51px;
+    }
+  }
+
+  .footer-collapse{
+    display: none;
+  }
+
+}
+
+
+//
+//  Notebook
+//  _____________________________________________
+
+& when (@media-target = 'desktop'),
+(@media-target = 'all') {
+  @media only screen and (max-width: (@screen__l + 1)) and (min-width: (@screen__m + 1) ) {
+    .page-footer{
+      & + #back_top {
+        right: 18px;
+      }
+    }
+  }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+  //
+  //  Footer links
+  //  _____________________________________________
+
+  .footer__links{
+    width: 50%;
+    &--item{
+      margin-left: 49px;
+      &:first-child{
+        margin-left: 0;
+      }
+    }
+  }
+
+  .page-footer{
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+    display: none;
+    padding-bottom: 14px;
+    padding-top: 53px;
+    z-index: 99;
+  }
+
+  .page-footer{
+    .mn_navigation.mn__footer {
+      width: 50%;
+      float: left;
+
+      .navigation {
+        li.level0 {
+          float: left;
+          margin-left: 49px;
+          &:first-child{
+            margin-left: 0;
+          }
+
+        }
+      }
+
+      .mega-content {
+        display: block;
+
+        .mega-content-inner{
+          background: @color-gray15;
+          border: 0;
+          min-width: auto;
+
+          a.item-link{
+            color: @color-white;
+            font-size: @font-size__l;
+            font-weight: @font-weight__regular;
+            padding: 0;
+            line-height: 28px;
+
+            &:hover{
+              background: none;
+            }
+          }
+
+        }
+      }
+
+      li.havechild > .mega-content{
+        position: static;
+      }
+
+    }
+
+    .block.newsletter{
+      position: absolute;
+      top: 0;
+      right: 40px;
+
+
+    }
+
+    .footer--right{
+      margin-top: -20px;
+
+
+    }
+
+    .footer.content{
+      position: relative;
+    }
+
+    .copyright{
+      font-size: 14px;
+    }
+  }
+
+
+
+}
+
+& when (@media-target = 'desktop'),
+(@media-target = 'all') {
+  @media only screen and (max-width: 1919px) and (min-width: (@screen__m) ) {
+
+    .footer__links--bottom{
+      margin-top: 24px;
+    }
+
+    .page-footer{
+      padding-bottom: 37px;
+
+      .mn_navigation.mn__footer {
+        a.level0{
+          padding-bottom: 14px;
+        }
+      }
+
+      .block.newsletter{
+        top: 5px;
+      }
+
+      .footer--right{
+        padding-right: 46px;
+      }
+
+      .copyright{
+        margin-top: 2px;
+        padding-right: 48px;
+      }
+    }
+
+  }
+}

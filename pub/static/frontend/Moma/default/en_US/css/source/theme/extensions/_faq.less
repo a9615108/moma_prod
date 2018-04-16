@@ -1,0 +1,270 @@
+// /**
+//  * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@border-color__faq: @color-gray-light7;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+  //
+  //  Main
+  //  _____________________________________________
+
+  .faq-index-index{
+    .page-main{
+      //padding-bottom: 90px;
+    }
+  }
+
+  .page-wrapper .ms-faq{
+    float: left;
+    display: inline-block;
+    width: 100%;
+    .row{
+      margin-right: 0;
+      margin-left: 0;
+      > div{
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    .faq-container{
+      margin-bottom: 0;
+    }
+    .faq-left{
+      .lib-visually-hidden;
+    }
+    .faq-main{
+      width: 100%;
+      padding: 0;
+      border: none;
+      height: auto;
+    }
+    .faq-title{
+      text-align: left;
+      margin: 0;
+      float: none;
+      h1{
+        margin: 0;
+        text-align: left;
+        .lib-font-size(30);
+        font-weight: @font-weight__regular;
+        color: @primary__color;
+        padding-bottom: 46px;
+      }
+    }
+    .faq-question{
+      float: left;
+      display: inline-block;
+      width: 100%;
+      color: @primary__color;
+      line-height: 40px;
+      border-bottom: @border-width__base solid @border-color__faq;
+      margin-bottom: 0;
+      position: relative;
+      padding-left: 38px;
+      &:before{
+        content: '';
+        position: absolute;
+        cursor: pointer;
+        left: 8px;
+        top: 10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        .lib-css(background, url('@{baseDir}images/icon-question.svg') no-repeat center center/10px 12px @primary__color);
+      }
+      > span{
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        right: 9px;
+        top: 11px;
+        &:before,
+        &:after{
+          background: @color-gray10;
+          content: '';
+          height: 1px;
+          right: 0;
+          position: absolute;
+          top: 7.5px;
+          width: 15px;
+          .transition( all 500ms ease);
+        }
+        &:after {
+          .rotate (90deg)
+        }
+        &:after{
+          .transform-origin (@x:center, @y:center);
+        }
+      }
+      &.active{
+        > span{
+          &:before, &:after {
+            content: '';
+            .rotate (180deg)
+          }
+        }
+      }
+    }
+    .faq-content{
+      padding: 28px 38px 37px;
+      border-bottom: @border-width__base solid @border-color__faq;
+      p{
+        margin-bottom: 0;
+        line-height: 24px;
+      }
+      br{
+        content: '';
+        margin-bottom: 24px;
+        display: block;
+      }
+    }
+    .faq{
+      padding: 0;
+    }
+    .faq-listing{
+      float: left;
+      display: inline-block;
+      padding-left: 0;
+      margin-top: 73px;
+      width: 100%;
+      .faq{
+        &.first{
+          .faq-question {
+            border-top: @border-width__base solid @border-color__faq;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+  .faq-index-index {
+    .page-main {
+      padding-left: 0;
+      padding-right: 0;
+      .faq-title, .faq-container {
+        padding-left: @layout__width-xs-indent - 5;
+        padding-right: @layout__width-xs-indent - 5;
+        overflow: auto;
+      }
+    }
+    .breadcrumbs{
+      .lib-visually-hidden;
+    }
+  }
+
+  body{
+    .page-wrapper .ms-faq{
+      #faq-container{
+        width: 100%;
+        .transform(translateX(0%));
+      }
+      #title-back, #title-next{
+        display: none;
+      }
+      .faq-title{
+        h1{
+          .lib-font-size(20);
+          margin-top: 10px;
+          padding-bottom: 15px;
+        }
+      }
+      .faq-question{
+        padding-left: 30px;
+        &:before{
+          left: 0;
+        }
+      }
+      .faq-content{
+        padding: 10px 0 16px;
+        p{
+          line-height: 19px;
+        }
+      }
+      .faq-listing{
+        margin-top: 6px;
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+
+  html body{
+    .page-wrapper{
+      .ms-faq{
+        .faq-listing{
+          margin-top: 11px;
+          padding-right: 0;
+        }
+      }
+    }
+  }
+
+}
+
+//
+//  Ipad and up
+//  _____________________________________________
+
+& when (@media-target = 'mobile'),
+(@media-target = 'all') {
+  @media only screen and (max-width: (@screen__m - 1)) and (min-width: (@screen__s + 1) ) {
+
+  }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+  //
+  //  Main
+  //  _____________________________________________
+
+  .faq-index-index {
+    .page-main{
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+      .faq-title, .faq-container{
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: @layout__max-width;
+        padding-left: @layout-indent__width;
+        padding-right: @layout-indent__width;
+        width: auto;
+        float: none;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,27 @@
+Save,保存
+"Backup options",備份選項
+"Insert Widget...",插入小部件...
+"Maximum length of this field must be equal or less than %1 symbols.","此欄位的最大長度必須等於或小於 %1 個符號。"
+Loading...,讀取中...
+Translate,翻譯
+"Method %s does not exist on jQuery.decorate","方法 %s 不存在於jQuery.decorate"
+more,更多
+Close,關閉
+Warning,警告
+Previous,前
+"Please wait...",請稍候...
+"Please enter a value greater than or equal to %s.",請輸入大於或等於%s的值。
+"Please enter a date from the past.",請輸入過去的日期。
+"Please enter a value less than or equal to %s.",請輸入小於或等於%s的值。
+"Please enter a valid year (1900-%1).",請輸入有效的年份(1900-%1)。
+"Please enter a valid day (1-%1).",請輸入有效的日期(1-%1)。
+"Please enter a date between %min and %max.",請輸入在%min和%max之間的日期。
+Cancel,取消
+Ok,確定
+All,所有
+Submit,提交
+"No records found.",未找到資料。
+Next,下一個
+"Show all...",顯示所有...
+"This is a required field.",這是必填欄位。
+"Recent items",最近的項目
