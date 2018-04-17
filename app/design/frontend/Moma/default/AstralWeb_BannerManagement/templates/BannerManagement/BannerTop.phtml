@@ -1,0 +1,120 @@
+<?php
+$modelBanners = $block->getBannerData(1);
+//var_dump($modelBanner->getData());die;
+$i = 0;
+foreach ($modelBanners as $modelBanner) {
+    if (isset($modelBanner) && $modelBanner) {
+        $bannerData = $block->getBannerItem($modelBanner->getId());
+        $animations = $modelBanner->getRotationType();
+        if ($animations == 1) {
+            $animation = "fade";
+        } elseif ($animations == 0) {
+            $animation = "slide";
+        } else {
+            $animation = "slide";
+        }
+        $time = $modelBanner->getRotationTime();
+        if ($time == 0) {
+            $time = 5;
+        }
+    } else {
+        return;
+    }
+
+if(isset($bannerData) && $bannerData->getSize() ){ ?>
+    <?php
+        switch ($i) {
+            case 0:
+                $class = 'main-slider';
+                break;
+            case 1:
+                $class = 'main-slider-mobile';
+                break;
+            default:
+                $class = 'section-home-' . ($i - 1);
+                break;
+        }
+    ?>
+<body class="loading">
+    <div id="container" class="cf <?php echo $class ?> <?php if($bannerData->getSize() ==1) echo 'single' ?>">
+        <div id="main" role="main">
+            <section class="slider">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <?php foreach ($bannerData as $item){ ?>
+                            <?php
+                                if($item->getBannerItemLinkTarget() == 2){
+                                    $target = "_blank";
+                                }else  if($item->getBannerItemLinkTarget() == 3){
+                                    $target = "_self";
+                                }
+                                else  if($item->getBannerItemLinkTarget() == 4){
+                                    $target = "_parent";
+                                }
+                                else  if($item->getBannerItemLinkTarget() == 5){
+                                    $target = "_top";
+                                }else{
+                                    $target = NULL;
+                                }
+                            ?>
+                            <li class="items">
+                                <?php if(strpos($item->getBannerItemLink(),'www.youtube.com') !== false): ?>
+                                 <?php $paramurl = explode("=", $item->getBannerItemLink());
+                                    if(!isset($paramurl[1])){
+                                        $paramurl = explode("/", $item->getBannerItemLink());
+                                        $src = "https://www.youtube.com/embed/".end($paramurl);
+                                    }else{
+                                        $src = "https://www.youtube.com/embed/".end($paramurl);
+                                    }
+
+                                  ?>
+                                  <div class="video__wrapper">
+                                <iframe width="598" height="336" src="<?php echo $src ?>" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                                <?php else: ?>
+                                <a href="<?php echo $item->getBannerItemLink();?>" target="<?php echo $target;?>" ><img  alt="<?php echo $item->getBannerItemAltTag();?>" src="<?php echo $block->getBaseUrlMedia($item->getBannerItemImageDesktop());?>" />
+                                <?php echo $item->getBannerItemAdditionalHtmlCss();?></a>
+                                <?php endif; ?>
+                            </li>
+                        <?php };?>
+                    </ul>
+                </div>
+            </section>
+            <div>
+                <?php echo $modelBanner->getAdditionalHtmlCss();?>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    require(['jquery','flexslider'], function($) {
+        $(document).ready(function($) {
+            $('.flexslider').flexslider({
+                animation: "<?php echo $animation;?>",
+                slideshowSpeed :parseInt(<?php echo $time*1000;?>),
+                start: function(slider){
+                    $('body').removeClass('loading');
+                }
+            });
+            //console.log($('.video__wrapper').length);
+            if($('.video__wrapper').length === 3){
+                $('.video__wrapper').each(function(){
+                    var liclonevideo = $(this).parent().closest('li');
+                    if(!liclonevideo.hasClass('clone')){
+                        var url = liclonevideo.find('iframe');
+                        var res = url[0].src.split('?');
+                        var urlfinal = res[0] + '?autoplay=1&rel=0&mute=1';
+                        liclonevideo.find('iframe').prop('src',urlfinal);
+
+                    }
+            });
+            }
+            $('ul .slides').each(function(){
+                console.log(this.find("li").length);
+            });
+        });
+    });
+</script>
+</body>
+    <?php $i++; ?>
+    <?php } ?>
+<?php } ?>

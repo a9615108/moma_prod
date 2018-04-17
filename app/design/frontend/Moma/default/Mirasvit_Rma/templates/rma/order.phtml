@@ -1,0 +1,37 @@
+<?php
+/** @var \Mirasvit\Rma\Block\Rma\Order $block */
+$order = $block->getCurrentOrder();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
+$configObject = $objectManager->create("Magento\Framework\App\Config\ScopeConfigInterface");
+$isEnable = $configObject->getValue('rma/frontend/is_show_refund_bt');
+
+?>
+<div class="order-details-items">
+    <div class="custom-order-details-link"><a href="<?php echo $block->getUrl().'sales/order/view/order_id/'.$order->getId()?>"><?php echo __('訂購的項目')?></a></div>
+    <div class="custom-order-details-rma-link active"><a href="javascript:void(0);"><?php echo __('退貨紀錄')?></a></div>
+    <div class="custom-rma-content">
+        <?php if ($block->isReturnAllowed() && $isEnable): ?>
+            <div class="order-title">
+                <button onclick="window.location.href='<?= $block->getUrl('rma/rma/new', ['order_id' => $order->getId()])?>';" class="button pull-right"><span><span><?= __('Request New Return')?></span></span></button>
+                <br><br>
+            </div>
+        <?php endif ?>
+        <div class="table-wrapper">
+            <?php
+            echo $block->getOrderRmaList();
+            ?>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    requirejs(['jquery'], function (jQuery) {
+        jQuery(document).ready(function (jQuery) {
+            jQuery('.custom-order-details-rma-link').on('click', function () {
+                jQuery(this).toggleClass('hide');
+                jQuery('.order-details-items .custom-rma-content').toggleClass('hide');
+            })
+        });
+    });
+</script>

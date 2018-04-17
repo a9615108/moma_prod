@@ -1,0 +1,70 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+?>
+
+<?php if (!$customerSession->isLoggedIn()) : ?>
+    <div class="authorization-link sign-in">
+        <a href="<?php echo $block->getBaseUrl() . 'customer/account/login' ?>">
+            <?php echo __('Login') ?>
+        </a>
+        /
+        <a href="<?php echo $block->getBaseUrl() . 'customer/account/create' ?>">
+            <?php echo __('Register') ?>
+        </a>
+    </div>
+<?php else: ?>
+    <div class="customer-logged">
+        <div class="welcome-customer">
+            <p><?php echo __('hi %1!', $customerSession->getCustomer()->getName()) ?></p>
+        </div>
+        <div class="list-action-authorization">
+            <a href="<?php echo $block->getBaseUrl() . 'customer/account' ?>">
+                <?php echo __('Member Account') ?>
+            </a>
+            <a href="<?php echo $block->getBaseUrl() . 'sales/order/history' ?>">
+                <?php echo __('Orders') ?>
+            </a>
+            <a href="<?php echo $block->getBaseUrl() . 'wishlist' ?>">
+                <?php echo __('Wishlist') ?>
+            </a>
+            <a href="<?php echo $block->getBaseUrl() . 'customer/account/logout' ?>">
+                <?php echo __('Sign Out') ?>
+            </a>
+        </div>
+    </div>
+<?php endif; ?>
+
+<script type="text/javascript">
+    requirejs(['jquery'], function ($) {
+        $(document).ready(function () {
+            $('.welcome-customer').on('click', function () {
+                var list_action = $('.list-action-authorization');
+                if (list_action.hasClass('active')) {
+                    list_action.removeClass('active');
+                } else {
+                    list_action.addClass('active');
+                }
+
+                var customer_logged = $('.customer-logged');
+                if (customer_logged.hasClass('active')) {
+                    customer_logged.removeClass('active');
+                } else {
+                    customer_logged.addClass('active');
+                }
+            });
+
+            var body = $('body');
+            var heightHeader =  $('.page-wrapper .page-header').height();
+            var heightNavigation =  $('.page-wrapper .mn_navigation').height();
+            var height = heightHeader + heightNavigation;
+            $(window).scroll(function () {
+                if($(this).scrollTop() > height){
+                    body.addClass('sticky-header');
+                }else {
+                    body.removeClass('sticky-header');
+                }
+            });
+        })
+    });
+</script>

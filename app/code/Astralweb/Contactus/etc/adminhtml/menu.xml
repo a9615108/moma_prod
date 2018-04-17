@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+        <add id="Astralweb_Contactus::elements" title="Astralweb" module="Astralweb_Contactus" sortOrder="18"  resource="Astralweb_Contactus::contactus"/>
+
+        <add id="Astralweb_Contactus::contact" title="Contact" module="Astralweb_Contactus" parent="Astralweb_Contactus::elements" sortOrder="10" action="contactus/contact/" resource="Astralweb_Contactus::contact"/>
+
+    </menu>
+</config>

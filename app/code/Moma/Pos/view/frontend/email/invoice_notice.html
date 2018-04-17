@@ -1,0 +1,144 @@
+<!--@subject {{trans "MOMA電子發票開立通知信"}} @-->
+
+<!--@vars {
+    "var email":"http://local.astralweb.com.tw/static/frontend/Moma/default/en_US/images/pos/MOMA_08.png",
+    "var customer.email":"Customer Email"
+} @-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			font-family: 'Microsoft JhengHei',arial;
+		}
+		ul{
+			list-style: none;
+			clear: both;
+			display: flex;
+		}
+		li {
+			list-style: none;
+			float: left;
+		}
+		.table-logo {
+			width: 160px;
+			height: 18px;
+			margin: auto;
+		}
+		.table-head-link {
+			text-decoration: none;
+			color: #e5e5e5;
+			font-size: 10px;
+			padding-top: 5px;
+		}
+		.table-head-title {
+			display: grid;
+			font-size: 10px;
+			font-weight: 200;
+			letter-spacing: 10px;
+		}
+		.table-head-title:nth-child(1) {
+			font-size: 25px;
+			color: #f7f7f7;
+		}
+		.table-head-title:nth-child(3) {
+			letter-spacing: 8px;
+		}
+		/*
+                .textLine:after {
+                    content: '|';
+                    position: absolute;
+                    right: 10px;
+                }
+        */
+	</style>
+</head>
+<body>
+
+<div class="mail-wrapper" style="width: 1000px;background: #f2f2f2;">
+	<table style="border-collapse:collapse;width: 100%">
+		<tr style="background: #4C4C4C; color: #e5e5e5;">
+			<th style="display: grid;padding:15px;">
+				<img class="table-logo" src="{{var MOMA_08_png_url}}">
+				<a class="table-head-link" href="">www.moma1997.com</a>
+			</th>
+			<th style="padding: 0px 70px;">
+				<span class="table-head-title">其基有限公司</span>
+				<span class="table-head-title">電子計算機統一發票</span>
+				<span class="table-head-title">中華民國 {{var year}}年 {{var month}}月 {{var day}}日</span>
+			</th>
+			<th style="font-size: 1px;font-weight: 200;text-align: center;">
+				<img src="{{var fafa2_png_url}}" style="width:200px;padding-top:3px;">
+			</th>
+		</tr>
+	</table>
+	<div class="content-top">
+		<ul style="background: #f2f2f2; color: #4C4C4C;">
+			<li style="font-size: 18px;width: 25%;text-indent: 20px;">發票號碼：</li>
+			<li style="width: 20%;">買受人：</li>
+			<li style="width: 20%;">統一編號：</li>
+			<li style="width: 35%;">地址：</li>
+		</ul>
+		<ul style="background: #f2f2f2; color: #4C4C4C;height: 60px;">
+			<li style="font-size: 18px;width: 25%;text-indent: 20px;">{{var invoice}}</li>
+			<li style="width: 20%;">{{var CustomerName}}</li>
+			<li style="width: 20%;">{{var uninum}}</li>
+			<li style="width: 35%;">{{var address}}</li>
+		</ul>
+	</div>
+	<div class="email-content" style="width: 78%;float: left;">
+		<div class="content-mid" style="background: #f2f2f2; min-height: 340px;">
+			<ul style="background: #4C4C4C; color: #e5e5e5;margin-bottom: 5px;">
+				<li style="width: 25%;text-indent: 20px;">商品名稱</li>
+				<li style="width: 10%;text-align: center;">顏色</li>
+				<li style="width: 10%;text-align: center;">尺寸</li>
+				<li style="width: 20%;text-align: center;">貨號</li>
+				<li style="width: 10%;text-align: center;">數量</li>
+				<li style="width: 10%;text-align: center;">單價</li>
+				<li style="width: 10%;text-align: center;">金額</li>
+			</ul>
+			{{var order_item_html|raw}}
+		</div>
+		<div class="content-bottom" style="background: #999999;color: #4C4C4C;width: 100%;float: left;">
+			<p style="border-bottom: 1px solid #e5e5e5;padding: 3px 20px;">
+				<span>銷售額合計</span>
+				<span style="float:right;padding-top: 3px;">{{var total}}</span>
+			</p>
+			<ul style="border-bottom: 1px solid #e5e5e5;padding: 3px 20px;">
+				<li class="textLine" style="width: 15%;position: relative;">營業稅<span>　　｜</span></li>
+				<li class="textLine" style="width: 15%;position: relative;">應稅　Ｖ<span>　｜</span></li>
+				<li class="textLine" style="width: 15%;position: relative;">零稅率<span>　　｜</span></li>
+				<li class="textLine" style="width: 15%;position: relative;">免稅<span>　　｜</span></li>
+			</ul>
+			<p style="border-bottom: 1px solid #e5e5e5;padding: 3px 20px;">
+				<span>總計</span>
+				<span style="float:right;padding-top: 3px;">{{var total}}</span>
+			</p>
+		</div>
+	</div>
+	<div class="content-right" style="background: #f2f2f2; color: #4C4C4C; min-height: 400px;display: flow-root;padding-left: 5px">
+		<p style="background: #4C4C4C; color: #e5e5e5;text-align: center;">備註</p>
+		<p style="border-bottom: 1px solid #4C4C4C;display: flex;padding: 5px 5px 3px 10px;">客服專線：0800-086-986</p>
+		<p style="padding: 5px 5px 3px 10px;">訂單編號：</p>
+		<p style="padding: 30px 10px 10px 10px;">{{var increment_id}}</p>
+		<p style="padding: 5px 5px 3px 10px;">明細編號：</p>
+		<p style="padding: 30px 10px 10px 10px;">{{var incrementId}}</p>
+		<p style="padding: 5px 5px 3px 10px;">信用卡後四碼：</p>
+		<p style="padding: 30px 10px 10px 10px;">{{var last_4_digit_of_pan}}</p>
+		<p style="background: #4C4C4C; color: #e5e5e5;text-align: center;">營業人蓋用統一發票專用章</p>
+		<p><img src="{{var stamp_png_url}}" style="width: 200px;padding: 5px;"></p>
+	</div>
+	<div class="email-footer" class="content-bottom" style="background: #999999;clear: both;padding: 5px 20px 0px;;">
+		<img src="{{var fafa_b_png_url}}" style="width: 100%;">
+	</div>
+</div>
+
+</body>
+</html>

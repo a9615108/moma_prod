@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+    	 <job name="OrderSearch_Order_ShippingSF" instance="Astralweb\Shippingsf\Cron\ConfirmOrder" method="OrderSearch">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job name="Confirm_Order_ShippingSF" instance="Astralweb\Shippingsf\Cron\ConfirmOrder" method="Confirm">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job name="Route_Order_ShippingSF" instance="Astralweb\Shippingsf\Cron\ConfirmOrder" method="Route">
+            <schedule>* * * * *</schedule>
+        </job>
+    </group>
+</config>

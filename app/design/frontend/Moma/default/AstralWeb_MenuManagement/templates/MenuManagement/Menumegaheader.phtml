@@ -1,0 +1,217 @@
+<span class="server-balance" style="display: none;">Server 1</span>
+<?php
+$menuItemJson = $this->helper('AstralWeb\MenuManagement\Helper\Data')->getMenuDisplay('Header');
+$icon = "<i class=\"fa fa-angle-right\"></i>";
+if ($menuItemJson) {
+    $jsonObject = json_decode($menuItemJson->getMenuItemJson()); ?>
+    <nav class="mn_navigation">
+        <?php foreach ($jsonObject as $mainMenu) {
+            if (isset($mainMenu->children)) {
+                $subMenus = $mainMenu->children;
+            } ?>
+            <?php echo $block->getChildHtml('login.block.mobile'); ?>
+            <ul id="meganavigator" class="navigation">
+                <?php if (isset($mainMenu->children)) {
+                    for ($i = 0; $i < count($subMenus); $i++) { ?>
+                        <li class="level0 nav-<?php echo $i; ?> <?php if (isset($subMenus[$i]->children)) {
+                            $subMenus2 = $subMenus[$i]->children;
+                            echo "havechild";
+                        }; ?>">
+                            <div class="level0-inner">
+                                <a
+                                        title="<?php echo $subMenus[$i]->name; ?>" class="level0 item-link" target="<?php echo $this->helper('AstralWeb\MenuManagement\Helper\Data')->geTargetdata($subMenus[$i]->id,$menuItemJson->getId())?>" href=<?php echo $menudata = $this->helper('AstralWeb\MenuManagement\Helper\Data')->getMenudata($subMenus[$i]->id,$menuItemJson->getId()); ?> >
+                                    <span class="menu-title"><?php echo $subMenus[$i]->name; ?></span>
+                                </a>
+                                <span class="mega-link-collapse"><span><?php echo __('arrow') ?></span></span>
+                            </div>
+                            <div class="menu mega-content">
+                                <div class="mega-content-inner">
+                                    <ul class="subnavi">
+                                        <?php if (isset($subMenus[$i]->children)) {
+                                            for ($j = 0; $j < count($subMenus2); $j++) { ?>
+                                                <li class="level1 nav-<?php echo $i; ?>-<?php echo $j; ?> <?php if (isset($subMenus2[$j]->children)) {
+                                                    $subMenus3 = $subMenus2[$j]->children;
+                                                    echo "havechild";
+                                                }; ?>">
+                                                    <a title="<?php echo $subMenus2[$j]->name; ?>" class="level1 item-link" href=<?php echo $menudata = $this->helper('AstralWeb\MenuManagement\Helper\Data')->getMenudata($subMenus2[$j]->id,$menuItemJson->getId()); ?>  target="<?php echo $this->helper('AstralWeb\MenuManagement\Helper\Data')->geTargetdata($subMenus2[$j]->id,$menuItemJson->getId())?>" >
+                                                        <span
+                                                            class="menu-title"><?php echo $subMenus2[$j]->name; ?></span>
+                                                        <?php if (isset($subMenus2[$j]->children)) {
+                                                            $subMenus3 = $subMenus2[$j]->children;
+                                                            echo $icon;
+                                                        }; ?>
+                                                        <span class="mega-link-collapse"><span><?php echo __('arrow') ?></span></span>
+                                                    </a>
+
+                                                    <div class="menu mega-content">
+                                                        <div class="mega-content-inner">
+                                                            <ul class="subnavi">
+                                                                <?php if (isset($subMenus2[$j]->children)) {
+                                                                    for ($m = 0; $m < count($subMenus3); $m++) { ?>
+                                                                        <li class="level2 nav-<?php echo $i; ?>-<?php echo $j; ?>-<?php echo $m; ?> <?php if (isset($subMenus3[$m]->children)) {
+                                                                            $subMenus4 = $subMenus3[$m]->children;
+                                                                            echo "havechild";
+                                                                        }; ?>">
+                                                                            <a title="" class="level2 item-link"
+                                                                               href=<?php echo $menudata = $this->helper('AstralWeb\MenuManagement\Helper\Data')->getMenudata($subMenus3[$m]->id,$menuItemJson->getId()); ?>  target="<?php echo $this->helper('AstralWeb\MenuManagement\Helper\Data')->geTargetdata($subMenus3[$m]->id,$menuItemJson->getId())?>" >
+                                                                                <span
+                                                                                    class="menu-title"><?php echo $subMenus3[$m]->name; ?></span>
+                                                                                <?php if (isset($subMenus3[$m]->children)) {
+                                                                                    $subMenus4 = $subMenus3[$m]->children;
+                                                                                    echo $icon;
+                                                                                }; ?>
+                                                                                <span class="mega-link-collapse"><span><?php echo __('arrow') ?></span></span>
+                                                                            </a>
+                                                                            <div class="menu mega-content">
+                                                                                <div class="mega-content-inner">
+                                                                                    <ul class="subnavi">
+                                                                                        <?php if (isset($subMenus3[$m]->children)) {
+                                                                                            for ($k = 0; $k < count($subMenus4); $k++) { ?>
+                                                                                                <li class="level3 nav-<?php echo $i; ?>-<?php echo $j; ?>-<?php echo $m; ?>-<?php echo $k; ?>">
+                                                                                                    <a title=""
+                                                                                                       class="level3 item-link"
+                                                                                                       href=<?php echo $menudata = $this->helper('AstralWeb\MenuManagement\Helper\Data')->getMenudata($subMenus4[$k]->id,$menuItemJson->getId()); ?>  target="<?php echo $this->helper('AstralWeb\MenuManagement\Helper\Data')->geTargetdata($subMenus4[$k]->id,$menuItemJson->getId())?>" >
+                                                                                                        <span
+                                                                                                            class="menu-title"><?php echo $subMenus4[$k]->name; ?></span>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                            <?php };
+                                                                                        } ?>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    <?php };
+                                                                } ?>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            <?php };
+                                        } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    <?php };
+                } ?>
+            </ul>
+            <?php
+$menuItemJson = $this->helper('AstralWeb\MenuManagement\Helper\Data')->getMenuDisplay('Footer');
+$icon = "<i class=\"fa fa-angle-right\"></i>";
+if ($menuItemJson) {
+    $jsonObject = json_decode($menuItemJson->getMenuItemJson()); ?>
+    <nav class="mn_navigation mn__footer">
+        <?php foreach ($jsonObject as $mainMenu) {
+            if (isset($mainMenu->children)) {
+                $subMenus = $mainMenu->children;
+            } ?>
+            <ul id="meganavigator" class="navigation">
+                <?php if (isset($mainMenu->children)) {
+                    for ($i = 0; $i < count($subMenus); $i++) { ?>
+                        <li class="level0 nav-<?php echo $i; ?> <?php if (isset($subMenus[$i]->children)) {
+                            $subMenus2 = $subMenus[$i]->children;
+                            echo "havechild";
+                        }; ?>">
+                            <div class="level0-inner">
+                                <a
+                                    title="Home" class="level0 item-link" target="<?php echo $this->helper('AstralWeb\MenuManagement\Helper\Data')->geTargetdata($subMenus[$i]->id,$menuItemJson->getId())?>" href=<?php echo $menudata = $this->helper('AstralWeb\MenuManagement\Helper\Data')->getMenudata($subMenus[$i]->id,$menuItemJson->getId()); ?> >
+                                    <span class="menu-title"><?php echo $subMenus[$i]->name; ?></span>
+
+                                </a>
+                                 <span class="mega-link-collapse"><span><?php echo __('arrow') ?></span></span>
+                            </div>
+                           
+                            <div class="menu mega-content">
+                                <div class="mega-content-inner">
+                                    <ul class="subnavi">
+                                        <?php if (isset($subMenus[$i]->children)) {
+                                            for ($j = 0; $j < count($subMenus2); $j++) { ?>
+                                                <li class="level1 nav-<?php echo $i; ?>-<?php echo $j; ?> <?php if (isset($subMenus2[$j]->children)) {
+                                                    $subMenus3 = $subMenus2[$j]->children;
+                                                    echo "havechild";
+                                                }; ?>">
+                                                    <a title="" class="level1 item-link" href=<?php echo $menudata = $this->helper('AstralWeb\MenuManagement\Helper\Data')->getMenudata($subMenus2[$j]->id,$menuItemJson->getId()); ?>  target="<?php echo $this->helper('AstralWeb\MenuManagement\Helper\Data')->geTargetdata($subMenus2[$j]->id,$menuItemJson->getId())?>" >
+                                                        <span
+                                                            class="menu-title"><?php echo $subMenus2[$j]->name; ?></span>
+                                                        <?php if (isset($subMenus2[$j]->children)) {
+                                                            $subMenus3 = $subMenus2[$j]->children;
+                                                            echo $icon;
+                                                        }; ?>
+                                                    </a>
+                                                    <div class="menu mega-content">
+                                                        <div class="mega-content-inner">
+                                                            <ul class="subnavi">
+                                                                <?php if (isset($subMenus2[$j]->children)) {
+                                                                    for ($m = 0; $m < count($subMenus3); $m++) { ?>
+                                                                        <li class="level2 nav-<?php echo $i; ?>-<?php echo $j; ?>-<?php echo $m; ?> <?php if (isset($subMenus3[$m]->children)) {
+                                                                            $subMenus4 = $subMenus3[$m]->children;
+                                                                            echo "havechild";
+                                                                        }; ?>">
+                                                                            <a title="" class="level2 item-link"
+                                                                               href=<?php echo $menudata = $this->helper('AstralWeb\MenuManagement\Helper\Data')->getMenudata($subMenus3[$m]->id,$menuItemJson->getId()); ?>  target="<?php echo $this->helper('AstralWeb\MenuManagement\Helper\Data')->geTargetdata($subMenus3[$m]->id,$menuItemJson->getId())?>" >
+                                                                                <span
+                                                                                    class="menu-title"><?php echo $subMenus3[$m]->name; ?></span>
+                                                                                <?php if (isset($subMenus3[$m]->children)) {
+                                                                                    $subMenus4 = $subMenus3[$m]->children;
+                                                                                    echo $icon;
+                                                                                }; ?>
+                                                                            </a>
+                                                                            <div class="menu mega-content">
+                                                                                <div class="mega-content-inner">
+                                                                                    <ul class="subnavi">
+                                                                                        <?php if (isset($subMenus3[$m]->children)) {
+                                                                                            for ($k = 0; $k < count($subMenus4); $k++) { ?>
+                                                                                                <li class="level3 nav-<?php echo $i; ?>-<?php echo $j; ?>-<?php echo $m; ?>-<?php echo $k; ?>">
+                                                                                                    <a title=""
+                                                                                                       class="level3 item-link"
+                                                                                                       href=<?php echo $menudata = $this->helper('AstralWeb\MenuManagement\Helper\Data')->getMenudata($subMenus4[$k]->id,$menuItemJson->getId()); ?>  target="<?php echo $this->helper('AstralWeb\MenuManagement\Helper\Data')->geTargetdata($subMenus4[$k]->id,$menuItemJson->getId())?>" >
+                                                                                                        <span
+                                                                                                            class="menu-title"><?php echo $subMenus4[$k]->name; ?></span>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                            <?php };
+                                                                                        } ?>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    <?php };
+                                                                } ?>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            <?php };
+                                        } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    <?php };
+                } ?>
+            </ul>
+            <!--            <div class="menu_additional_html_css">-->
+            <!--                < //echo $menuItemJson->getAdditionalHtmlCss()?-->
+            <!--            </div>-->
+        <?php }; ?>
+    </nav>
+<?php }; ?>
+        <?php }; ?>
+        <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('mobile-menu-bottom')->toHtml();?>
+    </nav>
+    <script type="text/javascript">
+        requirejs(['jquery'], function ($) {
+            $(document).ready(function () {
+                $('.mega-link-collapse').on('click', function () {
+                    var parent = $(this).parent().parent();
+                    if (parent.hasClass('active')) {
+                        parent.removeClass('active');
+                    } else {
+                        parent.addClass('active');
+                    }
+                });
+            })
+        });
+    </script>
+<?php }; ?>

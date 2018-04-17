@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+    	<referenceBlock name="head.additional">
+            <block class="Astralweb\Gtm\Block\Gtm" name="astralweb.gtm.header" as="gtm.header" template="Astralweb_Gtm::gtm_header.phtml" before="-"/>
+        </referenceBlock>
+        <referenceContainer name="after.body.start">
+            <block class="Astralweb\Gtm\Block\Gtm" name="astralweb.gtm.body" as="gtm.body" template="Astralweb_Gtm::gtm_body.phtml" before="-"/>
+        </referenceContainer>
+    </body>
+</page>

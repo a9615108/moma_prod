@@ -1,0 +1,97 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+//data-role="collapsible"
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @var $block \Magento\LayeredNavigation\Block\Navigation
+ */
+?>
+<style>
+    #layered-filter-block .filter-content .filter-options-title:before{
+        display: none;
+    }
+    #layered-filter-block .filter-content .filter-options-title:after{
+        display: none;
+    }
+</style>
+
+<?php if ($block->canShowBlock()): ?>
+    <?php echo $block->getChildHtml('catalog.child.cat') ?>
+    <div class="block filter" id="layered-filter-block" data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false, "collateral": { "openedState": "filter-active", "element": "body" } }}'>
+        <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
+        <div class="block-title filter-title" data-count="<?php /* @escapeNotVerified */ echo $filtered; ?>">
+            <strong data-role="title"><?php /* @escapeNotVerified */ echo __('Shop By') ?></strong>
+            <div class="filter-close-icon">
+                <span><?php echo __('Filter close icon') ?></span>
+            </div>
+        </div>
+        <div class="block-content filter-content">
+            <?php echo $block->getChildHtml('state') ?>
+
+            <?php if ($block->getLayer()->getState()->getFilters()): ?>
+                <div class="block-actions filter-actions">
+                    <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>" class="action clear filter-clear"><span><?php /* @escapeNotVerified */ echo __('Clear All') ?></span></a>
+                </div>
+            <?php endif; ?>
+            <?php $wrapOptions = false; ?>
+            <?php foreach ($block->getFilters() as $filter): ?>
+        <?php if ($filter->getItemsCount()): ?>
+        <?php if (!$wrapOptions): ?>
+            <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?php /* @escapeNotVerified */ echo __('Shopping Options') ?></strong>
+            <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+                <?php  $wrapOptions = true; endif; ?>
+                <div  class="filter-options-item">
+                    <div data-role="title" class="filter-options-title"><?php /* @escapeNotVerified */ echo __($filter->getName()) ?></div>
+                    <div data-role="content" class="filter-options-content"><?php /* @escapeNotVerified */ echo $block->getChildBlock('renderer')->render($filter); ?></div>
+                </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+                <?php if ($wrapOptions): ?>
+            </div>
+        <?php else: ?>
+            <script>
+                require([
+                    'jquery'
+                ], function ($) {
+                    $('#layered-filter-block').addClass('filter-no-options');
+
+                    $('.filter-close-icon').on('click', function () {
+                        //var body = $('body');
+                        if ($('body').hasClass('filter-active')) {
+                            $('body').removeClass('filter-active');
+                        } else {
+                            $('body').addClass('filter-active');
+                        }
+
+                    });
+
+                });
+            </script>
+            <?php endif; ?>
+        </div>
+    </div>
+    <script>
+        require([
+            'jquery'
+        ], function ($) {
+            $('.filter-close-icon').on('click', function () {
+                //var body = $('body');
+                if ($('body').hasClass('filter-active')) {
+                    $('body').removeClass('filter-active');
+                } else {
+                    $('body').addClass('filter-active');
+                }
+
+            });
+
+        });
+    </script>
+<?php endif; ?>

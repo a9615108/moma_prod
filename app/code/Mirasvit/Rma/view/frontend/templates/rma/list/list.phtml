@@ -1,0 +1,52 @@
+<?php
+//@codingStandardsIgnoreFile
+
+/* @var $block \Mirasvit\Rma\Block\Rma\Listing\Listing */
+$list = $block->getRmaList();
+?>
+<?php if (count($list)): ?>
+    <?= $block->getChildHtml('rma.toolbar')?>
+    <div class="table-wrapper">
+        <table class="data table history">
+            <caption class="table-caption"><?=__('RMA') ?></caption>
+            <thead>
+            <tr class="first last">
+                <th scope="col" class="col"><?= __('RMA') ?></th>
+                <th scope="col" class="col"><?= __('Date') ?></th>
+                <th scope="col" class="col"><?= __('Order #') ?></th>
+                <th scope="col" class="col"><?= __('Status') ?></th>
+                <th scope="col" class="col actions"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($list as $rma): ?>
+                <tr>
+                    <td data-th="<?= __('RMA') ?>" class="col">
+                        <?= $rma->getIncrementId() ?>
+                        <?php if (!$block->isLastMessageRead($rma)): ?><span class="unread"></span><?php endif ?>
+                    </td>
+                    <td data-th="<?= __('Date') ?>" class="col">
+                        <?= $block->formatDate($rma->getCreatedAt(), \IntlDateFormatter::MEDIUM) ?>
+                    </td>
+                    <td data-th="<?= __('Order #') ?>" class="col">
+                        <a href="<?= $this->getUrl('sales/order/view', ['order_id' => $rma->getOrderId()]) ?>">
+                            <?= $block->getOrderIncrementId($rma) ?>
+                        </a>
+                    </td>
+                    <td data-th="<?= __('Status') ?>" class="col">
+                        <?= $block->getStatusName($rma) ?>
+                    </td>
+                    <td data-th="<?= __('Actions') ?>" class="col">
+                        <a href="<?= $block->getRmaUrl($rma)?>"><?= __('View Return') ?></a>
+                    </td>
+                </tr>
+            <?php endforeach?>
+            </tbody>
+        </table>
+    </div>
+    <?= $block->getChildHtml('rma.toolbar')?>
+<?php else: ?>
+    <div class="message info empty">
+        <span><?= __('There are no Returns') ?></span>
+    </div>
+<?php endif ?>

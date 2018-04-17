@@ -1,0 +1,4 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="AstralWeb\BannerManagement\Block\Banner" type="Astralweb\Lookbook\Block\Banner" />
+    <preference for="Eadesigndev\Pdfgenerator\Helper\Pdf" type="Astralweb\Lookbook\Helper\Pdf" />
+</config>

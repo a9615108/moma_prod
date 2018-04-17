@@ -1,0 +1,46 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+?>
+<?php $storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt();?>
+<span data-action="toggle-nav" class="action nav-toggle"><span><?php /* @escapeNotVerified */ echo __('Toggle Nav') ?></span></span>
+<div class="logo-wrap">
+    <?php if ($block->isHomePage()):?>
+        <strong class="logo">
+            <?php else: ?>
+            <a class="logo" href="<?php echo $block->getUrl(''); ?>" title="<?php /* @escapeNotVerified */ echo $storeName ?>">
+                <?php endif ?>
+                <img src="<?php /* @escapeNotVerified */ echo $block->getLogoSrc() ?>"
+                     alt="<?php /* @escapeNotVerified */ echo $block->getLogoAlt() ?>"
+                    <?php echo $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+                    <?php echo $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+                />
+                <?php if ($block->isHomePage()):?>
+        </strong>
+    <?php else:?>
+        </a>
+    <?php endif?>
+</div>
+
+<script type="text/javascript">
+    requirejs(['jquery'], function ($) {
+        $(document).ready(function () {
+            var body = $('body');
+            $('.nav-toggle').on('click', function () {
+                if (body.hasClass('menu-active')) {
+                    body.removeClass('menu-active');
+                } else {
+                    body.addClass('menu-active');
+                }
+            });
+        });
+    });
+</script>

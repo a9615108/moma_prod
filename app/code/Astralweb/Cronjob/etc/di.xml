@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="astralweb_cronjob_command_iguangallprod"        xsi:type="object">Astralweb\Cronjob\Command\IguangAllProd</item>
+                <item name="astralweb_cronjob_command_iguangproductpartial" xsi:type="object">Astralweb\Cronjob\Command\IguangProductPartial</item>
+                <item name="astralweb_cronjob_command_iguangcateFull"       xsi:type="object">Astralweb\Cronjob\Command\IguangCateFull</item>
+                <item name="astralweb_cronjob_command_iguangproducthot"     xsi:type="object">Astralweb\Cronjob\Command\IguangProductHot</item>
+                <item name="astralweb_cronjob_command_iguangOrderfinish"    xsi:type="object">Astralweb\Cronjob\Command\IguangOrderfinish</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

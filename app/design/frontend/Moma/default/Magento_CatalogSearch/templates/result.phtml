@@ -1,0 +1,66 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+$helper = $this->helper('Magento\CatalogSearch\Helper\Data');
+?>
+<?php if ($block->getResultCount()): ?>
+    <?php echo $block->getChildHtml('tagged_product_list_rss_link'); ?>
+    <div class="search results">
+        <?php if ($messages = $block->getNoteMessages()):?>
+            <div class="message notice">
+                <div>
+                    <?php foreach ($messages as $message):?>
+                        <?php /* @escapeNotVerified */ echo $message?><br />
+                    <?php endforeach;?>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php echo $block->getProductListHtml() ?>
+    </div>
+<?php else: ?>
+    <!--
+<div class="message notice">
+    <div>
+        <?php /* @escapeNotVerified */ echo($block->getNoResultText()) ? $block->getNoResultText() : __('Your search returned no results.') ?>
+        <?php echo $block->getAdditionalHtml() ?>
+        <?php if ($messages = $block->getNoteMessages()):?>
+            <?php foreach ($messages as $message):?>
+                <br /><?php /* @escapeNotVerified */ echo $message?>
+            <?php endforeach;?>
+        <?php endif; ?>
+    </div>
+</div> -->
+    <div class="content-noresult-wrap">
+        <div class="content-noresult-wrap__content">
+            <div class="search-for">
+                <span class="label"><?php echo __("未搜尋到"); ?></span>
+                <span class="content"><?php echo __("%1", $helper->getEscapedQueryText()); ?></span>
+            </div>
+            <div class="report-message"><?php echo __("沒有搜尋到任何結果"); ?></div>
+            <div class="direct-link">
+                <a href="<?php echo $block->getUrl() ?>"><?php echo __("返回首頁"); ?></a>
+            </div>
+        </div>
+    </div>
+
+<?php endif; ?>
+<script type="text/javascript">
+    console.log('1');
+    require(['jquery'], function($){
+        console.log('2');
+        setTimeout(function(){
+            console.log('3');
+            var search = $('.main').find('.content-noresult-wrap');
+            if(search.length)
+            {
+                console.log('4');
+                $('body').addClass('search-no-result');
+            }
+        }, 300);
+
+    });
+</script>

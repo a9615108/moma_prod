@@ -1,0 +1,4 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Checkout\Block\Checkout\LayoutProcessor" type="Astralweb\Checkout\Block\Checkout\LayoutProcessor" />
+    <preference for="Magento\Checkout\Controller\Index\Index" type="Astralweb\Checkout\Controller\Index\Index" />
+</config>

@@ -1,0 +1,141 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$helper = $objectManager->get('Astralweb\ShippingStorePickUp\Helper\Data');
+$shops = $helper->getShops();
+?>
+<div class="errorStorePickUp"></div>
+<style>
+#shop_select > select{
+    width : 200px;
+    margin: 0px 2px;
+}
+</style>
+<script>
+    var shops = <?=$shops?>;
+    var k,county_html = '';
+    for( k in shops ){
+        county_html += '<option value="'+k+'">'+k+'</option>';
+    }
+
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+        'use strict';
+        // localStorage.clear();
+
+        // 門市取貨 ShippingStorePickUp_ShippingStorePickUp
+        $("body").delegate('#checkout-shipping-method-load', "click", function(){
+            if( $('input[name^="ko_unique_"]:checked').val() == "ShippingStorePickUp_ShippingStorePickUp" ){
+                $("#shop_select").show();
+            }else{
+                $("#shop_select").hide();
+            }
+        })
+
+        // 選定門市
+        $("body").delegate('#shop_id', "change", function(){
+
+            var county,region,k,shop;
+            var shop_id= $('#shop_id').val();
+            break_shop_id_change :
+            for( county in shops ){
+                for( region in shops[county] ){
+                    for( k in shops[county][region] ){
+                        if( shops[county][region][k]['code'] == shop_id ){
+                            shop = shops[county][region][k];
+
+                            $(".modals-overlay").css('z-index','-1');
+                            $("input[name='street[0]']").val(shop['street'] + '(' + shop['name'] + ')').trigger('change');;   // 台北市 大安區 仁愛路四段300巷11之1號(F011421)
+                            $("input[name='telephone']").val(shop['telephone']).trigger('change');                // 02-27001566"
+                            $("input[name='region']").val(region).trigger('change');               // 全家吉泰店
+                            $("input[name='city']").val(county).trigger('change');                 // 台北市
+                            $("input[name='postcode']").val(shop['postcode']).trigger('change');;                // 106
+
+                            $(".action-show-popup").click().trigger('change');
+                            $('#shipping-save-in-address-book').prop('checked', false).change();
+                            $(".shipping-address-item").addClass("addresscvs");
+                            $("body").addClass("scroll-enable");
+                            $(".billing-address-same-as-shipping-block").addClass("removesameisaddr");
+                            $(".action-update").addClass("removebuttonupdate");
+                            $(".action-save-address").click().trigger('change');
+                            $(".modals-overlay").css('z-index','-1');
+                            setTimeout(function(){
+                                $(".edit-address-link").addClass("editcvs");
+                            }, 400);
+                            $('.edit-address-link').hide();                 // 拿掉 Shipping Address 修改
+                            $('.edit-address-link').css('display','none');  // 拿掉 Shipping Address 修改
+
+                            break break_shop_id_change;
+                        }
+                    }
+                }
+            }
+
+            // 門市店號 記在 cookie
+            $.cookie('shop_id', shop_id );
+        })
+
+        var interval_2 = setInterval(function(){
+            if(  $("#s_method_ShippingStorePickUp_ShippingStorePickUp").length ){
+
+                clearInterval(interval_2);
+
+                if(  $("#s_method_ShippingStorePickUp_ShippingStorePickUp").is(":checked") ){
+                    $("#shop_select").show();
+                }
+            }
+        },1000)
+
+        var interval = setInterval(function(){
+            if( $( "#checkout-step-shipping_method" ).length ){
+
+                clearInterval(interval);
+
+                $("#checkout-step-shipping_method").append('<div id="shop_select" style="display:none;"></div>');
+
+                var k,county_html = '<option>請選擇縣/市</option>';
+                for( k in shops ){
+                    county_html += '<option value="'+k+'">'+k+'</option>';
+                }
+
+                $("#shop_select")
+                    .append( '<select id="shop_county" >'+county_html+'</select>' )
+                    .append( '<select id="shop_region" ><option>請選擇鄉鎮市區</option></select>' )
+                    .append( '<select id="shop_id" name="shop_id"><option value="0">請選擇門市</option></select>' );
+
+                var county,region;
+
+                $('#shop_county').change(function(){
+                    var k,region_html = '<option>請選擇</option>';
+                    county= $('#shop_county').val();
+                    for( k in shops[county] ){
+                        region_html += '<option value="'+k+'">'+k+'</option>';
+                    }
+                    $('#shop_region').html(region_html);
+                });
+
+                $('#shop_region').change(function(){
+                    var k,name_html = '<option value="0">請選擇</option>';
+                    region= $('#shop_region').val();
+                    for( k in shops[county][region] ){
+                        name_html += '<option value="'+shops[county][region][k]['code']+'">'+shops[county][region][k]['street']+'('+shops[county][region][k]['name']+')</option>';
+                    }
+                    $('#shop_id').html(name_html);
+                });
+            }
+        },1000)
+
+        // 送出
+        $("body").delegate(".continue", "click", function(){
+            var checked1 = $("#s_method_ShippingStorePickUp_ShippingStorePickUp").is(":checked");
+
+            if(checked1){
+                if( $('#shop_id').val() == '0'){
+                    $('.errorStorePickUp').text('請指定收貨門市');
+                    return false;
+                }
+            }
+        });
+    });
+</script>

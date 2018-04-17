@@ -1,0 +1,222 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<div class="page-create-order">
+    <script>
+        require(["Magento_Sales/order/create/form"], function(){
+            order.setCurrencySymbol('<?php /* @escapeNotVerified */ echo $block->getCurrencySymbol($block->getCurrentCurrencyCode()) ?>')
+        });
+    </script>
+    <div class="order-details<?php if ($block->getCustomerId()): ?> order-details-existing-customer<?php endif; ?>">
+
+        <div id="order-additional_area" style="display: none" class="admin__page-section order-additional-area">
+            <?php echo $block->getChildHtml('additional_area') ?>
+        </div>
+
+        <div id="order-search" style="display: none" class="admin__page-section order-search-items">
+            <?php echo $block->getChildHtml('search') ?>
+        </div>
+
+        <section id="order-items" class="admin__page-section order-items" data-mage-init='{"loader": {}}'>
+            <?php echo $block->getChildHtml('items') ?>
+        </section>
+
+        <div id="order-errors" class="order-errors"><?php echo $block->getChildHtml('errors') ?></div>
+
+        <section id="order-form_account" class="admin__page-section order-account-information">
+            <?php echo $block->getChildHtml('form_account') ?>
+        </section>
+
+        <section id="order-addresses" class="admin__page-section order-addresses">
+            <div class="admin__page-section-title">
+                <span class="title"><?php /* @escapeNotVerified */ echo __('Address Information') ?></span>
+            </div>
+            <div class="admin__page-section-content">
+                <div id="order-billing_address" class="admin__page-section-item order-billing-address">
+                    <?php echo $block->getChildHtml('billing_address') ?>
+                </div>
+                <div id="order-shipping_address" class="admin__page-section-item order-shipping-address">
+                    <?php echo $block->getChildHtml('shipping_address') ?>
+                </div>
+            </div>
+        </section>
+
+        <section id="order-methods" class="admin__page-section order-methods">
+            <div class="admin__page-section-title">
+                <span class="title"><?php /* @escapeNotVerified */ echo __('Payment &amp; Shipping Information') ?></span>
+            </div>
+            <div class="admin__page-section-content">
+                <div id="order-billing_method" class="admin__page-section-item order-billing-method">
+                    <?php echo $block->getChildHtml('billing_method') ?>
+                </div>
+                <div id="order-shipping_method" class="admin__page-section-item order-shipping-method">
+                    <?php echo $block->getChildHtml('shipping_method') ?>
+                </div>
+
+            </div>
+        </section>
+
+        <?php if ($block->getChildBlock('card_validation')): ?>
+            <section id="order-card_validation" class="admin__page-section order-card-validation">
+                <?php echo $block->getChildHtml('card_validation') ?>
+            </section>
+        <?php endif; ?>
+        <div id="invoice-type" class="checkout-shipping-address">
+            <div class="step-title" data-bind="i18n: '發票資訊'"></div>
+            <div class="invoice-type step-content">
+                <div id="err" style="display: none; margin-bottom: 20px;" class="message info empty invoice-error-mess">
+                    <div>
+                    </div>
+                </div>
+
+                <div class="option">
+                    <div class="input-group">
+                        <input type="radio" name="invoice" id="two-way" data-bind="value:'two', checked : 'two' , event: { change: changeInput}">
+                        <label class="label" for="two-way"><span data-bind="i18n: '電子發票'"></span></label>
+                        <span>統一編號</span><input type="text" name="purchaser-name" data-bind="value: newPurChaserName">
+                        <div id="err2" style="display: none;" class="message i統一編號nfo empty invoice-company-error-mess"><span data-bind="i18n:'Enter This Field'"></span></div>
+
+                    </div>
+                    <div class="input-group">
+                        <input type="radio" name="invoice" id="three-way" data-bind="value:'three', event: { change: changeInput}">
+                        <label class="label" for="three-way"><span data-bind="i18n: '捐贈發票'"></span></label>
+                        <span>捐贈單位</span>
+                        <div class="wrap-select">
+                            <select name="invoice-select">
+                                <option value="0" name="0"></option>
+                                <option value="5238" name="現代婦女基金會">現代婦女基金會</option>
+                                <option value="885521" name="兒童福利聯盟文教基金會">兒童福利聯盟文教基金會</option>
+                                <option value="7777" name="乳癌防治基金會">乳癌防治基金會</option>
+                            </select>
+                        </div>
+                        <div id="err1" style="display: none;" class="message info empty invoice-regist-error-mess"><span data-bind="i18n:'Enter This Field'"></span></div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script>
+            require([
+                'jquery',
+                'mage/mage'
+            ], function ($) {
+                'use strict';
+                $("body").delegate("#sales_order_create_customer_grid_table .on-mouse", "click", function() {
+                    setTimeout(function(){
+                        location.reload();
+                    },500);
+
+                });
+                $('.primary').on('click', function(event) {
+                    var typeInvoice = jQuery('[name="invoice"]:checked').val();
+                    if (typeInvoice === 'on') {
+
+                        var a = jQuery('[name="invoice-select"]').val();
+                        if (a === '0') {
+                            $('#err').hide();
+                            $('#err').html('<div>必填欄位</div>');
+                            $('#err').show();
+                              event.preventDefault();
+                              event.stopPropagation();
+                            return false;
+                        }
+
+                    } else {
+                        var b = jQuery('[name="purchaser-name"]').val();
+                        if (b !== '') {
+                            if (!($.isNumeric(b) && b.length == 8)) {
+                                $('#err').hide();
+                                $('#err').html('<div>統一編號需要有8碼</div>');
+                                $('#err').show();
+                                event.preventDefault();
+                                event.stopPropagation();
+                                return false;
+                            }
+
+                        }
+                    }
+                });
+                $("body").delegate(".primary", "click", function(event) {
+                    var typeInvoice = jQuery('[name="invoice"]:checked').val();
+                    if (typeInvoice === 'on') {
+                        var a = jQuery('[name="invoice-select"]').val();
+                        if (a === '0') {
+                            $('#err').hide();
+                            $('#err').html('<div>必填欄位</div>');
+                            $('#err').show();
+                              event.preventDefault();
+                              event.stopPropagation()
+                            return false;
+                        }
+
+                    } else {
+                        var b = jQuery('[name="purchaser-name"]').val();
+                        if (b !== '') {
+                            if (!($.isNumeric(b) && b.length == 8)) {
+                                $('#err').hide();
+                                $('#err').html('<div>統一編號需要有8碼</div>');
+                                $('#err').show();
+                                  event.preventDefault();
+                                  event.stopPropagation()
+                                return false;
+                            }
+
+                        }
+                    }
+                });
+
+
+
+            });
+        </script>
+        <?php echo $block->getChildHtml('gift_options') ?>
+
+
+        <section class="admin__page-section order-summary">
+            <div class="admin__page-section-title">
+                <span class="title"><?php /* @escapeNotVerified */ echo __('Order Total') ?></span>
+            </div>
+            <div class="admin__page-section-content">
+                <fieldset class="admin__fieldset order-history" id="order-comment">
+                    <legend class="admin__legend"><span><?php /* @escapeNotVerified */ echo __('Order History') ?></span></legend>
+                    <br>
+                    <?php echo $block->getChildHtml('comment') ?>
+                </fieldset>
+                <fieldset id="order-totals" class="admin__fieldset order-totals">
+                    <?php echo $block->getChildHtml('totals') ?>
+                </fieldset>
+            </div>
+        </section>
+    </div>
+
+    <?php if ($block->getCustomerId()): ?>
+        <div class="order-sidebar">
+            <div class="store-switcher order-currency">
+                <label class="admin__field-label" for="currency_switcher">
+                    <?php /* @escapeNotVerified */ echo __('Order Currency:') ?>
+                </label>
+                <select id="currency_switcher"
+                        class="admin__control-select"
+                        name="order[currency]"
+                        onchange="order.setCurrencyId(this.value); order.setCurrencySymbol(this.options[this.selectedIndex].getAttribute('symbol'));">
+                    <?php foreach ($block->getAvailableCurrencies() as $_code): ?>
+                        <option value="<?php /* @escapeNotVerified */ echo $_code ?>"<?php if ($_code == $block->getCurrentCurrencyCode()): ?> selected="selected"<?php endif; ?> symbol="<?php /* @escapeNotVerified */ echo $block->getCurrencySymbol($_code) ?>">
+                            <?php /* @escapeNotVerified */ echo $block->getCurrencyName($_code) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="customer-current-activity" id="order-sidebar">
+                <?php echo $block->getChildHtml('sidebar') ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+</div>

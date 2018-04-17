@@ -1,0 +1,311 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+    .fwb{
+        font-weight:bold;
+    }
+    .fs16{
+        font-size:1.6rem;
+    }
+</style>
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2015 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<?php echo $block->getChildHtml('form_fields_before')?>
+<?php /* Extensions placeholder */ ?>
+<?php echo $block->getChildHtml('customer.form.register.extra')?>
+
+<?php
+$helper = $this->helper('Plumrocket\SocialLoginFree\Helper\Data');
+if($helper->modulePositionEnabled('register') && $helper->hasButtons()) : ?>
+    <?php echo $this->getChildHtml('pslogin_buttons'); ?>
+    <div class="pslogin-spacer pslogin-clearfix"> 
+        <table>
+            <tr>
+                <td><div class="pslogin-border"></div></td>
+                <td class="pslogin-bordertext w25"><?php echo __('OR'); ?></td>
+                <td><div class="pslogin-border"></div></td>
+            </tr>
+        </table>
+    </div>
+<?php endif; ?>
+
+<form class="form create account form-create-account" action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>" method="post" id="form-validate" enctype="multipart/form-data" autocomplete="off">
+    <fieldset class="fieldset create info">
+        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Personal Information') ?></span></legend><br>
+        <input type="hidden" name="success_url" value="<?php /* @escapeNotVerified */ echo $block->getSuccessUrl() ?>">
+        <input type="hidden" name="error_url" value="<?php /* @escapeNotVerified */ echo $block->getErrorUrl() ?>">
+
+        <div class="moma-note"><?php echo __('* 必填欄位')?></div>
+
+        <div class="field required">
+            <label for="email_address" class="label"><span><?php /* @escapeNotVerified */ echo __('Email (會員帳號)') ?></span></label>
+            <div class="control">
+                <input type="email" placeholder="<?php echo __('abc@gmail.com')?>" name="email" id="email_address" value="<?php echo $block->escapeHtml($block->getFormData()->getEmail()) ?>" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" class="input-text" data-validate="{required:true, 'validate-email':true}">
+            </div>
+        </div>
+
+        <?php echo $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Name')->setObject($block->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?>
+
+        <?php $_dob = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Dob') ?>
+        <?php if ($_dob->isEnabled()): ?>
+            <?php echo $_dob->setDate($block->getFormData()->getDob())->toHtml() ?>
+        <?php endif ?>
+
+        <?php $_taxvat = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Taxvat') ?>
+        <?php if ($_taxvat->isEnabled()): ?>
+            <?php echo $_taxvat->setTaxvat($block->getFormData()->getTaxvat())->toHtml() ?>
+        <?php endif ?>
+
+        <?php $_gender = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Gender') ?>
+        <?php if ($_gender->isEnabled()): ?>
+            <?php echo $_gender->setGender($block->getFormData()->getGender())->toHtml() ?>
+        <?php endif ?>
+    </fieldset>
+
+    <fieldset class="fieldset address">
+        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Address Information') ?></span></legend><br>
+        <input type="hidden" name="create_address" value="1" />
+
+        <div class="field telephone required">
+            <label for="telephone" class="label"><span><?php /* @escapeNotVerified */ echo __('Phone Number') ?></span></label>
+            <div class="control">
+                <input type="text" placeholder="<?php echo __('手機號碼')?>" name="telephone" id="telephone" value="<?php echo $block->escapeHtml($block->getFormData()->getTelephone()) ?>" title="<?php /* @escapeNotVerified */ echo __('Phone Number') ?>" class="input-text <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('telephone') ?>">
+            </div>
+            <span class="custom-comment"><?php echo __('請務必確認您的手機號碼填寫正確')?></span>
+        </div>
+
+        <?php $_streetValidationClass = $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('street'); ?>
+        
+        <div id="twzipcode" class="required">
+            <div class="field city required">
+                <label for="city" class="label"><span><?php echo __('城市')?></span></label>
+                <div class="wrap-select">
+                    <div data-role="county"
+                         data-name="city"
+                         data-style="樣式名稱"
+                         data-required="true">
+                    </div>
+                </div>
+            </div>
+            <div class="field region required">
+                <label for="region" class="label"><span><?php echo __('地區')?></span></label>
+                <div class="wrap-select">
+                    <div data-role="district"
+                         data-name="region"
+                         data-style="district-style"
+                         data-required="true">
+                    </div>
+                </div>
+            </div>
+            <div class="field postcode required">
+                <label for="postcode" class="label"><span><?php echo __('郵遞區號')?></span></label>
+                <div data-role="zipcode"
+                     data-name="postcode"
+                     data-style="zipcode-style"
+                     data-required="true">
+                </div>
+            </div>
+        </div>
+
+        <div class="field street required">
+            <label for="street_1" class="label"><span><?php /* @escapeNotVerified */ echo __('Street Address') ?></span></label>
+            <div class="control">
+                <input type="text" placeholder="<?php echo __('ＯＯ區ＸＸ路Ｎ段Ｓ號Ａ樓之Ｚ')?>" name="street[]" value="<?php echo $block->escapeHtml($block->getFormData()->getStreet(0)) ?>" title="<?php /* @escapeNotVerified */ echo __('Street Address') ?>" id="street_1" class="input-text <?php /* @escapeNotVerified */ echo $_streetValidationClass ?>">
+            </div>
+        </div>
+
+        <div class="field country required">
+            <label for="country" class="label"><span><?php /* @escapeNotVerified */ echo __('Country') ?></span></label>
+            <div class="control">
+                <?php echo $block->getCountryHtmlSelect() ?>
+            </div>
+        </div>
+
+        <?php $addressAttributes = $block->getChildBlock('customer_form_address_user_attributes');?>
+        <?php if ($addressAttributes): ?>
+            <?php $addressAttributes->setEntityType('customer_address'); ?>
+            <?php $addressAttributes->setFieldIdFormat('address:%1$s')->setFieldNameFormat('address[%1$s]');?>
+            <?php $block->restoreSessionData($addressAttributes->getMetadataForm(), 'address');?>
+            <?php echo $addressAttributes->setShowContainer(false)->toHtml()?>
+        <?php endif;?>
+        <input type="hidden" name="default_billing" value="1">
+        <input type="hidden" name="default_shipping" value="1">
+    </fieldset>
+
+    <fieldset class="fieldset create account" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Sign-in Information') ?></span></legend><br>
+        <div class="field password required" data-mage-init='{"passwordStrengthIndicator": {}}'>
+            <label for="password" class="label"><span><?php /* @escapeNotVerified */ echo __('Password') ?></span></label>
+            <div class="control">
+                <input type="password" placeholder="<?php echo __('密碼')?>" name="password" id="password"
+                       title="<?php /* @escapeNotVerified */ echo __('Password') ?>"
+                       class="input-text"
+                       data-password-min-length="<?php echo $block->escapeHtml($block->getMinimumPasswordLength()) ?>"
+                       data-password-min-character-sets="<?php echo $block->escapeHtml($block->getRequiredCharacterClassesNumber()) ?>"
+                       data-validate="{required:true, 'validate-customer-password':true}"
+                       autocomplete="off">
+                <div id="password-strength-meter-container" data-role="password-strength-meter" >
+                    <div id="password-strength-meter" class="password-strength-meter">
+                        <?php /* @escapeNotVerified */ echo __('Password Strength'); ?>:
+                        <span id="password-strength-meter-label" data-role="password-strength-meter-label" >
+                            <?php /* @escapeNotVerified */ echo __('No Password'); ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="field confirmation required">
+            <label for="password-confirmation" class="label"><span><?php /* @escapeNotVerified */ echo __('Confirm Password') ?></span></label>
+            <div class="control">
+                <input type="password" placeholder="<?php echo __('確認密碼')?>" name="password_confirmation" title="<?php /* @escapeNotVerified */ echo __('Confirm Password') ?>" id="password-confirmation" class="input-text" data-validate="{required:true, equalTo:'#password'}" autocomplete="off">
+            </div>
+        </div>
+<!--        --><?php //echo $block->getChildHtml('form_additional_info'); ?>
+        <div class="term-condition-wrap">
+            <div class="term-condition">
+                <input type="checkbox" name="moma-agree" class="checkbox moma-agree required-entry" id="custom-moma-agree" checked="checked" title="Agree">
+                <label for="custom-moma-agree" class="label">
+                    <span><?php echo __('我同意 <a target="_blank" href="%1terms">服務條款</a> 及 <a target="_blank" href="%1privacy">隱私條款</a>', $block->getUrl())?></span>
+                </label>
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Create an Account') ?>"><span><?php /* @escapeNotVerified */ echo __('Create an Account') ?></span></button>
+        </div>
+        <div class="secondary">
+            <a class="action back" href="<?php echo $block->escapeUrl($block->getBackUrl()) ?>"><span><?php /* @escapeNotVerified */ echo __('Back') ?></span></a>
+        </div>
+    </div>
+</form>
+<script>
+require([
+    'jquery',
+    'mage/mage'
+], function($){
+
+    var dataForm = $('#form-validate');
+    var ignore = <?php /* @escapeNotVerified */ echo $_dob->isEnabled() ? '\'input[id$="full"]\'' : 'null'; ?>;
+    
+    dataForm.mage('validation', {
+    <?php if ($_dob->isEnabled()): ?>
+        errorPlacement: function(error, element) {
+            if (element.prop('id').search('full') !== -1) {
+                var dobElement = $(element).parents('.customer-dob'),
+                    errorClass = error.prop('class');
+                error.insertAfter(element.parent());
+                dobElement.find('.validate-custom').addClass(errorClass)
+                    .after('<div class="' + errorClass + '"></div>');
+            }
+            else {
+                error.insertAfter(element);
+            }
+        },
+        ignore: ':hidden:not(' + ignore + ')'
+    <?php else: ?>
+        ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+    <?php endif ?>
+    }).find('input:text').attr('autocomplete', 'off');
+
+});
+</script>
+<?php if ($block->getShowAddressFields()): ?>
+<script type="text/x-magento-init">
+    {
+        "#country": {
+            "regionUpdater": {
+                "optionalRegionAllowed": <?php /* @escapeNotVerified */ echo($block->getConfig('general/region/display_all') ? 'true' : 'false'); ?>,
+                "regionListId": "#region_id",
+                "regionInputId": "#region",
+                "postcodeId": "#zip",
+                "form": "#form-validate",
+                "regionJson": <?php /* @escapeNotVerified */ echo $this->helper('Magento\Directory\Helper\Data')->getRegionJson() ?>,
+                "defaultRegion": "<?php /* @escapeNotVerified */ echo $block->getFormData()->getRegionId() ?>",
+                "countriesWithOptionalZip": <?php /* @escapeNotVerified */ echo $this->helper('Magento\Directory\Helper\Data')->getCountriesWithOptionalZip(true) ?>
+            }
+        }
+    }
+</script>
+<?php endif; ?>
+<script type="text/javascript">
+    require([
+        'twzipcode',
+        'jquery',
+        'jquery/ui',
+    ], function (Twzipcode,jQuery) {
+        jQuery('#twzipcode').twzipcode();
+
+        jQuery( "#dialog-message" ).dialog({
+            modal: true,
+            width : 300,
+            buttons: [
+                {
+                    text: "我知道了",
+                    click: function() {
+                        jQuery( this ).dialog( "close" );
+                    }
+                }
+            ]
+        });
+    });
+</script>
+<script type="text/javascript">
+    requirejs(['jquery'], function (jQuery) {
+        jQuery(document).ready(function ($) {
+            jQuery(".term-condition input.moma-agree:checked").each(function(){
+                jQuery(this).parent().parent(".term-condition-wrap").addClass('active');
+            });
+        });
+        jQuery(".term-condition input.moma-agree").on('click', function () {
+            jQuery(this).parent().parent(".term-condition-wrap").toggleClass('active');
+        });
+    });
+</script>
+
+<div id="dialog-message" style="display:none;text-align: center;">
+    <span style="font-size:30px">
+        <font color="#E34132">重要公告請注意！</font> 
+    </span> 
+    <br/>
+    <br/>
+    <span style="font-size:1.5rem" >
+
+        為確保您的客戶消費權益<br/>
+        所有會員卡號<br/>
+        皆需<span class="fwb fs16">實名驗證</span><br/>
+        您的『<span class="fwb" >姓名</span>』與『<span class="fwb" >手機號碼</span>』<br/>
+        -------------------------<br/>
+        若您為<span class="fwb fs16">實體門市</span>會員<br/>
+        <br/>
+        註冊時，請您驗證時確實填寫<br/>
+        您在<span class="fwb fs16">實體門市</span>所註冊的<br/>
+        『真實姓名』與『手機號碼』<br/>
+        並進行驗證<br/>
+        -------------------------<br/>
+        新註冊會員<br/>
+        <br/>
+        請您確實填寫您的<br/>
+        『真實姓名』與『手機號碼』<br/>
+        並進行驗證<br/>
+        <span style='text-decoration:underline;'> ＊完成後在實體門市與官網<br/>
+        即<span class="fwb fs16" >同時</span>擁有會員消費累積權益！</span>
+     
+    </span>
+</div>

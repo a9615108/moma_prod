@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <paymentatm>
+                <model>Astralweb\ATMPayment\Model\PaymentMethod</model>
+                <active>1</active>
+                <title>ATM匯款</title>
+            </paymentatm>
+        </payment>
+    </default>
+</config>

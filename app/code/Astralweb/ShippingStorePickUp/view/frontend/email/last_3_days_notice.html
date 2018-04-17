@@ -1,0 +1,13 @@
+<!--@subject 門市取貨到貨通知函－取貨期限剩餘三天@-->
+{{var data.order.getCustomerName()}}, 您好
+
+您所訂購的商品已送達MOMA門市
+取貨期限剩餘三天
+逾期將被退回，請於取貨期限內完成取貨
+
+取貨代碼：{{var data.order.getGetCode()}}
+取貨門市：{{var data.Street}}
+取貨期限：{{var data.deadline}} 前
+
+收件人： {{var data.shipping.getName()}}
+手機號碼：{{var data.shipping.getTelephone()}}

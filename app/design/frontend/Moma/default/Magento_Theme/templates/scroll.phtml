@@ -1,0 +1,28 @@
+<div id="back_top" style="display: block;"></div>
+<style type="text/css">
+    #back_top {
+        background-color: red;
+        bottom: 22px;
+        cursor: pointer;
+        display: none;
+        height: 44px;
+        position: fixed;
+        right: 200px;
+        width: 54px;
+    }
+</style>
+<script type="text/javascript">
+    require(['jquery'],function($){
+        $(window).scroll(function() {
+            if($(this).scrollTop() > 600) {
+                $('#back_top').fadeIn();
+            } else {
+                $('#back_top').fadeOut();
+            }
+        });
+        $('#back_top').click(function() {
+            $('body,html').animate({scrollTop:0},500);
+        });
+
+    });
+</script>

@@ -1,0 +1,39 @@
+<?php
+/** @var \Mirasvit\Rma\Block\Rma\NewRma\Step2\Info $block */
+$order = $block->getOrder();
+?>
+<input name="order_id" type="hidden" value="<?= $order->getId() ?>">
+<div class="block">
+    <div class="block-title">
+        <strong><?= __('Request Information') ?></strong>
+    </div>
+    <div class="block-content">
+        <div class="box box-rma-information">
+            <table width="100%">
+                <tbody>
+                <tr>
+                    <th><?= __('Customer Name') ?>:</th>
+                    <td>
+                        <?= $order->getCustomerName() ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th><?= __('Email Address') ?>:</th>
+                    <td>
+                        <?= $order->getCustomerEmail() ?>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <?php if ($order->getShippingAddress()): ?>
+            <div class="box box-rma-shipping-information">
+                <strong class="box-title"><?= __('Order Shipping Address') ?>:</strong>
+
+                <div class="box-content">
+                    <?= $block->getFormattedAddress($order->getShippingAddress()) ?>
+                </div>
+            </div>
+        <?php endif ?>
+    </div>
+</div>

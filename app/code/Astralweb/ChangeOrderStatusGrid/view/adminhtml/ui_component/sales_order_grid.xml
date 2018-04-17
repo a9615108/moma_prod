@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Pdfinvoiceplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                </item>
+            </argument>
+           <action name="status">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">status</item>
+                        <item name="label" xsi:type="string" translate="true">Change status</item>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="type" xsi:type="string">prepare_shipping</item>
+                        <item name="label" xsi:type="string" translate="true">準備出貨</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">prepare_shipping</param>
+                        </item>
+                    </item>
+                    <item name="1" xsi:type="array">
+                        <item name="type" xsi:type="string">processing</item>
+                        <item name="label" xsi:type="string" translate="true">訂單成立</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">processing</param>
+                        </item>
+                    </item>
+                    <item name="2" xsi:type="array">
+                        <item name="type" xsi:type="string">replacement</item>
+                        <item name="label" xsi:type="string" translate="true">已處理退/換貨/已取消</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">replacement</param>
+                        </item>
+                    </item>
+                     <item name="3" xsi:type="array">
+                        <item name="type" xsi:type="string">pending_payment</item>
+                        <item name="label" xsi:type="string" translate="true">Pending Payment</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">pending_payment</param>
+                        </item>
+                    </item>
+                    <item name="4" xsi:type="array">
+                        <item name="type" xsi:type="string">payment_review</item>
+                        <item name="label" xsi:type="string" translate="true">Payment Review</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">payment_review</param>
+                        </item>
+                    </item>
+                     <item name="5" xsi:type="array">
+                        <item name="type" xsi:type="string">fraud</item>
+                        <item name="label" xsi:type="string" translate="true">Suspected Fraud</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">fraud</param>
+                        </item>
+                    </item>
+                     <item name="6" xsi:type="array">
+                        <item name="type" xsi:type="string">pending</item>
+                        <item name="label" xsi:type="string" translate="true">等待付款</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">pending</param>
+                        </item>
+                    </item>
+                    <item name="7" xsi:type="array">
+                        <item name="type" xsi:type="string">pending_cod</item>
+                        <item name="label" xsi:type="string" translate="true">等待付款(後台手動下單)</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">pending_cod</param>
+                        </item>
+                    </item>
+                    <item name="8" xsi:type="array">
+                        <item name="type" xsi:type="string">payment_failed</item>
+                        <item name="label" xsi:type="string" translate="true">交易失敗</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">payment_failed</param>
+                        </item>
+                    </item>
+                     <item name="9" xsi:type="array">
+                        <item name="type" xsi:type="string">holded</item>
+                        <item name="label" xsi:type="string" translate="true">保留中</item>  
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">holded</param>
+                        </item>
+                    </item>
+                     <item name="10" xsi:type="array">
+                        <item name="type" xsi:type="string">shipping_processing</item>
+                        <item name="label" xsi:type="string" translate="true">已發送出貨通知</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">shipping_processing</param>
+                        </item>
+                    </item>
+                     <item name="11" xsi:type="array">
+                        <item name="type" xsi:type="string">delivering</item>
+                        <item name="label" xsi:type="string" translate="true">已出貨</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">delivering</param>
+                        </item>
+                    </item>
+                    <item name="12" xsi:type="array">
+                        <item name="type" xsi:type="string">store_arrived</item>
+                        <item name="label" xsi:type="string" translate="true">已到指定超商</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">store_arrived</param>
+                        </item>
+                    </item>
+                     <item name="13" xsi:type="array">
+                        <item name="type" xsi:type="string">closed</item>
+                        <item name="label" xsi:type="string" translate="true">已退貨</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">closed</param>
+                        </item>
+                    </item>
+                     <item name="14" xsi:type="array">
+                        <item name="type" xsi:type="string">canceled</item>
+                        <item name="label" xsi:type="string" translate="true">已取消</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">canceled</param>
+                        </item>
+                    </item>
+                    <item name="15" xsi:type="array">
+                        <item name="type" xsi:type="string">complete</item>
+                        <item name="label" xsi:type="string" translate="true">已完成</item>
+                        <item name="url" xsi:type="url" path="changeorderstatusgrid/order_changestatus/changestatusgrid">
+                            <param name="status">complete</param>  
+                        </item>
+                    </item>
+                    
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+</listing>

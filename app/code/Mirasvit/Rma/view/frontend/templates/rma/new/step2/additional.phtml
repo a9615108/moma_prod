@@ -1,0 +1,28 @@
+<?php
+/** @var \Mirasvit\Rma\Block\Rma\NewRma\Step2\Additional $block */
+?>
+<div class="block">
+    <div class="block-title">
+        <strong><?= __('Additional Information') ?></strong>
+    </div>
+    <div class="block-content">
+        <fieldset class="fieldset">
+            <div class="field">
+                <div class="control">
+                    <textarea name="reply" id="reply" class="input-text"></textarea>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">
+                    <span><?= __('Attach files') ?></span>
+                </label>
+
+                <div class="control">
+                    <?= $block->getFileInputHtml() ?>
+                </div>
+                <?= $block->getAttachmentLimits() ?>
+            </div>
+        </fieldset>
+    </div>
+</div>

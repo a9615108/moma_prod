@@ -1,0 +1,30 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$urlInterface = $objectManager->get('Magento\Framework\UrlInterface');
+$url1 = $urlInterface->getUrl('asimporter/order/index');
+$url2 = $urlInterface->getUrl('cvsimporter/order/index');
+$moduleManager = $objectManager->get('Magento\Framework\Module\Manager');
+$cvs = $moduleManager->isEnabled('Astralweb_Shippingcvs');
+$sf = $moduleManager->isEnabled('Astralweb_Shippingsf');
+
+?>
+<script>
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+        var cvs = "<?php echo $cvs ?>";
+        var sf = "<?php echo $sf ?>";
+        var url ='';
+        if(sf ==='1'){
+            url = "<?php echo $url1 ?>"
+        }else{
+            url = "<?php echo $url2 ?>"
+        }
+        $("#shipping").click(function () {
+            window.location=url;
+        });
+        //console.log('dadada');
+    });
+</script>
+

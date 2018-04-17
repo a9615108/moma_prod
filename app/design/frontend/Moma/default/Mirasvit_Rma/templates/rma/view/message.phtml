@@ -1,0 +1,30 @@
+<?php
+/* @var $block \Mirasvit\Rma\Block\Rma\View\Message */
+?>
+<div class="block">
+    <div class="block-title">
+        <strong><?= __('附加訊息') ?></strong>
+    </div>
+    <div class="block-content">
+        <form action="<?= $block->getMessagePostUrl() ?>" method="POST" enctype="multipart/form-data"
+              data-hasrequired="<?= __('* Required Fields') ?>" data-mage-init='{"validation":{}}'>
+            <input name="id" type="hidden" value="<?= $block->getRmaId() ?>">
+
+            <fieldset class="fieldset">
+                <div class="field">
+                    <div class="control">
+                        <textarea name="message" id="message" class="input-text"></textarea>
+                    </div>
+                </div>
+
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="submit" class="action primary">
+                        <span><?= __('送出訊息') ?></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

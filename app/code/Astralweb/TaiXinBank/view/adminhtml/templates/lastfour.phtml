@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var Magento\Sales\Block\Adminhtml\Order\View $block
+ */
+
+$order = $block->getOrder();
+$lastFour = $order->getLast4DigitOfPan();
+?>
+<?php if ($lastFour):?>
+    <div class="first-six">
+        <span class="content-label"><?php echo __('The Last Four Digits:');?></span><span class="content-additional"><?php echo $block->escapeHtml($lastFour)?></span>
+    </div>
+<?php endif;?>

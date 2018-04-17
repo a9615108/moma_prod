@@ -1,0 +1,231 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php
+$lookbook = $this->helper('Astralweb\Lookbook\Helper\Data');
+$imageData = $lookbook->getImageProduct();
+?>
+<?php if($imageData){?>
+<div class="lookbook__wrap">
+  <style type="text/css">
+    .page-title-wrapper, .page-layout-2columns-left .sidebar-main, .page-layout-2columns-left .sidebar-additional{
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    .category-image .image{
+      width: 100%;
+      height: auto;
+    }
+    
+    @media only screen and (max-width: 639px) {
+       .column.main .lookbook__wrap {
+        text-align: left;
+      }
+      .page-wrapper > .breadcrumbs {
+        border: 0;
+        clip: rect(0, 0, 0, 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+      .page-wrapper .page-main {
+        max-width: none;
+        padding: 0;
+      }
+      .page-wrapper .lookbook__wrap {
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1580px;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: 100%;
+      }
+      .page-wrapper .lookbook__banner {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+      }
+      .nav-sections {
+        margin-bottom: 0;
+      }
+  }
+
+  @media only screen and (max-width: 1279px) and (min-width: 641px) {
+    .column.main {
+      text-align: center;
+      padding-bottom: 0;
+    }
+    .column.main .lookbook__wrap {
+      text-align: left;
+    }
+    .page-wrapper > .breadcrumbs {
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    .page-wrapper .page-main {
+      max-width: none;
+      padding: 0;
+    }
+    .page-wrapper .lookbook__wrap {
+      box-sizing: border-box;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1580px;
+      padding-left: 15px;
+      padding-right: 15px;
+      width: 100%;
+    }
+    .page-wrapper .lookbook__banner {
+      width: 100%;
+      max-width: none;
+      padding: 0;
+    }
+    .page-wrapper .lookbook__banner .banner-category {
+      width: 100%;
+      height: auto;
+    }
+    .nav-sections {
+      margin-bottom: 0;
+    }
+  }
+
+  @media all and (min-width: 1024px), print {
+    .column.main {
+      text-align: center;
+      padding-bottom: 0;
+    }
+    .column.main .lookbook__wrap {
+      text-align: left;
+    }
+    .page-wrapper > .breadcrumbs {
+      height: 0;
+      margin-bottom: 0;
+      position: relative;
+      top: 30px;
+      margin-top: 0;
+      z-index: 2;
+    }
+    .page-wrapper .page-main {
+      max-width: none;
+      padding: 0;
+    }
+    .page-wrapper .lookbook__wrap {
+      box-sizing: border-box;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1580px;
+      padding-left: 40px;
+      padding-right: 40px;
+      width: 100%;
+    }
+    .page-wrapper .lookbook__banner {
+      width: 100%;
+      max-width: none;
+      padding: 0;
+    }
+    .page-wrapper .lookbook__banner .banner-category {
+      width: 100%;
+      height: auto;
+    }
+    .nav-sections {
+      margin-bottom: 0;
+    }
+    .page-layout-2columns-left .column.main{
+      width: 100%;
+    }
+  }
+
+</style>
+<div class="lookbook__grid">
+  <ul>
+    <?php if(isset($imageData['image'])){ ?>
+    <?php for ($i=0; $i < count($imageData['image']) ; $i++) { ?>
+    <li class="lookbook--item">
+      <a  class="fancybox" content="<?php echo $imageData['url'][$i] ;?>"  href="<?php echo $lookbook->getBaseUrlMedia($imageData['image'][$i]);?>" data-fancybox-group="gallery" title="<?php echo ($i+1).'/'.count($imageData['image']);?>">
+        <img class="lazy reset-lazy" data-src="<?php echo $lookbook->getBaseUrlMedia($imageData['image'][$i]);?>" />
+      </a>
+    </li>
+    <?php }; ?>
+    <?php };?>
+  </ul>
+</div>
+</div>
+
+<script>
+  require([
+    'jquery','lookbook','lazy'
+    ], function ($) {
+      $(document).ready(function() {
+
+	$(".fancybox-close").each(function(){
+              $(this).click(function(){
+                 $(".gr__moma_astralweb_com_tw").removeClass('fancybox-lock');
+              });
+
+          });
+
+        $('.fancybox').fancybox();
+        $(".fancybox").fancybox({
+          afterShow: function () {
+            $(".gr__moma_astralweb_com_tw").addClass('fancybox-lock');
+            $(".fancybox-image").wrap("<a href='"+$(this.element).attr('content')+"' target='_blank' />");
+          }
+        });
+        $(function() {
+         $('.lazy').lazy();
+       });
+      });
+
+    });
+  </script>
+
+  <?php }else{ ?>
+  <?php if (!$block->isContentMode() || $block->isMixedMode()): ?>
+    <?php echo $block->getProductListHtml() ?>
+  <?php endif; ?>
+  <?php };?>

@@ -1,0 +1,11 @@
+<?php
+/* @var $block \Mirasvit\Rma\Block\Rma\View */
+$rma = $block->getRma();
+?>
+<div class="rma-view">
+    <?php echo $block->getChildHtml('rma.view.buttons') ?>
+    <?php echo $block->getChildHtml('rma.view.info') ?>
+    <?php echo $block->getChildHtml('rma.view.items') ?>
+    <?php echo $block->getChildHtml('rma.view.message') ?>
+    <?php echo $block->getChildHtml('rma.view.history') ?>
+</div>

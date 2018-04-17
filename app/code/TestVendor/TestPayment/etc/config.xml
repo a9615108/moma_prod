@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <testpayment>
+                <active>1</active>
+                <title>超商取貨付款</title>
+                <order_status>processing</order_status>
+                <instructions>Instruction.</instructions>
+                <payment_action>true</payment_action>
+                <model>TestVendor\TestPayment\Model\Testpayment</model>
+                <group>offline</group>
+            </testpayment>
+        </payment>
+    </default>
+</config>

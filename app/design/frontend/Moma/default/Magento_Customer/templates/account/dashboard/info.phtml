@@ -1,0 +1,55 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Info $block */
+?>
+<div class="block block-dashboard-info">
+    <div class="block-title"><strong><?php /* @escapeNotVerified */ echo __('帳戶資訊') ?></strong></div>
+    <div class="block-content">
+        <div class="box box-information">
+            <strong class="box-title">
+                <span><?php /* @escapeNotVerified */ echo __('聯絡資訊') ?></span>
+            </strong>
+            <div class="box-content">
+                <p>
+                    <?php echo $block->escapeHtml($block->getName()) ?><br>
+                    <?php echo $block->escapeHtml($block->getCustomer()->getEmail()) ?><br>
+                </p>
+            </div>
+            <div class="box-actions">
+                <a class="action edit" href="<?php /* @escapeNotVerified */ echo $block->getUrl('customer/account/edit') ?>">
+                    <span><?php /* @escapeNotVerified */ echo __('編輯') ?></span>
+                </a>
+                <a href="<?php /* @escapeNotVerified */ echo $block->getChangePasswordUrl() ?>" class="action change-password">
+                    <?php /* @escapeNotVerified */ echo __('更改密碼') ?>
+                </a>
+            </div>
+        </div>
+        <?php if ($block->isNewsletterEnabled()): ?>
+            <div class="box box-newsletter">
+                <strong class="box-title">
+                    <span><?php /* @escapeNotVerified */ echo __('電子報') ?></span>
+                </strong>
+                <div class="box-content">
+                    <p>
+                        <?php if ($block->getIsSubscribed()): ?>
+                            <?php /* @escapeNotVerified */ echo __('您已訂閱電子報') ?>
+                        <?php else: ?>
+                            <?php /* @escapeNotVerified */ echo __('您尚未訂閱電子報') ?>
+                        <?php endif; ?>
+                    </p>
+                    <?php /* Extensions placeholder */ ?>
+                    <?php echo $block->getChildHtml('customer.account.dashboard.info.extra')?>
+                </div>
+                <div class="box-actions">
+                    <a class="action edit" href="<?php /* @escapeNotVerified */ echo $block->getUrl('newsletter/manage') ?>"><span><?php /* @escapeNotVerified */ echo __('編輯') ?></span></a>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

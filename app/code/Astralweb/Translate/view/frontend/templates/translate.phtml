@@ -1,0 +1,12 @@
+<?php
+$filepath = 'static/frontend/Moma/default/zh_Hant_TW/js-translation.json';
+$hashes2 = file_get_contents($filepath);
+$_data = json_decode($hashes2);
+?>
+<script type="text/javascript">
+    require(['jquery','flexslider',
+                'mage/translate',
+                'jquery/jquery-storageapi'], function($) {
+        $.mage.translate.add(<?php echo Zend_Json::encode($_data) ?>);
+    });
+</script>

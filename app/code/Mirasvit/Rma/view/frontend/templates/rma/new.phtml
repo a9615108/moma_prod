@@ -1,0 +1,8 @@
+<?php
+/** @var \Mirasvit\Rma\Block\Rma\NewRma $block */
+?>
+<?php if ($block->getIsStep2()): ?>
+    <?= $block->getChildHtml('rma.new.step2') ?>
+<?php else: ?>
+    <?= $block->getChildHtml('rma.new.step1') ?>
+<?php endif?>

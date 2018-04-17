@@ -1,0 +1,245 @@
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+  //
+  //  Layout
+  //  _____________________________________________
+  .cms-terms{
+    .block.filter{
+      display: none;
+    }
+    .terms-step__content{
+      list-style: none;
+      padding-left: 0;
+      li{
+        line-height: 1.71;
+      }
+    }
+    .page-main {
+      > .page-title-wrapper {
+        .page-title{
+          margin-bottom: 39px;
+        }
+      }
+    }
+    .terms-wrap{
+      .note-label{
+        margin-bottom: 5px;
+      }
+      .sub-content{
+        list-style: decimal;
+        margin-top: 0;
+        li{
+          margin-bottom: 0;
+          .lib-css(font-family, @font-family__monospace);
+          .lib-css(font-size, (@font-size__l - 1));
+          span{
+            margin-left: -10px;
+          }
+        }
+      }
+    }
+  }
+  .cms-no-route{
+    .block.filter, .breadcrumbs, .sidebar{
+      display: none;
+    }
+    .page-title-wrapper{
+      text-align: center;
+    }
+    .wrap-404-not-found{
+      text-align: center;
+    }
+    .link-home{
+      display: inline-block;
+      width: 100%;
+    }
+  }
+}
+
+//
+// Mobile
+//  _____________________________________________
+
+& when (@media-target = 'mobile'),
+(@media-target = 'all') {
+  @media only screen and (max-width: 767px){
+    .cms-terms {
+      .page-main {
+        > .page-title-wrapper {
+          .page-title{
+            margin-top: 9px;
+            margin-bottom: 3px;
+          }
+        }
+      }
+      .terms-wrap {
+        .note-label{
+          margin-bottom: 0;
+        }
+        .terms-step__content {
+          li{
+            margin-bottom: 13px;
+          }
+        }
+      }
+    }
+    .cms-no-route{
+      .page-title-wrapper{
+        margin-top: 47px;
+        .page-title{
+          margin-bottom: 18px;
+        }
+      }
+      .link-home{
+        margin-top: 20px;
+      }
+      .page-footer{
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
+
+//
+// IPad
+//  _____________________________________________
+
+& when (@media-target = 'desktop'),
+(@media-target = 'all') {
+  @media only screen and (min-width: 768px) and (max-width: (@screen__l - 1)) {
+    .cms-terms{
+      .lib-css(font-size, @font-size__xs);
+      .breadcrumbs{
+        display: none;
+      }
+      .page-title-wrapper{
+        margin-top: 10px;
+      }
+      .page-main {
+        > .page-title-wrapper {
+          .page-title{
+            margin-bottom: 15px;
+          }
+        }
+      }
+      .terms-wrap {
+        .note-label{
+          margin-bottom: 3px;
+        }
+        .sub-content {
+          padding-left: 49px;
+          li{
+            .lib-css(font-size, (@font-size__s + 1));
+            margin-bottom: -3px;
+          }
+        }
+      }
+      .terms-step__content {
+        li{
+          margin-bottom: 24px;
+        }
+      }
+    }
+    .cms-no-route{
+      .page-title-wrapper{
+        margin-top: 47px;
+        .page-title{
+          margin-bottom: 18px;
+        }
+      }
+      .link-home{
+        margin-top: 31px;
+      }
+      .page-footer{
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+}
+//
+//  Notebook
+//  _____________________________________________
+
+& when (@media-target = 'desktop'),
+(@media-target = 'all') {
+  @media only screen and (min-width: @screen__l) and (max-width: @screen__xl) {
+    .cms-terms{
+      .terms-wrap{
+        .sub-content{
+          padding-left: 55px;
+          margin-bottom: -5px;
+          li{
+            .lib-css(font-size, (@font-size__l - 1));
+            margin-bottom: 0;
+            span{
+              margin-left: -10px;
+            }
+          }
+        }
+      }
+      .terms-step__content {
+        li{
+          margin-bottom: 25px;
+        }
+      }
+    }
+    .cms-no-route{
+      .page-title-wrapper{
+        margin-top: 43px;
+        .page-title{
+          margin-bottom: 36px;
+        }
+      }
+      .link-home{
+        margin-top: 11px;
+      }
+    }
+  }
+}
+
+//
+//  PC
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+  .cms-terms{
+    .terms-wrap{
+      .sub-content{
+        padding-left: 54px;
+        margin-bottom: -5px;
+        li{
+          margin-bottom: 0;
+        }
+      }
+    }
+    .terms-step__content {
+      li{
+        margin-bottom: 25px;
+      }
+    }
+  }
+  .cms-no-route{
+    .page-title-wrapper{
+      margin-top: 70px;
+      .page-title{
+        margin-bottom: 35px;
+      }
+    }
+    .link-home{
+      margin-top: 10px;
+    }
+  }
+}

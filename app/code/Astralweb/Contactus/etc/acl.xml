@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Catalog::catalog">
+                    <resource id="Astralweb_Contactus::contactus_title" title="General" sortOrder="51">
+                        <resource id="Astralweb_Contactus::contactus_content" sortOrder="0" title="Contact">
+                            <resource id="Astralweb_Contactus::save" title="Save Item" sortOrder="10"/>
+                            <resource id="Astralweb_Contactus::delete" title="Delete Item" sortOrder="20"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

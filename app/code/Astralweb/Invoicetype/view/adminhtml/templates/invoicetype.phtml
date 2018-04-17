@@ -1,0 +1,32 @@
+<?php $_order = $block->getOrder();
+//var_dump($_order->getData());
+$order_incrementid = $_order->getId();
+//die('daa');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+$connection = $resource->getConnection();
+$tableName = $resource->getTableName('astralweb_invoicetype');
+$sql = "SELECT * FROM " . $tableName." WHERE order_id = ".$order_incrementid;
+
+$result = $connection->fetchAll($sql);
+?>
+<?php if(count($result) > 0){?>
+    <div class="invoicetype">
+        <span class="title">發票資訊</span>
+        <?php if($result[0]['invoice_type'] == 'three'){ ?>
+            <?php $data = explode(',',$result[0]['purchaser_name']) ?>
+            <p>捐贈發票</p>
+            <div><span>捐贈單位</span> : <?php echo $data[0] ?></div>
+
+        <?php }else{ ?>
+            <p>電子發票
+                <?php if($result[0]['order_invoice'] != NULL){ ?>
+                    : <span><?php  echo $result[0]['order_invoice'] ?></span>
+                <?php } ?>
+            </p>
+            <?php if($result[0]['tax_id'] != NULL){ ?>
+                <div><span>統一編號</span> : <?php  echo $result[0]['tax_id'] ?></div>
+            <?php } ?>
+        <?php } ?>
+    </div>
+<?php } ?>

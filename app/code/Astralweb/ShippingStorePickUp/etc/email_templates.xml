@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="store_pick_up_arrival_shop" 
+                label="My Label" 
+                file="arrival_shop.html" 
+                type="text" 
+                module="Astralweb_ShippingStorePickUp" 
+                area="frontend"/>
+    <template id="store_pick_up_last_3_days_notice" 
+                label="My Label" 
+                file="last_3_days_notice.html" 
+                type="text" 
+                module="Astralweb_ShippingStorePickUp" 
+                area="frontend"/>
+</config>

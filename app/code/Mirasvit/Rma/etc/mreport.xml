@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../module-reports/src/Reports/etc/map.xsd">
+    <!--<table name="mst_rma_message">-->
+    <!--<columns>-->
+    <!--<column name="triggered_by" label="triggered_by" fields="triggered_by" type="string" />-->
+    <!--&lt;!&ndash;<column name="customer_id" label="Customer" fields="customer_id" type="number" />&ndash;&gt;-->
+
+    <!--<column name="changed_ticket_cnt" label="changed_ticket_cnt" fields="ticket_id" type="number"-->
+    <!--expr="SUM(IF(triggered_by = 'user', 1, 0)"/>-->
+    <!--</columns>-->
+    <!--</table>-->
+
+    <table name="mst_rma_rma">
+        <columns>
+
+            <column name="day" label="Day" fields="created_at"
+                    class="Mirasvit\Report\Model\Query\Column\Date\Day"/>
+
+            <column name="week" label="Week" fields="created_at"
+                    class="Mirasvit\Report\Model\Query\Column\Date\Week"/>
+
+            <column name="month" label="Month" fields="created_at"
+                    class="Mirasvit\Report\Model\Query\Column\Date\Month"/>
+
+            <column name="quarter" label="Quarter" fields="created_at"
+                    class="Mirasvit\Report\Model\Query\Column\Date\Quarter"/>
+
+            <column name="year" label="Year" fields="created_at"
+                    class="Mirasvit\Report\Model\Query\Column\Date\Year"/>
+
+            <column name="user_id" label="User #" fields="user_id" type="number"
+            />
+
+            <column name="pending_rma_cnt" label="Pending Approval RMAs #" fields="status_id" type="number"
+                    expr="SUM(IF(%1 = 1, 1, 0))"
+            />
+            <column name="approved_rma_cnt" label="Approved RMAs #" fields="status_id" type="number"
+                    expr="SUM(IF(%1 = 2, 1, 0))"
+            />
+            <column name="rejected_rma_cnt" label="Rejected RMAs #" fields="status_id" type="number"
+                    expr="SUM(IF(%1 = 3, 1, 0))"
+            />
+            <column name="sent_rma_cnt" label="Package Sent RMAs #" fields="status_id" type="number"
+                    expr="SUM(IF(%1 = 4, 1, 0))"
+            />
+            <column name="closed_rma_cnt" label="Closed RMAs #" fields="status_id" type="number"
+                    expr="SUM(IF(%1 = 5, 1, 0))"
+            />
+            <column name="total_rma_cnt" label="Total RMAs #" fields="status_id" type="number"
+                    expr="COUNT(*)"
+            />
+        </columns>
+    </table>
+    <table name="mst_rma_item">
+        <columns>
+
+            <column name="day" label="Day" fields="created_at"
+                    class="Mirasvit\Report\Model\Query\Column\Date\Day"/>
+
+            <column name="week" label="Week" fields="created_at"
+                    class="Mirasvit\Report\Model\Query\Column\Date\Week"/>
+
+            <column name="month" label="Month" fields="created_at"
+                    class="Mirasvit\Report\Model\Query\Column\Date\Month"/>
+
+            <column name="quarter" label="Quarter" fields="created_at"
+                    class="Mirasvit\Report\Model\Query\Column\Date\Quarter"/>
+
+            <column name="year" label="Year" fields="created_at"
+                    class="Mirasvit\Report\Model\Query\Column\Date\Year"/>
+
+            <column name="total_condition_cnt" label="Total conditions #" fields="condition_id" type="number"
+                    expr="COUNT(*)"
+            />
+
+            <column name="total_reasons_cnt" label="Total reasons #" fields="reason_id" type="number"
+                    expr="COUNT(*)"
+            />
+
+            <column name="total_resolution_cnt" label="Total resolutions #" fields="resolution_id" type="number"
+                    expr="COUNT(*)"
+            />
+        </columns>
+    </table>
+</config>

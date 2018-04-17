@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <collect_storecvs>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Astralweb\Shippingcvs\Model\Carrier\Collect</model>
+                <name></name>
+                <price>15.00</price>
+                <title>Shipping CVS</title>
+                <type>I</type>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <namedomain>bt.astralweb.com.tw</namedomain>
+                <usernameaccoutsms>MOMA1997</usernameaccoutsms>
+                <passwordaccoutsms>Moma1228</passwordaccoutsms>
+                <smscreateshipment>Test sms 1</smscreateshipment>
+                <smspackagearrived>Test sms 2</smspackagearrived>
+                <smspackagethree>Test sms 3</smspackagethree>
+            </collect_storecvs>
+        </carriers>
+
+    </default>
+</config>

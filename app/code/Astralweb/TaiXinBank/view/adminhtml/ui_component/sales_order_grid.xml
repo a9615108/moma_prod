@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="sales_order_columns">
+		<column name="amasty_ogrid_first_6_digit_of_pan" class="Astralweb\TaiXinBank\Ui\Component\Listing\Column\FirstSixDigits">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">billing</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Order First Six Digits</item>
+                </item>
+            </argument>
+        </column>
+		<column name="amasty_ogrid_last_4_digit_of_pan" class="Astralweb\TaiXinBank\Ui\Component\Listing\Column\LastFourDigits">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tab" xsi:type="string">billing</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Order Last Four Digits</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

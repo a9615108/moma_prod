@@ -1,0 +1,28 @@
+<?php
+/** @var \Mirasvit\Rma\Block\Rma\NewRma\Step2\CustomFields $block */
+?>
+<?php $customFields = $block->getCustomFields(); ?>
+<?php if ($customFields): ?>
+    <fieldset class="fieldset">
+        <?php foreach ($customFields as $field): ?>
+            <div class="field <?php if ($field->getIsRequiredCustomer()): ?>required<?php endif ?>">
+                <?php if ($field->getType() == 'checkbox'): ?>
+                    <?= $block->getFieldInputHtml($field) ?>
+                    <label class="label" for="<?= $field->getCode() ?>">
+                        <span><?= __($field->getName()) ?></span>
+                    </label>
+                    <p class="small"><?= $field->getDescription() ?></p>
+                <?php else: ?>
+                    <label class="label">
+                        <span><?= __($field->getName()) ?></span>
+                    </label>
+
+                    <div class="control">
+                        <?= $block->getFieldInputHtml($field) ?>
+                        <p class="small"><?= $field->getDescription() ?></p>
+                    </div>
+                <?php endif ?>
+            </div>
+        <?php endforeach ?>
+    </fieldset>
+<?php endif ?>

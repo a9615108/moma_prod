@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var Magento\Sales\Block\Adminhtml\Order\View $block
+ */
+
+$order = $block->getOrder();
+$firstsix = $order->getFirst6DigitOfPan();
+?>
+<?php if ($firstsix):?>
+<div class="first-six">
+    <span class="content-label"><?php echo __('The First Six Digits:');?></span><span class="content-additional"><?php echo $block->escapeHtml($firstsix)?></span>
+</div>
+<?php endif;?>

@@ -1,0 +1,41 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php echo $block->getChildHtml('form_before')?>
+<form class="form form-newsletter-manage" action="<?php /* @escapeNotVerified */ echo $block->getAction() ?>" method="post" id="form-validate">
+    <fieldset class="fieldset">
+        <?php echo $block->getBlockHtml('formkey')?>
+        <div class="custom-newsletter-title"><h1><?php echo __('訂閱電子報')?></h1></div>
+        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('歡迎訂閱電子報，搶先看MOMA每週新品與最新時尚流行報導。') ?></span></legend><br>
+
+<!--        <div class="field choice">-->
+<!--            <input type="checkbox" name="is_subscribed" id="subscription" value="1" title="--><?php ///* @escapeNotVerified */ echo __('General Subscription') ?><!--"--><?php //if ($block->getIsSubscribed()): ?><!-- checked="checked"--><?php //endif; ?><!-- class="checkbox">-->
+<!--            <label for="subscription" class="label"><span>--><?php ///* @escapeNotVerified */ echo __('General Subscription') ?><!--</span></label>-->
+<!--        </div>-->
+
+        <div class="subscribe-cancel"><?php echo __('訂閱/取消')?></div>
+        <div class="select-subscribe-cancel">
+            <div class="wrap-select">
+                <select name="subscribe_cancel">
+                    <option value="subscribe" <?php if ($block->getIsSubscribed()){echo 'selected';} ?>><?php echo __('訂閱')?></option>
+                    <option value="cancel" <?php if (!$block->getIsSubscribed()){echo 'selected';} ?>><?php echo __('取消')?></option>
+                </select>
+            </div>
+        </div>
+
+        <?php /* Extensions placeholder */ ?>
+        <?php echo $block->getChildHtml('customer.form.newsletter.extra')?>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary"><button type="submit" title="<?php /* @escapeNotVerified */ echo __('Save') ?>" class="action save primary"><span><?php /* @escapeNotVerified */ echo __('Save') ?></span></button></div>
+        <div class="secondary"><a class="action back" href="<?php echo $block->escapeUrl($block->getBackUrl()) ?>"><span><?php /* @escapeNotVerified */ echo __('Back') ?></span></a></div>
+    </div>
+</form>
+<?php /* Extensions placeholder */ ?>
+<?php echo $block->getChildHtml('customer.form.newsletter.extra2')?>

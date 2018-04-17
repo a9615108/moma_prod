@@ -1,0 +1,17 @@
+{
+"name": "astralweb/zh_hant_tw",
+  "description": "Chinese Traditional (Taiwan) language",
+  "version": "1.0.0",
+  "license": [
+    "OSL-3.0"
+  ],
+  "require": {
+    "magento/framework": "100.0.*"
+  },
+  "type": "magento2-language",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ]
+  }
+}

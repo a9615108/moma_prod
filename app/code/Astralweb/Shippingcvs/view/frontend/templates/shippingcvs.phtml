@@ -1,0 +1,516 @@
+<?php 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$helper = $objectManager->get('Astralweb\Shippingcvs\Helper\Data');
+$domainname = $helper->getDomainName();
+?>
+<div class="errorstore"></div>
+<script>
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+        'use strict';
+        localStorage.clear();
+        var domainname = '<?php echo $domainname ?>';
+       // console.log(domainname)
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+            {
+                $("body").delegate("#s_method_collect_storecvs_collect_storecvs", "click", function() {
+            window.open('http://mcvs.map.com.tw/default.asp?cvsname='+domainname+'&cvsid=111&cvstemp=取貨店查詢測試','_blank','width=800,height=800');
+ 
+
+
+        });
+                 $("body").delegate("#label_carrier_collect_storecvs_collect_storecvs", "click", function() {
+            window.open('http://mcvs.map.com.tw/default.asp?cvsname='+domainname+'&cvsid=111&cvstemp=取貨店查詢測試','_blank','width=800,height=800');
+ 
+
+
+        });
+                
+            }else{
+             $("body").delegate("#s_method_collect_storecvs_collect_storecvs", "click", function() {
+            window.open('http://cvs.map.com.tw/default.asp?cvsname='+domainname+'&cvsid=111&cvstemp=取貨店查詢測試','_blank','width=800,height=800');
+        
+
+            });
+
+                 $("body").delegate("#label_carrier_collect_storecvs_collect_storecvs", "click", function() {
+            window.open('http://cvs.map.com.tw/default.asp?cvsname='+domainname+'&cvsid=111&cvstemp=取貨店查詢測試','_blank','width=800,height=800');
+ 
+
+
+        });   
+            }
+        //     $("body").on("load", ".shipping-address-item", function() {
+        // $(".shipping-address-item").addClass("addresscvs");
+        //     });
+        
+               // setTimeout(function(){ $(".shipping-address-item").addClass("addresscvs"); }, 1000);
+    //            $('select[name="billing_address_id"]').on('change', function() {
+  		// 			console.log('change');
+				// })
+
+               
+             $("body").delegate(".continue", "click", function(){
+                    var standalone = window.navigator.standalone,
+                    userAgent = window.navigator.userAgent.toLowerCase(),
+                    safari = /safari/.test( userAgent ),
+                    line = /line/.test( userAgent ),
+                    ios = /iphone|ipod|ipad/.test( userAgent );
+                    var isLineBrowser = false;
+                    //check if in app browser facebook ios
+                    if( ios || line) {
+                        if ( !standalone && safari) {
+                            if(line)
+                            {
+                                $('.action-show-popup-wrap').addClass('hideaddresscvs');
+
+                             $('select[name="billing_address_id"]').on('change', function() {
+                                    // $('.action-update').click().change();
+                                    var a=$('select[name="billing_address_id"] option:selected').html();
+                                    if(a === '新增地址' || a === 'New Address'){
+                                        // console.log('111');
+                                        $(".action-update").removeClass("removebuttonupdate").change();
+                                    }else{
+                                        //console.log('2222');
+                                         $(".action-update").addClass("removebuttonupdate").change();
+                                         $('.action-update').click().change();
+                                    }
+                                })
+                            $('.close-billing-popup').click(function(){
+                                $(".action-update").addClass("removebuttonupdate").change();
+                            });
+                    //      console.log($('select[name="billing_address_id"]'));
+                             var checked = $("#s_method_collect_storecvs_collect_storecvs").is(":checked");
+                             
+                               
+                            
+
+                             var value = $.cookie('shippingcvs');
+
+                             var street = $("input[name='street[0]']").val();
+                             var tel = $("input[name='telephone']").val();
+                             var company = $("input[name='company']").val();
+
+                            if(checked)
+                            {
+                                if(value){
+                                // alert(value);
+
+                                $('.errorstore').hide();
+
+                                localStorage.setItem('doanh','aaaa');
+                                var data = value.split(',');
+                                             // $(".action-show-popup").click();
+                                             // $(".modals-overlay").css('z-index','-1');
+                                if(street === '' || tel === '' || company === ''){
+                                    var pathname = window.location.href;
+                                    if(pathname.search('payment') == -1 && (street != data[0] || tel != data[1] || company != data[2]) ){
+                                    $(".modals-overlay").css('z-index','-1');
+                                        $("input[name='street[0]']").val(data[0]+'('+data[3]+')').trigger('change');
+                                    $("input[name='telephone']").val(data[1]).trigger('change');
+                                    $("input[name='region']").val(data[2]).trigger('change');
+                                    $("input[name='city']").val(data[5]).trigger('change');
+                                    $("input[name='postcode']").val(data[6]).trigger('change');
+                                    $(".action-show-popup").click().trigger('change');
+                                    $('#shipping-save-in-address-book').prop('checked', false).change(); // Unchecks it
+                                    $("body").addClass("scroll-enable");
+                                    $(".billing-address-same-as-shipping-block").addClass("removesameisaddr");
+                                    $(".action-update").addClass("removebuttonupdate");
+                                    $(".shipping-address-item").addClass("addresscvs");
+                                    
+                                    $(".action-save-address").click().trigger('change');
+                                    $(".modals-overlay").css('z-index','-1');
+                                    setTimeout(function(){ $(".edit-address-link").addClass("editcvs"); }, 400);
+                                    $('.edit-address-link').hide();
+                                    //console.log($('.edit-address-link'));
+                                    $('.edit-address-link').css('display','none');
+                                    var a=$('select[name="billing_address_id"] option:first').html();
+                                    if(a !== '新增地址' || a !== 'New Address'){
+                                       $('.action-update').click().change();
+                                    }
+                                    $(".opc-new-shipping-address").show();
+
+
+                                    }
+                                }else{
+                                    var pathname = window.location.href;
+                                    if(pathname.search('payment') == -1 && (street != data[0] || tel != data[1] || company != data[2]) ){
+                                        $(".modals-overlay").css('z-index','-1');
+                                        $("input[name='street[0]']").val(data[0]+'('+data[3]+')').trigger('change');
+                                        $("input[name='telephone']").val(data[1]).trigger('change');
+            //                            $("input[name='city']").val('桃園').trigger('change');
+                                        $("input[name='region']").val(data[2]).trigger('change');
+                                         $("input[name='city']").val(data[5]).trigger('change');
+                                        $("input[name='postcode']").val(data[6]).trigger('change');
+                                        $(".action-show-popup").click().trigger('change');
+                                         $('#shipping-save-in-address-book').prop('checked', false).change(); // Unchecks it
+                                      $(".shipping-address-item").addClass("addresscvs");
+                                      $(".billing-address-same-as-shipping-block").addClass("removesameisaddr");
+                                      $(".action-update").addClass("removebuttonupdate");
+                                          $(".action-save-address").click().trigger('change');
+                                     $(".modals-overlay").css('z-index','-1');
+                                     setTimeout(function(){ $(".edit-address-link").addClass("editcvs"); }, 400);
+                                     $('.edit-address-link').hide();
+                                          console.log($('.edit-address-link'));
+                                     $('.edit-address-link').css('display','none');
+                                     var a=$('select[name="billing_address_id"] option:first').html();
+                                    if(a !== '新增地址' || a !== 'New Address'){
+                                       $('.action-update').click().change();
+                                    }
+                                    $(".opc-new-shipping-address").show();
+
+                                    }
+                                    // $(".action-save-address").click();
+                                }
+                             
+                            }
+                            }
+                            }
+                        } else if ( standalone && !safari ) {
+                             // alert('standaalone');
+                        } else if ( !standalone && !safari ) {
+                             $('.action-show-popup-wrap').addClass('hideaddresscvs');
+
+                             $('select[name="billing_address_id"]').on('change', function() {
+                                    // $('.action-update').click().change();
+                                    var a=$('select[name="billing_address_id"] option:selected').html();
+                                    if(a === '新增地址' || a === 'New Address'){
+                                        // console.log('111');
+                                        $(".action-update").removeClass("removebuttonupdate").change();
+                                    }else{
+                                        //console.log('2222');
+                                         $(".action-update").addClass("removebuttonupdate").change();
+                                         $('.action-update').click().change();
+                                    }
+                                })
+                            $('.close-billing-popup').click(function(){
+                                $(".action-update").addClass("removebuttonupdate").change();
+                            });
+                    //      console.log($('select[name="billing_address_id"]'));
+                             var checked = $("#s_method_collect_storecvs_collect_storecvs").is(":checked");
+                             
+                               
+                            
+
+                             var value = $.cookie('shippingcvs');
+
+                             var street = $("input[name='street[0]']").val();
+                             var tel = $("input[name='telephone']").val();
+                             var company = $("input[name='company']").val();
+
+                            if(checked)
+                            {
+                                if(value){
+                                // alert(value);
+
+                                $('.errorstore').hide();
+
+                                localStorage.setItem('doanh','aaaa');
+                                var data = value.split(',');
+                                             // $(".action-show-popup").click();
+                                             // $(".modals-overlay").css('z-index','-1');
+                                if(street === '' || tel === '' || company === ''){
+                                    var pathname = window.location.href;
+                                    if(pathname.search('payment') == -1 && (street != data[0] || tel != data[1] || company != data[2]) ){
+                                    $(".modals-overlay").css('z-index','-1');
+                                        $("input[name='street[0]']").val(data[0]+'('+data[3]+')').trigger('change');
+                                    $("input[name='telephone']").val(data[1]).trigger('change');
+                                    $("input[name='region']").val(data[2]).trigger('change');
+                                    $("input[name='city']").val(data[5]).trigger('change');
+                                    $("input[name='postcode']").val(data[6]).trigger('change');
+                                    $(".action-show-popup").click().trigger('change');
+                                    $('#shipping-save-in-address-book').prop('checked', false).change(); // Unchecks it
+                                    $("body").addClass("scroll-enable");
+                                    $(".billing-address-same-as-shipping-block").addClass("removesameisaddr");
+                                    $(".action-update").addClass("removebuttonupdate");
+                                    $(".shipping-address-item").addClass("addresscvs");
+                                    
+                                    $(".action-save-address").click().trigger('change');
+                                    $(".modals-overlay").css('z-index','-1');
+                                    setTimeout(function(){ $(".edit-address-link").addClass("editcvs"); }, 400);
+                                    $('.edit-address-link').hide();
+                                    //console.log($('.edit-address-link'));
+                                    $('.edit-address-link').css('display','none');
+                                    var a=$('select[name="billing_address_id"] option:first').html();
+                                    if(a !== '新增地址' || a !== 'New Address'){
+                                       $('.action-update').click().change();
+                                    }
+                                    $(".opc-new-shipping-address").show();
+
+
+                                    }
+                                }else{
+                                    var pathname = window.location.href;
+                                    if(pathname.search('payment') == -1 && (street != data[0] || tel != data[1] || company != data[2]) ){
+                                        $(".modals-overlay").css('z-index','-1');
+                                        $("input[name='street[0]']").val(data[0]+'('+data[3]+')').trigger('change');
+                                        $("input[name='telephone']").val(data[1]).trigger('change');
+            //                            $("input[name='city']").val('桃園').trigger('change');
+                                        $("input[name='region']").val(data[2]).trigger('change');
+                                         $("input[name='city']").val(data[5]).trigger('change');
+                                        $("input[name='postcode']").val(data[6]).trigger('change');
+                                        $(".action-show-popup").click().trigger('change');
+                                         $('#shipping-save-in-address-book').prop('checked', false).change(); // Unchecks it
+                                      $(".shipping-address-item").addClass("addresscvs");
+                                      $(".billing-address-same-as-shipping-block").addClass("removesameisaddr");
+                                      $(".action-update").addClass("removebuttonupdate");
+                                          $(".action-save-address").click().trigger('change');
+                                     $(".modals-overlay").css('z-index','-1');
+                                     setTimeout(function(){ $(".edit-address-link").addClass("editcvs"); }, 400);
+                                     $('.edit-address-link').hide();
+                                          console.log($('.edit-address-link'));
+                                     $('.edit-address-link').css('display','none');
+                                     var a=$('select[name="billing_address_id"] option:first').html();
+                                    if(a !== '新增地址' || a !== 'New Address'){
+                                       $('.action-update').click().change();
+                                    }
+                                    $(".opc-new-shipping-address").show();
+
+                                    }
+                                    // $(".action-save-address").click();
+                                }
+                             
+                            }
+                            }
+
+                         
+                        };
+                    } else {
+                        // alert('not ios');
+                    };
+
+                 
+         
+
+
+
+
+
+               var checkvalueCookie = $.cookie('shippingcvs');     
+               var a= localStorage.getItem('doanh');
+               var checked1 = $("#s_method_collect_storecvs_collect_storecvs").is(":checked");
+               if(checked1){
+                if(a === null || checkvalueCookie == null){
+                    console.log('null');
+                    $('.errorstore').text('請點擊超商配送按鈕來指定收貨超商');
+                     $('.errorstore').show();
+                    return false;
+                }
+               }
+                 
+             });
+        
+         
+     
+            
+     
+            // $('select[name="billing_address_id"]').on('change', function() {
+                 
+            //         var a=$('select[name="billing_address_id"] option:selected').html();
+            //         if(a === '新增地址' || a === 'New Address'){
+            //             $(".action-update").removeClass("removebuttonupdate").change();
+            //         }else{
+            //              $(".action-update").addClass("removebuttonupdate").change();
+            //              $('.action-update').click().change();
+            //         }
+                
+            //     })
+            // $('.close-billing-popup').click(function(){
+            //     $(".action-update").addClass("removebuttonupdate").change();
+            // });
+        $(window).focus(function() {
+        	$('.action-show-popup-wrap').addClass('hideaddresscvs');
+
+        	$('select[name="billing_address_id"]').on('change', function() {
+                    // $('.action-update').click().change();
+                    var a=$('select[name="billing_address_id"] option:selected').html();
+                    if(a === '新增地址' || a === 'New Address'){
+                        // console.log('111');
+                        $(".action-update").removeClass("removebuttonupdate").change();
+                    }else{
+                        //console.log('2222');
+                         $(".action-update").addClass("removebuttonupdate").change();
+                         $('.action-update').click().change();
+                    }
+                })
+            $('.close-billing-popup').click(function(){
+                $(".action-update").addClass("removebuttonupdate").change();
+            });
+    //     	console.log($('select[name="billing_address_id"]'));
+             var checked = $("#s_method_collect_storecvs_collect_storecvs").is(":checked");
+             
+               
+            
+
+             var value = $.cookie('shippingcvs');
+             var street = $("input[name='street[0]']").val();
+             var tel = $("input[name='telephone']").val();
+             var company = $("input[name='company']").val();
+             
+             //var test = "<?php //echo mb_convert_encoding(data[0], "UTF-8","big5"); ?>";
+             //console.log(test);
+            //console.log(test);
+             if(checked){
+                
+                //setTimeout(function(){ $(".shipping-address-item").addClass("addresscvs"); }, 1000);
+                 if(value){
+                    $('.errorstore').hide();
+
+                    localStorage.setItem('doanh','aaaa');
+                    var data = value.split(',');
+                                 // $(".action-show-popup").click();
+                                 // $(".modals-overlay").css('z-index','-1');
+                    if(street === '' || tel === '' || company === ''){
+                        var pathname = window.location.href;
+                        if(pathname.search('payment') == -1 && (street != data[0] || tel != data[1] || company != data[2]) ){
+                        $(".modals-overlay").css('z-index','-1');
+                            $("input[name='street[0]']").val(data[0]+'('+data[3]+')').trigger('change');
+                        $("input[name='telephone']").val(data[1]).trigger('change');
+                        $("input[name='region']").val(data[2]).trigger('change');
+                        $("input[name='city']").val(data[5]).trigger('change');
+                        $("input[name='postcode']").val(data[6]).trigger('change');
+                        $(".action-show-popup").click().trigger('change');
+                        $('#shipping-save-in-address-book').prop('checked', false).change(); // Unchecks it
+                        $("body").addClass("scroll-enable");
+                        $(".billing-address-same-as-shipping-block").addClass("removesameisaddr");
+                        $(".action-update").addClass("removebuttonupdate");
+                        $(".shipping-address-item").addClass("addresscvs");
+                        
+                        $(".action-save-address").click().trigger('change');
+                        $(".modals-overlay").css('z-index','-1');
+                        setTimeout(function(){ $(".edit-address-link").addClass("editcvs"); }, 400);
+                        $('.edit-address-link').hide();
+                        //console.log($('.edit-address-link'));
+                        $('.edit-address-link').css('display','none');
+                        var a=$('select[name="billing_address_id"] option:first').html();
+                        if(a !== '新增地址' || a !== 'New Address'){
+                           $('.action-update').click().change();
+                        }
+                        $(".opc-new-shipping-address").show();
+
+
+                        }
+                    }else{
+                        var pathname = window.location.href;
+                        if(pathname.search('payment') == -1 && (street != data[0] || tel != data[1] || company != data[2]) ){
+                            $(".modals-overlay").css('z-index','-1');
+                            $("input[name='street[0]']").val(data[0]+'('+data[3]+')').trigger('change');
+                            $("input[name='telephone']").val(data[1]).trigger('change');
+//                            $("input[name='city']").val('桃園').trigger('change');
+                            $("input[name='region']").val(data[2]).trigger('change');
+                             $("input[name='city']").val(data[5]).trigger('change');
+                            $("input[name='postcode']").val(data[6]).trigger('change');
+                            $(".action-show-popup").click().trigger('change');
+                             $('#shipping-save-in-address-book').prop('checked', false).change(); // Unchecks it
+                          $(".shipping-address-item").addClass("addresscvs");
+                          $(".billing-address-same-as-shipping-block").addClass("removesameisaddr");
+                          $(".action-update").addClass("removebuttonupdate");
+                              $(".action-save-address").click().trigger('change');
+                         $(".modals-overlay").css('z-index','-1');
+                         setTimeout(function(){ $(".edit-address-link").addClass("editcvs"); }, 400);
+                         $('.edit-address-link').hide();
+                              console.log($('.edit-address-link'));
+                         $('.edit-address-link').css('display','none');
+                         var a=$('select[name="billing_address_id"] option:first').html();
+                        if(a !== '新增地址' || a !== 'New Address'){
+                           $('.action-update').click().change();
+                        }
+                        $(".opc-new-shipping-address").show();
+
+                        }
+                        // $(".action-save-address").click();
+                    }
+                }
+
+             }
+             //$.cookie('shippingcvs',null);
+        //    console.log(checked);
+        // console.log(value);
+
+        });
+
+        // var checked1 = $("#s_method_collect_storecvs_collect_storecvs").is(":checked");
+        // if(checked1 == false){
+        //     console.log('dada');
+        //          $(".not-selected-item").removeClass("addresscvs").change();
+        //          $(".edit-address-link").removeClass("editcvs").change();
+        //      }
+         $("body").delegate("#s_method_collect_store_collect_store", "click", function() {
+            $(".errorstore").hide();
+                 var a= localStorage.getItem('doanh');
+                 if(a !== null){
+                    $(".selected-item").addClass("removeitemcvs");
+                 }
+		$(".not-selected-item").removeClass("addresscvs").change();
+                 $(".edit-address-link").removeClass("editcvs").change();
+                 $(".billing-address-same-as-shipping-block").removeClass("removesameisaddr").change();
+                 $(".action-update").removeClass("removebuttonupdate").change();
+                 $(".action-select-shipping-item").first().click().change();
+                 $("#opc-new-shipping-address").addClass("showpopupimport");
+                  $(".action-show-popup-wrap").removeClass("hideaddresscvs").change();
+                   var a=$('select[name="billing_address_id"] option:first').html();
+                   console.log(a);
+                        if(a !== '新增地址' || a !== 'New Address'){
+                           $('.action-update').click().change();
+                        }
+                        $(".opc-new-shipping-address").show();
+		localStorage.removeItem('doanh');	
+                        
+            
+        });
+         $("body").delegate("#label_carrier_collect_store_collect_store", "click", function() {
+                var a= localStorage.getItem('doanh');
+                $(".errorstore").hide();
+                 if(a !== null){
+                    $(".selected-item").addClass("removeitemcvs");
+                 }
+             $(".not-selected-item").removeClass("addresscvs").change();
+                 $(".edit-address-link").removeClass("editcvs").change();
+                 $(".billing-address-same-as-shipping-block").removeClass("removesameisaddr").change();
+            	$(".action-update").removeClass("removebuttonupdate").change();
+                $(".action-select-shipping-item").first().click().change();
+                $("#opc-new-shipping-address").addClass("showpopupimport");
+                 $(".action-show-popup-wrap").removeClass("hideaddresscvs").change();
+                  var a=$('select[name="billing_address_id"] option:first').html();
+                  console.log(a);
+                        if(a !== '新增地址' || a !== 'New Address'){
+                           $('.action-update').click().change();
+                        }
+                        $(".opc-new-shipping-address").show();
+			localStorage.removeItem('doanh');
+                        
+        });
+	$("body").delegate(".fake-input-wrapper", "click", function() {
+                var a= localStorage.getItem('doanh');
+                $(".errorstore").hide();
+                 if(a !== null){
+                    $(".selected-item").addClass("removeitemcvs");
+                 }
+             $(".not-selected-item").removeClass("addresscvs").change();
+                 $(".edit-address-link").removeClass("editcvs").change();
+                 $(".billing-address-same-as-shipping-block").removeClass("removesameisaddr").change();
+              $(".action-update").removeClass("removebuttonupdate").change();
+                $(".action-select-shipping-item").first().click().change();
+                $("#opc-new-shipping-address").addClass("showpopupimport");
+                 $(".action-show-popup-wrap").removeClass("hideaddresscvs").change();
+                  var a=$('select[name="billing_address_id"] option:first').html();
+                  console.log(a);
+                        if(a !== '新增地址' || a !== 'New Address'){
+                           $('.action-update').click().change();
+                        }
+                        $(".opc-new-shipping-address").show();
+		localStorage.removeItem('doanh');
+                        
+        });
+        $("body").delegate(".action-save-address", "click", function() {
+
+            $('.shipping-address-item').last().removeClass('removeitemcvs');
+            $('.action-show-popup-wrap').addClass('hideaddresscvs');
+         });
+        $("body").delegate(".primary .checkout", "click", function() {
+            $('.notice--payment__messages').hide();
+         });
+    });
+</script>

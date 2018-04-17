@@ -1,0 +1,19 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="catalog.topnav">
+            <block class="Magento\Framework\View\Element\Template" name="login.block.mobile" as="login.block.mobile" template="Magento_Theme::account/header-mobile.phtml"/>
+
+        </referenceBlock>
+
+        <referenceBlock name="page.top">
+                               <block class="AstralWeb\MenuManagement\Block\Menumega" name="catalog.topnav" before="-"
+                   template="MenuManagement/Menumegaheader.phtml"/>
+        </referenceBlock>
+        <referenceContainer name="footer">
+            <block ifconfig="menumanager_section/general/enable" class="AstralWeb\MenuManagement\Block\Menumega" before="footer-link" name="menumega_footer" as=""
+                   template="MenuManagement/Menumegassfooter.phtml"/>
+        </referenceContainer>
+
+    </body>
+</page>

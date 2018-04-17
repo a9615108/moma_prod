@@ -1,0 +1,217 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<?php
+$vip_phone = $block->getData('vip_phone');
+$firstname = $block->getData('firstname');
+$lastname = $block->getData('lastname');
+?>
+<script type="text/javascript">
+
+    // 倒數 6 分鐘 更新驗證碼  360
+    // 倒數 1 分鐘 重送簡訊     60
+    var verification_seconds = 360;
+    var resend_seconds = 60;
+
+    var seconds = 0;
+
+    var error_msg = {
+        'timeout' : '該驗證碼已失效',
+        'error'   : '驗證碼錯誤',
+        'unknow'  : '發生未知的錯誤',
+    }
+
+    require([
+        'jquery',
+        'jquery/ui'
+    ],function($ ){
+        $(document).ready(function(){
+
+            $('#verify').click(function(){
+                $(this)
+                    .select()
+                    .css('color','black' );
+            })
+
+            var dialog = $( "#dialog" ).dialog({
+                //'autoOpen': false,
+                'modal': true,
+                'closeOnEscape': false,
+                width : 'auto',
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+
+                'buttons': [
+                    {
+                        'text': "Cancel",
+                        'click': function () {
+                            // 登出
+                            location.href = '/customer/account/logout';
+                            // location.href = '/';
+                        },
+                    },
+                    {
+                        'text': "Ok",
+                        'id': "btnOk",
+                        'click': function () {
+                            //okCallback();
+
+                            // 送出客戶填的驗證碼
+
+                            var verify = $('#verify').val();
+
+                            var re = /^\d{6}$/;
+                            if ( ! re.test(verify)){
+                                $('#verify').css('color','red');
+                                return false;
+                            }
+
+                            dialog.submit();
+                        },
+                    }
+                ],
+
+                open: function(event, ui) {
+                    $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+                }
+            });
+
+            // 晚點出現 避免畫面閃爍
+            //$( "#dialog" ).dialog('open');
+
+            var interval = 0;
+            $('#send_SMS').click(function(){
+
+                // btn hide
+                $('#send_SMS').hide();
+
+                // 倒數 6 分鐘 更新驗證碼   verification_seconds = 360;
+                // 倒數 1 分鐘 重送簡訊     resend_seconds = 60;
+                if( ! seconds ){
+                    seconds = verification_seconds;
+                }
+                show_resend_seconds = resend_seconds;
+
+                clearInterval(interval);
+                interval = setInterval(function () {
+                    if( ! show_resend_seconds ){
+                        $('#send_SMS').show();
+                    }
+
+                    if( ! seconds ){
+                        clearInterval(interval); // 停止倒數
+                        $('#sms_notice').hide();
+                    }else{
+                        seconds--;
+                        show_resend_seconds--;
+
+                        seconds_str = '';
+
+                        min = Math.floor(seconds / 60);
+                        if( min ){
+                            seconds_str = min + '分';
+                        }
+
+                        sec = (seconds % 60);
+                        if( sec ){
+                            seconds_str +=  sec + '秒';
+                        }
+
+                        $('#seconds').text(seconds_str);
+
+                        // 顯示倒數提示
+                        $('#sms_notice').show();
+                    }
+                }, 1000);
+
+                // 寄出簡訊
+                jQuery.post(
+                    "/customer_account/Loginpost/Sendsms",
+                    {
+                        'tel':jQuery('#tel').val().trim()
+                    },
+                    function( data ) {
+                        data = JSON.parse(data);
+
+                        // 顯示訊息
+                        show_error(data['msg']);
+
+                        if( data['status'] == 0 ){
+                            if( data['sms_time'] > 0 ){
+                                seconds = data['sms_time'] ;
+                            }
+
+                            // 導回首頁
+                            if( data['redirect'] ){
+                                location.href = '/'
+                            }
+                        }
+                    }
+                );
+            }) // $('#send_SMS').click(function(){
+
+            // 顯示錯誤訊息
+            var vars = getUrlVars();
+
+            show_error(error_msg[vars['error']]);
+
+        }); // $(document).ready
+
+        function show_error(msg){
+            $('#sms_error')
+                .text(msg)
+                .show()
+            // .fadeOut(3000);
+        }
+
+        function getUrlVars()
+        {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for(var i = 0; i < hashes.length; i++)
+            {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+    }); // require js
+
+</script>
+
+<form id="dialog" method="post" action="/customer_account/Loginpost/Checksms" style="display:none;">
+    <div style="width:300px;float:left;">
+        <div>姓</div>
+        <input name="firstname" id="firstname" value="" />
+        <br/>
+        <br/>
+
+        <div>名</div>
+        <input name="lastname" id="lastname" value="" />
+        <br/>
+        <br/>
+
+        <div>手機號碼</div>
+        <input name="tel" id="tel" value="" />
+        <input type="button" id="send_SMS" value="送出簡訊驗證" />
+
+        <div id="sms_notice" style="display:none">驗證碼將在3分鐘內發送至您的手機號碼<br/>簡訊輸入有效時間尚餘<span id="seconds" style="color:red;"></span></div>
+        <br/>
+        <br/>
+
+        <div>填寫驗證碼</div>
+        <input name="verify" id="verify" value="" /><span id="sms_error" style="color:red;display:none;"></span>
+    </div>
+    <div style="font-size: 20px; font-weight: bold;float:left;">
+        為確保您的客戶消費權益<br/>
+        所有會員卡號<br/>
+        皆需實名驗證<br/>
+        您的『姓名』與『手機號碼』<br/>
+        若您在帳號驗證上有任何問題<br/>
+        請來電客服專線 0800-086-986<br/>
+        由客服人員為您線上即時處理！謝謝
+    </div>
+</form>

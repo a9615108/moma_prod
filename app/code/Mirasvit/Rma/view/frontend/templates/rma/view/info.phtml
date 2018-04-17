@@ -1,0 +1,61 @@
+<?php
+/* @var $block \Mirasvit\Rma\Block\Rma\View\Info */
+$rma = $block->getRma();
+?>
+<div class="block">
+    <div class="block-title">
+        <strong><?= __('Request Information') ?></strong>
+    </div>
+    <div class="block-content">
+        <div class="box box-rma-information">
+            <table width="100%">
+                <tbody>
+                <tr>
+                    <th><?= __('RMA') ?>:</th>
+                    <td>#<?= $rma->getIncrementId() ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Order') ?>:</th>
+                    <td>
+                        <?php if ($rma->getCustomerId()): ?>
+                            <?= $block->getOrderLabel($rma->getOrderId(), $block->getOrderUrl($rma->getOrderId())) ?>
+                        <?php else: ?>
+                            <?= $block->getOrderLabel($rma->getOrderId()) ?>
+                        <?php endif ?>
+                        <?= $rma->getIsGift() ? __('(This was a gift)') : '' ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><?= __('Date Requested') ?>:</th>
+                    <td><?= $block->formatDate($rma->getCreatedAt(), \IntlDateFormatter::MEDIUM) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Status') ?>:</th>
+                    <td><?= __($block->getStatusName($rma)) ?></td>
+                </tr>
+                <?php foreach ($block->getCustomFields($rma) as $field): ?>
+                    <?php if (!$value = $block->getRmaFieldValue($rma, $field)) {
+                        continue;
+                    } ?>
+                    <tr>
+                        <th><?= __($field->getName()) ?>:</th>
+                        <td>
+                            <?= $value ?>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+                <tr>
+                    <th>
+                        <?= __('Contact Information') ?>:
+                    </th>
+                    <td>
+                        <?= $block->getShippingAddressHtml($rma) ?>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

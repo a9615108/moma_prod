@@ -1,0 +1,19 @@
+<div class="footer-collapse">
+    <center><span class="info info-footer"><span>Info</span></span></center>
+</div>
+<div></div>
+<script type="text/javascript">
+    require(['jquery'],function($){
+
+        $(".info-footer").click(function(){
+            $(".page-footer").slideToggle();
+            var footer_collapse = $(".footer-collapse");
+            if (footer_collapse.hasClass('active')) {
+                footer_collapse.removeClass('active');
+            } else {
+                footer_collapse.addClass('active');
+            }
+        });
+
+    });
+</script>

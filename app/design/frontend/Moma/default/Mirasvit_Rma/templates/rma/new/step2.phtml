@@ -1,0 +1,48 @@
+<?php
+/** @var \Mirasvit\Rma\Block\Rma\NewRma\Step2 $block */
+?>
+
+<div data-mage-init='{"rmaNew": {}}'></div>
+<div class="rma-new-step2">
+    <form id="rma-new-form" action="<?= $block->getStep2PostUrl() ?>" method="POST" enctype="multipart/form-data"
+          data-hasrequired="<?= __('* Required Fields') ?>" data-mage-init='{"validation":{}}'>
+
+        <?= $block->getChildHtml('rma.new.step2.info') ?>
+
+        <?php if ($block->getAllowGift()): ?>
+            <?= $block->getChildHtml('rma.new.gift') ?>
+        <?php endif ?>
+
+        <?= $block->getChildHtml('rma.new.step2.items') ?>
+        <?= $block->getChildHtml('rma.new.step2.custom_fields') ?>
+        <?= $block->getChildHtml('rma.new.step2.additional') ?>
+        <?= $block->getChildHtml('rma.new.step2.policy') ?>
+
+        <div class="term-condition-wrap">
+            <div class="term-condition">
+                <input type="checkbox" name="moma-agree" class="checkbox moma-agree required-entry" id="rma-moma-agree" checked="checked" title="Agree">
+                <label for="rma-moma-agree" class="label">
+                    <span><a target="_blank" href="<?php echo $block->getBaseUrl().'shopping_instruction'?>"><?php echo __('我同意 退貨條款')?></a></span>
+                </label>
+            </div>
+            <div class="text-term-condition"><?php echo __('請注意，每筆訂單限辦理退貨一次') ?></div>
+        </div>
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit" class="action primary" data-role="rma-submit">
+                    <span><?= __('送出申請') ?></span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <style type="text/css">
+        #rma_remove_item1 {
+            display: none;
+        }
+    </style>
+    <div style="display:none" id="error_message_no_items">
+        <?= __('請選擇欲退貨的商品，並輸入數量與原因。') ?>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../Core/etc/config.xsd">
+    <default>
+        <mailerlite>
+            <subscribers>
+                <groupid>6092099</groupid>
+                <apikey>ef47ff5a796b3253a5ab6fefa8182d4e</apikey>
+            </subscribers>
+        </mailerlite>
+    </default>
+</config>

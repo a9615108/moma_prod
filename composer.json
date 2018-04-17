@@ -1,0 +1,153 @@
+{
+    "name": "magento/project-community-edition",
+    "description": "eCommerce Platform for Growth (Community Edition)",
+    "type": "project",
+    "version": "2.1.5",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+        "magento/product-community-edition": "2.1.5",
+        "composer/composer": "@alpha",
+        "vpietri/adm-quickdevbar": "dev-master",
+        "msp/devtools": "dev-master",
+        "ebizmarts/magento2-mandrill": "3.0.10",
+        "astralweb/menu-management": "0.0.3.2",
+        "astralweb/banner-management": "dev-moma",
+        "amasty/base": "1.0.3",
+        "amasty/shopby": "1.14.6",
+        "amasty/shopby-brand": "1.14.6",
+        "amasty/module-improved-layered-navigation-page": "1.14.6",
+        "amasty/shopby-root": "1.14.6",
+        "amasty/shopby-seo": "1.14.6",
+        "amasty/ogrid": "1.1.4",
+        "magestore/module-faq": "0.0.1",
+        "picqer/php-barcode-generator": "^0.2.1",
+        "neklo/core": "2.0.1",
+        "neklo/reindexer": "1.0.1",
+        "eadesignro/module-eacore": "0.0.4",
+        "eadesignro/module-pdfgenerator": "1.0.31",
+        "eadesignro/mpdf": "7.0.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.0",
+        "squizlabs/php_codesniffer": "1.5.3",
+        "phpmd/phpmd": "@stable",
+        "pdepend/pdepend": "2.2.2",
+        "fabpot/php-cs-fixer": "~1.2",
+        "lusitanian/oauth": "~0.3 <=0.7.0",
+        "sebastian/phpcpd": "2.0.0"
+    },
+    "config": {
+        "use-include-path": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Magento\\Framework\\": "lib/internal/Magento/Framework/",
+            "Magento\\Setup\\": "setup/src/Magento/Setup/",
+            "Magento\\": "app/code/Magento/"
+        },
+        "psr-0": {
+            "": "app/code/"
+        },
+        "files": [
+            "app/etc/NonComposerComponentRegistration.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
+            "Magento\\Tools\\": "dev/tools/Magento/Tools/",
+            "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/",
+            "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
+            "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/"
+        }
+    },
+    "minimum-stability": "alpha",
+    "prefer-stable": true,
+    "repositories": {
+        "magento": {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        },
+        "quickdevbar": {
+            "type": "git",
+            "url": "git@github.com:vpietri/magento2-developer-quickdevbar.git"
+        },
+        "msp-devtools": {
+            "type": "git",
+            "url": "git@github.com:magespecialist/m2-MSP_DevTools.git"
+        },
+        "mandrill": {
+            "type": "git",
+            "url": "git@github.com:ebizmarts/magento2-mandrill.git"
+        },
+        "astralweb-menu-management": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/astralweb_menu_management.git"
+        },
+        "astralweb-banner-management": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/astralweb_banner_management.git"
+        },
+        "amasty-base": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/amasty_base.git"
+        },
+        "amasty-shopby": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/amasty_shopby.git"
+        },
+        "amasty-shopbybrand": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/amasty_shopbybrand.git"
+        },
+        "amasty-shopbypage": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/amasty_shopbypage.git"
+        },
+        "amasty-shopbyroot": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/amasty_shopbyroot.git"
+        },
+        "amasty-shopbyseo": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/amasty_shopbyseo.git"
+        },
+        "amasty-order-grid": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/amasty_ordergrid.git"
+        },
+        "magestore-faq": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/magestore_faq.git"
+        },
+        "neklo-core": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/niklo_core.git"
+        },
+        "neklo-reindexer": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/niklo_reindexer.git"
+        },
+        "magento2-pdf-generator2": {
+            "type": "git",
+            "url": "git@github.com:EaDesgin/magento2-pdf-generator2.git"
+        },
+        "eadesigndev_eacore": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/eadesigndev_eacore.git"
+        },
+        "eadesigndev_pdfgenerator": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/eadesigndev_pdfgenerator.git"
+        },"mpdf": {
+            "type": "git",
+            "url": "ssh://git@stash.ecommage.com:7999/m2e/mpdf.git"
+        }
+    },
+    "extra": {
+        "magento-force": "override"
+    }
+}

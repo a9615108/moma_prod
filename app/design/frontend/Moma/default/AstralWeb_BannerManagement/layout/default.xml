@@ -1,0 +1,17 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="AstralWeb_BannerManagement::css/styles.css"/>
+        <script src="AstralWeb_BannerManagement::js/jquery.flexslider.js"/>
+    </head>
+    <body>
+        <referenceBlock name="page.top">
+            <block  ifconfig="bannermanager_section/general/enable" class="AstralWeb\BannerManagement\Block\Banner" name="bannerslider.menu.tops"  after="catalog.topnav"
+                   template="BannerManagement/BannerTop.phtml" />
+        </referenceBlock>
+        <referenceBlock name="before.body.end" >
+            <block  ifconfig="bannermanager_section/general/enable" class="AstralWeb\BannerManagement\Block\Banner" name="bannerslider.menu.top"  before="-"
+                   template="BannerManagement/BannerButton.phtml" />
+        </referenceBlock>
+    </body>
+</page>

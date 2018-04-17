@@ -1,0 +1,26 @@
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $customerSession = $objectManager->get('Magento\Customer\Model\Session');
+
+if($customerSession->isLoggedIn()){
+    $customerName = $customerSession->getCustomer()->getFirstname() . ' ' . $customerSession->getCustomer()->getLastname();
+
+    $VipNum = $customerSession->getCustomer()->getVipNum();
+    if( ! $VipNum ){
+        $VipNum = '<font color="red">未驗證</font>';
+    }
+
+    ?>
+<div class="custom-account-dashboard">
+    <div class="custom-account-title">
+        <h1 class="title"><?php echo __('會員帳戶總覽')?></h1>
+    </div>
+    <div class="custom-account-name">
+        <?php echo __('Hi '.$customerName.'!')?>
+        <?php echo __(' VIP卡號:'.$VipNum)?>
+    </div>
+</div>
+
+    <?php
+}
+?>

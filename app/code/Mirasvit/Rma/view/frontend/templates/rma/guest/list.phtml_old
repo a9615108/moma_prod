@@ -1,0 +1,39 @@
+<?php
+/* @var $block \Mirasvit\Rma\Block\Rma\Guest\Listing */
+$rmas = $block->getRmaList();
+$order = $block->getOrder();
+?>
+<div>
+    <?php  ?>
+    <button onclick="window.location.href='<?= $block->getUrl('rma/guest/create')?>';" class="button pull-right"><span><span><?= __('Request New Return')?></span></span></button>
+    <br><br>
+    <?php if (count($rmas)):
+        ?>
+        <?= $block->getChildHtml('rma.toolbar')?>
+        <table class="data-table" id="rma-table">
+            <thead>
+            <tr class="first last">
+                <th><?= __('RMA') ?></th>
+                <th><?= __('Date') ?></th>
+                <th><?= __('Status') ?></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($rmas as $rma): ?>
+                <tr>
+                    <td><?= $rma->getIncrementId() ?>
+                        <?php if ($rma->getLastMessage() && !$rma->getLastMessage()->getIsRead()): ?><span class="unread"></span><?php endif;?>
+                    </td>
+                    <td><?= $block->formatDate($rma->getCreatedAt(), \IntlDateFormatter::MEDIUM) ?></td>
+                    <td><?= $block->getStatusName($rma) ?></td>
+                    <td><a href="<?= $block->getRmaUrl($rma)?>"><?= __('View Return') ?></a></td>
+                </tr>
+            <?php endforeach?>
+            </tbody>
+        </table>
+    <?= $block->getChildHtml('rma.toolbar')?>
+    <?php else: ?>
+        <p><?= __('There are no Returns') ?></p>
+    <?php endif ?>
+</div>

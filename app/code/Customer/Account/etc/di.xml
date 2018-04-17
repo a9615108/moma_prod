@@ -1,0 +1,5 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Customer\Controller\Account\LoginPost"  type="Customer\Account\Controller\LoginPost\Index" />
+    <preference for="Magento\Customer\Controller\Account\CreatePost" type="Customer\Account\Controller\CreatePost\Index" />
+    <preference for="Magento\Customer\Controller\Account\EditPost"   type="Customer\Account\Controller\EditPost\Index" />
+</config>

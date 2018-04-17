@@ -1,0 +1,17 @@
+<?php
+/** @var \Mirasvit\Rma\Block\Rma\NewRma\Step2\Items $block */
+/** @var \Mirasvit\Rma\Api\Data\ItemInterface $item */
+?>
+<div class="block">
+    <div class="block-title">
+        <strong><?= __('選擇退貨商品') ?></strong>
+    </div>
+    <div class="block-content ui-rma-items">
+        <?php foreach ($block->getRmaItems() as $item): ?>
+            <?php echo $block->getChildBlock('rma.new.step2.items.item')->setItem($item)->toHtml() ?>
+        <?php endforeach ?>
+    </div>
+    <div class="tips-to-guide"><?php echo __('退貨時，請在於附加訊息填入詳細的取件資訊，以利完成退款程序，請參考以下範例：<br> 收件人：王小明 <br>收件地址：台北市忠孝東路一段1號5樓之3 <br> 電話號碼：0911-222-333') ?></div>
+</div>
+
+<div class="clearfix"></div>

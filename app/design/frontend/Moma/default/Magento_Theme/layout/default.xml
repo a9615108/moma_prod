@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+         <referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="frontuser" template="Magento_Theme::frontuser/tags.phtml" before="-"/>
+        </referenceBlock>
+        <referenceContainer name="header.panel">
+            <block class="Magento\Framework\View\Element\Html\Links" name="header.links">
+                <arguments>
+                    <argument name="css_class" xsi:type="string">header links</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_img_width" xsi:type="number">183</argument>
+                <argument name="logo_img_height" xsi:type="number">23</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="footer">
+
+            <block class="Magento\Cms\Block\Block" name="footer-link" before="-">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">footer-links</argument>
+                </arguments>
+            </block>
+            
+            <container name="footer-right" label="" htmlTag="div" htmlClass="footer--right" >
+                <block class="Magento\Cms\Block\Block" name="footer-social">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">footer-social</argument>
+                </arguments>
+                </block>
+            </container>
+
+             <referenceBlock name="footer_links" remove="true"/>
+        </referenceContainer>
+        <block class="Magento\Store\Block\Switcher" name="info-footer" template="Magento_Theme::info.phtml"/>
+        <block class="Magento\Store\Block\Switcher" name="scroll" before="copyright" template="Magento_Theme::scroll.phtml"/>
+        <move element="scroll" destination="page.wrapper" after="footer"/>
+        <move element="info-footer" destination="page.wrapper" after="scroll"/>
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="copyright" remove="true"/>
+        <referenceContainer name="header-wrapper">
+            <block class="Magento\Framework\View\Element\Template" name="login.block" as="login.block" after="minicart" template="Magento_Theme::account/header.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

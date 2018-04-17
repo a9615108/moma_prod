@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+
+        <block class="Magento\Catalog\Pricing\Render" name="product.price.final.custom">
+            <arguments>
+                <argument name="price_render" xsi:type="string">product.price.render.default</argument>
+                <argument name="price_type_code" xsi:type="string">final_price</argument>
+                <argument name="zone" xsi:type="string">item_view</argument>
+            </arguments>
+        </block>
+        <block class="Astralweb\ShareSocial\Block\Sharesocial" name="share.social.custom" template="Astralweb_ShareSocial::sharesocial.phtml"/>
+
+        <move element="product.info.stock.sku" destination="columns.top" after="product.info.head"/>
+        <move element="product.info.sku" destination="product.info.stock.sku" before="product.info.type"/>
+        <move element="product.price.final" destination="product.info.addtocart.additional"/>
+        <move element="product.price.final.custom" destination="product.info.addtocart"/>
+        <move element="share.social.custom" destination="product.info.form.content" after="-" />
+        <move element="product.info.options.wrapper.bottom" destination="product.info.form.options" after="product.info.options.wrapper"/>
+        <move element="product.info.description" destination="content" after="-"/>
+        <referenceBlock name="product.info.overview" remove="true" />
+        <referenceBlock name="product.attributes" remove="true" />
+        <referenceBlock name="product.info.type" remove="true" />
+        <referenceContainer name="product.info.stock.sku">
+            <block class="Magento\Catalog\Block\Product\View" name="short.title" as="short.title" before="-" template="Magento_Catalog::product/shortitle.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="product.info.details">
+            <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.ingredient" template="product/view/attribute.phtml" group="detailed_info" before="product.info.overview">
+                <arguments>
+                    <argument name="at_call" xsi:type="string">getProductIngredient</argument>
+                    <argument name="at_code" xsi:type="string">product_ingredient</argument>
+                    <argument name="css_class" xsi:type="string">product-ingredient</argument>
+                    <argument name="at_label" xsi:type="string">none</argument>
+                    <argument name="title" translate="true" xsi:type="string">商品成分</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.washing.instruction" template="product/view/attribute.phtml" group="detailed_info">
+                <arguments>
+                    <argument name="at_call" xsi:type="string">getWashingInstruction</argument>
+                    <argument name="at_code" xsi:type="string">washing_instruction</argument>
+                    <argument name="css_class" xsi:type="string">washing-instruction</argument>
+                    <argument name="at_label" xsi:type="string">none</argument>
+                    <argument name="title" translate="true" xsi:type="string">洗滌方式</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.short.desc" template="product/view/attribute.phtml" group="detailed_info">
+                <arguments>
+                    <argument name="at_call" xsi:type="string">getShortDescription</argument>
+                    <argument name="at_code" xsi:type="string">short_description</argument>
+                    <argument name="css_class" xsi:type="string">overview</argument>
+                    <argument name="at_label" translate="true" xsi:type="string">none</argument>
+                    <argument name="title" translate="true" xsi:type="string">尺寸表</argument>
+                    <argument name="add_attribute" xsi:type="string">itemprop="description"</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.fitting.report " template="product/view/attribute.phtml" group="detailed_info">
+                <arguments>
+                    <argument name="at_call" xsi:type="string">getFittingReport</argument>
+                    <argument name="at_code" xsi:type="string">fitting_report</argument>
+                    <argument name="css_class" xsi:type="string">fitting-report</argument>
+                    <argument name="at_label" translate="true" xsi:type="string">none</argument>
+                    <argument name="title" translate="true" xsi:type="string">試穿報告</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

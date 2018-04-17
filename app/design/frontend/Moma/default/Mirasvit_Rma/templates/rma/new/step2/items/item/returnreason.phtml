@@ -1,0 +1,67 @@
+<?php
+/** @var \Mirasvit\Rma\Block\Rma\NewRma\Step2\Items\Item\ReturnReason $block */
+/** @var \Mirasvit\Rma\Api\Data\ItemInterface $item */
+?>
+
+<?php if (($item = $block->getItem())): ?>
+    <?php if ($block->isReasonAllowed()): ?>
+        <div class="field required">
+            <label class="label">
+                <span><?= __('退貨原因') ?></span>
+            </label>
+
+            <div class="control">
+                <div class="wrap-select">
+                    <select name="items[<?= $item->getOrderItemId() ?>][reason_id]"
+                            id="reason_id<?= $item->getOrderItemId() ?>">
+                        <option value=""><?= __('退貨原因') ?></option>
+                        <?php foreach ($block->getReasonList() as $reason): ?>
+                            <option
+                                value="<?= $reason->getId() ?>"><?= $reason->getName() ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($block->isConditionAllowed()): ?>
+        <div class="field required">
+            <label class="label">
+                <span><?= __('Condition') ?></span>
+            </label>
+
+            <div class="control">
+                <select name="items[<?= $item->getOrderItemId() ?>][condition_id]"
+                        id="condition_id<?= $item->getOrderItemId() ?>"
+                        data-validate="{required:true}">
+                    <option value=""><?= __('-- Select a Condition --') ?></option>
+                    <?php foreach ($block->getConditionList() as $condition): ?>
+                        <option
+                            value="<?= $condition->getId() ?>"><?= $condition->getName() ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($block->isResolutionAllowed()): ?>
+        <div class="field required">
+            <label class="label">
+                <span><?= __('Resolution') ?></span>
+            </label>
+
+            <div class="control">
+                <select name="items[<?= $item->getOrderItemId() ?>][resolution_id]"
+                        id="resolution_id<?= $item->getOrderItemId() ?>"
+                        data-validate="{required:true}">
+                    <option value=""><?= __('-- Select a Resolution --') ?></option>
+                    <?php foreach ($block->getResolutionList() as $resolution): ?>
+                        <option
+                            value="<?= $resolution->getId() ?>"><?= $resolution->getName() ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

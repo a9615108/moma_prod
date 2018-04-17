@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Magento\Sales\Model\Order\Pdf\Invoice" type="Astralweb\FixPdfBrokenFont\Model\Order\Pdf\InvoiceReWrite" />
+	<preference for="Magento\Sales\Model\Order\Pdf\Shipment" type="Astralweb\FixPdfBrokenFont\Model\Order\Pdf\ShipmentReWrite" />
+	<preference for="Magento\Sales\Model\Order\Pdf\Creditmemo" type="Astralweb\FixPdfBrokenFont\Model\Order\Pdf\CreditmemoReWrite" />
+	<preference for="Magento\Shipping\Model\Order\Pdf\Packaging" type="Astralweb\FixPdfBrokenFont\Model\Order\Pdf\PackagingReWrite" />
+</config>

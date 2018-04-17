@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <moma_pos_section>
+            <general>
+                <enable>1</enable>
+                <logging>1</logging>
+                <user>moma</user>
+                <token>f1f92441a3e466dbee2ed51c59d3267f</token>
+                <method>getOrder</method>
+            </general>
+        </moma_pos_section>
+    </default>
+</config>

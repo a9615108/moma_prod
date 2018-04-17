@@ -1,0 +1,20 @@
+<?php $_categories = $block->getCurrentChildCategories(); ?>
+<?php $_count = is_array($_categories) ? count($_categories) : $_categories->count(); ?>
+<?php if ($_count): ?>
+    <div class="list-category">
+        <div class="list-category__title">
+            <?php echo $block->getCategory()->getName() ?>
+        </div>
+        <ul class="list-category__inner">
+            <?php foreach ($_categories as $_category): ?>
+                <?php if ($_category->getIsActive()): ?>
+                    <li>
+                        <a href="<?php echo $block->getCategoryUrl($_category) ?>">
+                            <span><?php echo $block->escapeHtml($_category->getName()) ?></span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

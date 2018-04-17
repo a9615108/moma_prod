@@ -1,0 +1,33 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Wishlist\Block\Catalog\Product\View\Addto\Wishlist */
+?>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+$_helper_wishlist = $this->helper('Magento\Wishlist\Helper\Data');
+$product_id_wishlist = array();
+foreach($_helper_wishlist->getWishlistItemCollection() as $wishlistItemCollection){
+    $product_id_wishlist[] = $wishlistItemCollection->getProductId();
+}
+?>
+
+<?php if ($block->isWishListAllowed()) : ?>
+    <a href="#"
+       class="action towishlist <?php if(in_array($product->getId(), $product_id_wishlist)) echo "added"?>"
+       data-post='<?php /* @escapeNotVerified */ echo $block->getWishlistParams(); ?>'
+       data-action="add-to-wishlist"><span><?php /* @escapeNotVerified */ echo __('Add to Wish List') ?></span></a>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "addToWishlist": <?php /* @escapeNotVerified */ echo $block->getWishlistOptionsJson() ?>
+        }
+    }
+</script>

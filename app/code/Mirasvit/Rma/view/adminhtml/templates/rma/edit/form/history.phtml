@@ -1,0 +1,53 @@
+<?php
+/** @var \Mirasvit\Rma\Block\Adminhtml\Rma\Edit\Form\History $block */
+/** @var \Mirasvit\Rma\Model\Rma $rma */
+$rma = $block->getRma();
+?>
+<fieldset class="fieldset admin__fieldset rma-edit__history">
+    <legend class="admin__legend legend">
+        <span><?= __('RMA History') ?></span>
+
+        <div class="actions _primary">
+            <?php if ($rma->getIsAdminRead()): ?>
+                <a href="<?php echo $block->getMarkUrl(false) ?>"><?php echo __('mark as unread') ?></a>
+            <?php else: ?>
+                <a href="<?php echo $block->getMarkUrl(true) ?>"><?php echo __('mark as read') ?></a>
+            <?php endif ?>
+        </div>
+    </legend>
+
+    <?php /** @var \Mirasvit\Rma\Api\Data\MessageInterface $message */?>
+    <?php foreach ($block->getMessageList() as $message): ?>
+        <div class="rma-message">
+            <div class="rma-message__header">
+                <strong>
+                    <?php if ($block->getMessageTriggeredBy($message) == Mirasvit\Rma\Api\Config\RmaConfigInterface::CUSTOMER): ?>
+                        <?= $message->getCustomerName() ?>
+                        <?php if ($block->getCustomerEmail($message) != ''): ?>
+                            , <?= $block->getCustomerEmail($message) ?>
+                        <?php endif ?>
+                    <?php elseif ($block->getMessageTriggeredBy($message) == Mirasvit\Rma\Api\Config\RmaConfigInterface::USER): ?>
+                        <?= $block->getUserName($message) ?>
+                    <?php endif ?>
+                </strong>
+                <span><?= $block->formatDate($message->getCreatedAt(), \IntlDateFormatter::MEDIUM) ?> <?= $block->formatTime($message->getCreatedAt(), \IntlDateFormatter::SHORT) ?></span>
+            </div>
+
+            <div
+                class="rma-message__body <?php if ($block->getMessageType($message) == \Mirasvit\Rma\Api\Config\MessageConfigInterface::MESSAGE_INTERNAL): ?>internal<?php endif ?> <?= $block->getMessageType($message) ?> <?php if ($block->getMessageTriggeredBy($message) == Mirasvit\Rma\Api\Config\RmaConfigInterface::CUSTOMER): ?>customer<?php else: ?>staff<?php endif ?> ">
+                <?php if ($message->getText()): ?>
+                    <?= $block->getMessageTextHtml($message) ?>
+                <?php endif ?>
+                <?php $attachments = $block->getMessageAttachments($message) ?>
+                <?php if (count($attachments)): ?>
+                    <div class="rma-message__attachments">
+                        <?php /** @var \Mirasvit\Rma\Api\Data\AttachmentInterface $attachment */?>
+                        <?php foreach ($attachments as $attachment): ?>
+                            <a href="<?= $block->getAttachmentUrl($attachment) ?>"><?= $attachment->getName() ?></a>
+                        <?php endforeach ?>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+    <?php endforeach ?>
+</fieldset>

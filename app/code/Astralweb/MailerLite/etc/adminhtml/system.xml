@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="astralweb" translate="label" sortOrder="115">
+            <label>Astral Web Extensions</label>
+        </tab>
+        <section id="mailerlite" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Mailer Lite</label>
+            <tab>astralweb</tab>
+            <resource>Astralweb_MailerLite::configuration</resource>
+            <group id="subscribers" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Subscribers</label>
+                <field id="apikey" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Key</label>
+                </field>
+                <field id="groupid" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Group</label>
+                    <source_model>Astralweb\MailerLite\Model\Config\Source\Groups</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

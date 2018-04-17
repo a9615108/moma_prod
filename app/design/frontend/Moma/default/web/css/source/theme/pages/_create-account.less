@@ -1,0 +1,306 @@
+// /**
+//  * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@border-color__faq: @color-gray-light7;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+  //
+  //  Main
+  //  _____________________________________________
+
+  .customer-account-create{
+    .form-create-account {
+      &.account {
+        .fieldset {
+          &.info {
+            width: 100%;
+            padding-right: 0;
+          }
+          &.address{
+            width: 100%;
+          }
+        }
+        .actions-toolbar{
+          margin-top: 0;
+          float: left;
+          margin-bottom: 80px;
+        }
+      }
+    }
+  }
+
+  .form-create-account{
+    .term-condition{
+      position: relative;
+      float: none;
+      margin: 0 auto;
+      display: inline-block;
+      > div.mage-error{
+        position: absolute;
+        bottom: -5px;
+        width: 100%;
+        + label{
+          margin-bottom: 20px;
+          display: inline-block;
+        }
+      }
+      &-wrap{
+        text-align: center;
+        &.active{
+          label{
+            &:after{
+              opacity: 1;
+            }
+          }
+        }
+      }
+      label{
+        &:before{
+          position: absolute;
+          left: 0;
+          top: 3px;
+          border: 1px solid @border-color__base;
+          display: block;
+          content: '';
+          pointer-events: none;
+          cursor: pointer;
+          width: 15px;
+          height: 15px;
+          border-radius: 0;
+        }
+        &:after{
+          height: 6px;
+          position: absolute;
+          background: @color-black;
+          display: block;
+          content: '';;
+          opacity: 0;
+          pointer-events: none;
+          cursor: pointer;
+          border-radius: 0;
+          left: 3px;
+          top: 8px;
+          .lib-css(background, url('@{baseDir}images/product-detail/checked-icon.png') no-repeat center center/ 10px 7px);
+          width: 10px;
+        }
+      }
+    }
+    .fieldset{
+      > .field{
+        margin-bottom: 18px;
+      }
+      > .legend + br{
+        display: none;
+      }
+      > .moma-note{
+        color: @color-red-true;
+        margin-bottom: 15px;
+      }
+      &.create{
+        margin-bottom: 17px;
+      }
+      &.address{
+        margin-bottom: 0;
+        margin-top: 15px;
+        .field{
+          &.telephone{
+            & + .field{
+              width: 95px;
+              float: left;
+
+              &.country{
+                width: 100%;
+                max-width: 300px;
+                .control{
+                  display: inline-block;
+                  position: relative;
+                  &:before{
+                    position: absolute;
+                    .lib-css(background, url('@{baseDir}images/category/icon-select.svg') @color-white no-repeat center center/ 7px 6px);
+                    pointer-events: none;
+                    height: 40px;
+                    width: 40px;
+                    content: '';
+                    display: block;
+                    right: 0px;
+                    top: 0px;
+                    border: 1px solid @border-color__base;
+                    border-left: none;
+                    z-index: 2;
+                  }
+                  > select{
+                    padding-right: 38px;
+                    &::-ms-expand {
+                      display: none;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &.region{
+            width: 95px;
+            margin-left: 7.5px;
+            float: left;
+            input{
+              display: block !important;
+            }
+          }
+          &.zip{
+            width: 95px;
+            margin-left: 7.5px;
+            float: left;
+          }
+        }
+        #twzipcode{
+          display: inline-block;
+          float: left;
+          width: 100%;
+          margin-bottom: 18px;
+          > *{
+            width: 95px;
+            margin-left: 7.5px;
+            display: inline-block;
+            float: left;
+            &:first-child{
+              margin-left: 0;
+            }
+          }
+          label{
+            padding: 0 0 5px 0;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+            float: left;
+            &:after{
+              content: '*';
+              color: @error__color;
+              font-size: 1.2rem;
+              margin: 0 5px 0 0;
+              float: left;
+            }
+          }
+          .wrap-select{
+            width: 100%;
+          }
+          &.hide{
+            .lib-visually-hidden;
+          }
+        }
+      }
+    }
+  }
+  .ui-datepicker {
+    .ui-datepicker-title {
+      .ui-datepicker-year{
+        padding: 0 12px;
+      }
+    }
+  }
+
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+
+  body .form-create-account{
+    &.account{
+      .custom-comment{
+        margin-bottom: 5px;
+      }
+    }
+    .term-condition{
+      &-wrap{
+      }
+    }
+    .fieldset{
+      > .field{
+        margin-bottom: 6px;
+      }
+      > .legend + br{
+      }
+      > .moma-note{
+        margin-top: -6px;
+        margin-bottom: 6px;
+      }
+      &.create{
+        margin-bottom: 21px;
+      }
+      &.address{
+        margin-top: 15px;
+        .field{
+          &.telephone{
+            & + .field{
+              width: calc(~"(100% - 15px)/3");
+            }
+          }
+          &.region{
+            width: calc(~"(100% - 15px)/3");
+          }
+          &.zip{
+            width: calc(~"(100% - 15px)/3");
+          }
+          &.country{
+            .lib-visually-hidden;
+          }
+        }
+        #twzipcode{
+          margin-bottom: 15px;
+          > *{
+            width: calc(~"(100% - 15px)/3");
+          }
+        }
+      }
+    }
+  }
+
+}
+
+//
+//  Ipad and up
+//  _____________________________________________
+
+& when (@media-target = 'mobile'),
+(@media-target = 'all') {
+  @media only screen and (max-width: (@screen__m - 1)) and (min-width: (@screen__s + 1) ) {
+
+  }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+  //
+  //  Main
+  //  _____________________________________________
+
+
+
+}

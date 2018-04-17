@@ -1,0 +1,32 @@
+<?php $_order = $block->getOrder();
+//var_dump($_order->getData());
+    $order_incrementid = $_order->getId();
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+$connection = $resource->getConnection();
+$tableName = $resource->getTableName('astralweb_invoicetype');
+$sql = "SELECT * FROM " . $tableName." WHERE order_id = ".$order_incrementid;
+
+$result = $connection->fetchAll($sql);
+
+
+
+?>
+<?php if(count($result) > 0): ?>
+
+<div class="invoicetype">
+<span class="title">Invoice Type</span>
+<?php if($result[0]['purchaser_name'] != '' && $result[0]['tax_id'] != ''): ?>
+<p>Three Shipping</p>
+<div><span>Company Name</span> : <?php echo $result[0]['purchaser_name'] ?></div>
+<div><span>Registration No</span> : <?php echo $result[0]['tax_id'] ?></div>
+</div>
+<?php else: ?>
+    <p>Two Shipping</p>
+<?php endif; ?>
+<?php endif; ?>
+
+
+
+

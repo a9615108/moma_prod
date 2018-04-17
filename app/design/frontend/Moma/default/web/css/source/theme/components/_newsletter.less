@@ -1,0 +1,137 @@
+// /**
+//  * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+  //  Newsletter subscription
+  .block.newsletter {
+
+    .form.subscribe {
+      display: table;
+      width: 100%;
+      position: relative;
+    }
+
+    .fieldset {
+      display: table-cell;
+      margin: 0;
+      padding: 0;
+      vertical-align: top;
+    }
+
+    .field {
+      margin: 0;
+
+      .control {
+        .lib-icon-font(
+                @icon-envelope,
+          @_icon-font-size: 35px,
+          @_icon-font-line-height: 33px,
+          @_icon-font-color: @form-element-input-placeholder__color
+        );
+        display: block;
+
+        &:before {
+          position: absolute;
+          .lib-visually-hidden();
+        }
+      }
+
+      .label{
+        .lib-visually-hidden-reset();
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: @color-white;
+      }
+
+    }
+
+    input {
+      .lib-input-placeholder(@color-white, regular);
+      padding-left: 142px;
+      height: 70px;
+      background: @secondary__color;
+      border: none;
+      color: @color-white;
+    }
+
+    .title {
+      display: none;
+    }
+
+    .label {
+      &:extend(.abs-visually-hidden all);
+    }
+
+    .actions {
+      display: inline-block;
+      vertical-align: top;
+      width: auto;
+      position: absolute;
+      right: 0;
+      top:0;
+    }
+
+    .action.subscribe {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      margin-left: 0;
+      line-height: 70px;
+      background: transparent;
+      padding: 0 16px;
+      border: none;
+    }
+  }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+  .block.newsletter {
+    width: 100%;
+    max-width: 420px;
+    margin-bottom: 46px;
+    .field {
+      margin-right: 5px;
+
+      .control {
+        width: 100%;
+      }
+      .label{
+        height: 40px;
+        width: 112px;
+        text-align: center;
+        padding-left: 12px;
+        top: 15px;
+        border-right: 2px solid @color-white;
+        padding-right: 10px;
+        &:before{
+          .lib-css(background, url('@{baseDir}images/logo-white.svg') no-repeat center center/90px 12px);
+          width: 90px;
+          height: 12px;
+          display: inline-block;
+          content: '';
+          margin-bottom: -1px;
+          margin-top: 2px;
+        }
+      }
+
+    }
+
+    .action.subscribe {
+      border-radius: 3px;
+    }
+    input{
+      width: 420px;
+    }
+  }
+}

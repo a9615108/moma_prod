@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <collect_store>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Astralweb\Shippingsf\Model\Carrier\Collect</model>
+                <name></name>
+                <price>15.00</price>
+                <title>Shipping SF</title>
+                <type>I</type>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <url_api>https://218.17.248.244:11443/bsp-oisp/sfexpressService</url_api>
+                <check_header>QJYXGS</check_header>
+                <check_body>7lPXjI7ZHBdU</check_body>
+                <j_company>MOMA</j_company>
+                <j_contact>其基有限公司</j_contact>
+                <j_tel>0800086986</j_tel>
+                <j_mobile></j_mobile>
+                <j_shippercode></j_shippercode>
+                <j_address>三民路二段37號28樓之1</j_address>
+                <j_province>北京</j_province>
+                <j_city>新北市</j_city>
+                <j_post_code>22069</j_post_code>
+                  <credit_no>8860550908</credit_no>
+                <credit_account>8860522659</credit_account>
+            </collect_store>
+        </carriers>
+
+    </default>
+</config>

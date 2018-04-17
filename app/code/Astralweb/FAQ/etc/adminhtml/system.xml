@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <!-- for add new tab in Magento2 system configuration section -->
+        <tab id="astralweb" translate="label" sortOrder="115">
+            <label>Astral Web Extensions</label>
+        </tab>
+        <!-- for create section -->
+        <section id="faq_banner" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>FAQ Banner</label>
+            <!-- Assign section to tab -->
+            <tab>astralweb</tab>
+            <resource>Astralweb_FAQ::configuration</resource>
+            <!-- create group for fields in section -->
+            <group id="parameters" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>FAQ Banner</label>
+                <!-- create image upload type field -->
+                <field id="slider_image_1" translate="label" type="image" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image</label>
+                    <comment>Allowed file types: jpg, jpeg, gif, png</comment>
+                    <!-- backend model which save uploaded  file on define location -->
+                    <backend_model>Astralweb\FAQ\Model\Saveimage</backend_model>
+                    <base_url type="media" scope_info="1">ecommage/banner</base_url>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

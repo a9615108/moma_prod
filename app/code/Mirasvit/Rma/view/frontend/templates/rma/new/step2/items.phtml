@@ -1,0 +1,16 @@
+<?php
+/** @var \Mirasvit\Rma\Block\Rma\NewRma\Step2\Items $block */
+/** @var \Mirasvit\Rma\Api\Data\ItemInterface $item */
+?>
+<div class="block">
+    <div class="block-title">
+        <strong><?= __('Items in this order') ?></strong>
+    </div>
+    <div class="block-content ui-rma-items">
+        <?php foreach ($block->getRmaItems() as $item): ?>
+            <?php echo $block->getChildBlock('rma.new.step2.items.item')->setItem($item)->toHtml() ?>
+        <?php endforeach ?>
+    </div>
+</div>
+
+<div class="clearfix"></div>

@@ -1,0 +1,67 @@
+<?php
+/* @var \Mirasvit\Rma\Block\Rma\View\Items $block */
+?>
+<div class="block">
+    <div class="block-title">
+        <strong><?= __('退貨商品') ?></strong>
+    </div>
+    <div class="block-content">
+        <div class="table-wrapper">
+            <table class="data table">
+                <thead>
+                <tr>
+                    <th scope="col" class="col"></th>
+                    <th scope="col" class="col"><?= __('Product Name') ?></th>
+                    <th scope="col" class="col"><?= __('SKU') ?></th>
+                    <th scope="col" class="col"><?= __('Qty') ?></th>
+                    <?php if ($block->isReasonAllowed()): ?>
+                        <th scope="col" class="col"><?= __('Reason') ?></th>
+                    <?php endif; ?>
+                    <?php if ($block->isConditionAllowed()): ?>
+                        <th scope="col" class="col"><?= __('Condition') ?></th>
+                    <?php endif; ?>
+                    <?php if ($block->isResolutionAllowed()): ?>
+                        <th scope="col" class="col"><?= __('Resolution') ?></th>
+                    <?php endif; ?>
+                </tr>
+                </thead>
+                <tbody>
+                <?php /** @var \Mirasvit\Rma\Api\Data\ItemInterface $item */ ?>
+                <?php foreach ($block->getItems() as $item): ?>
+                    <tr>
+                        <td data-th="Product" class="col">
+                            <img id="image"
+                                 src="<?= $block->initImage($item, 'product_page_image_small')->resize(150)->getUrl() ?>"
+                                 width="75px"/>
+                        </td>
+                        <td data-th="<?= __('Product Name') ?>" class="col">
+                            <?= $block->getOrderItemLabel($item) ?>
+                        </td>
+                        <td data-th="<?= __('SKU') ?>" class="col">
+                            <?= $block->getOrderItemSku($item) ?>
+                        </td>
+                        <td data-th="<?= __('QTY') ?>" class="col">
+                            <?= $item->getQtyRequested() ?>
+                        </td>
+                        <?php if ($block->isReasonAllowed()): ?>
+                            <td data-th="<?= __('Reason') ?>" class="col">
+                                <?= __($block->getReasonName($item)) ?>
+                            </td>
+                        <?php endif; ?>
+                        <?php if ($block->isConditionAllowed()): ?>
+                            <td data-th="<?= __('Condition') ?>" class="col">
+                                <?= __($block->getConditionName($item)) ?>
+                            </td>
+                        <?php endif; ?>
+                        <?php if ($block->isResolutionAllowed()): ?>
+                            <td data-th="<?= __('Resolution') ?>" class="col">
+                                <?= __($block->getResolutionName($item)) ?>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
